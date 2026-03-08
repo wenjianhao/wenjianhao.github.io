@@ -12,28 +12,25 @@ taxonomies:
 
 menu:
   main:
-    - name: About
-      url: about/
-      weight: 1
     - name: Papers
       url: papers/
-      weight: 2
+      weight: 1
     - name: Projects
       url: projects/
-      weight: 3
+      weight: 2
     - name: Blog
       url: blog/
-      weight: 4
+      weight: 3
     - name: Miscellaneous
       url: miscellaneous/
-      weight: 5
+      weight: 4
 
 params:
   description: "Personal website of Wenjian Hao: quantitative research, machine learning, and data science."
   author: Wenjian Hao
   DateFormat: "January 2006"
   defaultTheme: light
-  hideFooter: false
+  hideFooter: true
   disableThemeToggle: true
   ShowShareButtons: false
   ShowReadingTime: false
@@ -43,7 +40,7 @@ params:
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
   ShowAllPagesInArchive: false
-  MainSections: ["about", "papers", "projects", "blog", "miscellaneous"]
+  MainSections: ["papers", "projects", "blog", "miscellaneous"]
   ShowToc: false
   disableScrollToTop: true
   TocOpen: true
@@ -54,7 +51,7 @@ params:
   profileMode:
     enabled: true
     title: Wenjian Hao
-    subtitle: "I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, with particular interests in data-driven dynamics learning using linear operators, data-efficient reinforcement learning, sampling-based optimal control, safety-critical control, and robotics. My work aims to develop computationally efficient and reliable learning-based control algorithms for autonomous robotic systems by integrating machine learning with control theory. I have applied these methods to a variety of robotic platforms, including robotic manipulators, quadrupeds, drones, and autonomous surface vehicles."
+    subtitle: "I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, with particular interests in data-driven dynamics learning using linear operators, data-efficient reinforcement learning, sampling-based optimal control, safety-critical control, and robotics. My work aims to develop computationally efficient and reliable learning-based control algorithms for autonomous robotic systems by integrating machine learning with control theory. I have applied these methods to a variety of robotic platforms, including robotic manipulators, quadrupeds, drones, and surface vehicles."
     imageUrl: "wenjian-hao.jpg"
     imageWidth: 180
     imageHeight: 180
@@ -83,8 +80,6 @@ params:
     hiddenInSingle: true
   label:
     text: "Wenjian Hao"
-    icon: favicon.ico
-    iconHeight: 18
 
 markup:
   goldmark:
