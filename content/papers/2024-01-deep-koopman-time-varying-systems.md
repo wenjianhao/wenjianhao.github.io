@@ -21,3 +21,13 @@ This paper presents a data-driven approach that approximates nonlinear time-vary
 ##### Citation
 
 Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shaoshuai Mou. 2024. "Deep Koopman learning of nonlinear time-varying systems." Automatica 159:111372.
+
+```latex
+@article{WHao2024deepkoop,
+  author = {W Hao, B Huang, W Pan, D Wu, S Mou},
+  year = {2024},
+  title = {Deep Koopman learning of nonlinear time-varying systems},
+  journal = {Automatica 159:111372},
+  url = {https://www.sciencedirect.com/science/article/pii/S0005109823005381}
+}
+```

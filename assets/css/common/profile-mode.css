@@ -29,6 +29,7 @@
     height: 180px;
     object-fit: cover;
     object-position: center;
+    filter: brightness(1.12) contrast(1.03);
 }
 
 .buttons {

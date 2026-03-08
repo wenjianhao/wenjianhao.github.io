@@ -21,3 +21,13 @@ This paper compares two data-driven control paradigms: model-based deep Koopman 
 ##### Citation
 
 Hao, Wenjian, and Yiqiang Han. 2020. "Data driven control with learned dynamics: model-based versus model-free approach." arXiv preprint arXiv:2006.09543.
+
+```latex
+@techreport{WHao2020datadriv,
+  author = {W Hao, Y Han},
+  year = {2020},
+  title = {Data driven control with learned dynamics: model-based versus model-free approach},
+  number = {arXiv:2006.09543},
+  url = {https://arxiv.org/pdf/2006.09543}
+}
+```

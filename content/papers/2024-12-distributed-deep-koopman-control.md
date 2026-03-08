@@ -21,3 +21,13 @@ This work develops a distributed deep Koopman learning approach for control, whe
 ##### Citation
 
 Hao, Wenjian, Zehui Lu, Devesh Upadhyay, and Shaoshuai Mou. 2024. "A Distributed Deep Koopman Learning Algorithm for Control." arXiv preprint arXiv:2412.07212.
+
+```latex
+@techreport{WHao2024distribu,
+  author = {W Hao, Z Lu, D Upadhyay, S Mou},
+  year = {2024},
+  title = {A Distributed Deep Koopman Learning Algorithm for Control},
+  number = {arXiv:2412.07212},
+  url = {https://arxiv.org/pdf/2412.07212}
+}
+```

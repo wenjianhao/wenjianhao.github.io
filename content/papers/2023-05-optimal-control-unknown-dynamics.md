@@ -21,3 +21,13 @@ This paper proposes a data-driven method for infinite-horizon optimal control wi
 ##### Citation
 
 Hao, Wenjian, Paulo C. Heredia, and Shaoshuai Mou. 2023. "Optimal Control of Nonlinear Systems with Unknown Dynamics." arXiv preprint arXiv:2305.15188.
+
+```latex
+@techreport{WHao2023optimalc,
+  author = {W Hao, PC Heredia, S Mou},
+  year = {2023},
+  title = {Optimal Control of Nonlinear Systems with Unknown Dynamics},
+  number = {arXiv preprint},
+  url = {https://www.researchgate.net/profile/Wenjian-Hao-2/publication/371009358_Optimal_Control_of_Nonlinear_Systems_with_Unknown_Dynamics/links/691cdcd8de814309827224ae/Optimal-Control-of-Nonlinear-Systems-with-Unknown-Dynamics.pdf}
+}
+```

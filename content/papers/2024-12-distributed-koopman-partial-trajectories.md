@@ -21,3 +21,13 @@ This paper introduces distributed deep Koopman learning using partial trajectori
 ##### Citation
 
 Hao, Wenjian, Zehui Lu, Devesh Upadhyay, and Shaoshuai Mou. 2024. "Distributed Koopman Learning using Partial Trajectories for Control." arXiv preprint arXiv:2412.07212.
+
+```latex
+@techreport{WHao2024distribu,
+  author = {W Hao, Z Lu, D Upadhyay, S Mou},
+  year = {2024},
+  title = {Distributed Koopman Learning using Partial Trajectories for Control},
+  number = {arXiv:2412.07212},
+  url = {https://arxiv.org/pdf/2412.07212}
+}
+```

@@ -21,3 +21,13 @@ This paper develops a data-driven iterative method for inverse optimal control w
 ##### Citation
 
 Liang, Zihao, Wenjian Hao, and Shaoshuai Mou. 2023. "A data-driven approach for inverse optimal control." Proceedings of the 62nd IEEE Conference on Decision and Control (CDC), 3632-3637.
+
+```latex
+@inproceedings{ZLiang2023datadriv,
+  author = {Z Liang, W Hao, S Mou},
+  year = {2023},
+  title = {A data-driven approach for inverse optimal control},
+  booktitle = {Proceedings of the 62nd IEEE Conference on Decision and Control (CDC), 3632-3637},
+  url = {https://ieeexplore.ieee.org/iel7/10383192/10383193/10383220.pdf}
+}
+```

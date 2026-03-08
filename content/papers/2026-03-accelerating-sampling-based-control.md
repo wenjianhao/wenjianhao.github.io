@@ -21,3 +21,13 @@ This paper presents an efficient model predictive path integral (MPPI) control f
 ##### Citation
 
 Hao, Wenjian, Yuxuan Fang, Zehui Lu, and Shaoshuai Mou. 2026. "Accelerating Sampling-Based Control via Learned Linear Koopman Dynamics." arXiv preprint arXiv:2603.05385.
+
+```latex
+@techreport{WHao2026accelera,
+  author = {W Hao, Y Fang, Z Lu, S Mou},
+  year = {2026},
+  title = {Accelerating Sampling-Based Control via Learned Linear Koopman Dynamics},
+  number = {arXiv:2603.05385},
+  url = {https://arxiv.org/pdf/2603.05385}
+}
+```

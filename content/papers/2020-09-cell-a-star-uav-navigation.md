@@ -21,3 +21,13 @@ This paper presents an extension of A* search and related planners for robust lo
 ##### Citation
 
 Hao, Wenjian, Rongyao Wang, Alexander Krolicki, and Yiqiang Han. 2020. "Cell a* for navigation of unmanned aerial vehicles in partially-known environments." arXiv preprint arXiv:2009.07404.
+
+```latex
+@techreport{WHao2020cellasta,
+  author = {W Hao, R Wang, A Krolicki, Y Han},
+  year = {2020},
+  title = {Cell a* for navigation of unmanned aerial vehicles in partially-known environments},
+  number = {arXiv:2009.07404},
+  url = {https://arxiv.org/pdf/2009.07404}
+}
+```

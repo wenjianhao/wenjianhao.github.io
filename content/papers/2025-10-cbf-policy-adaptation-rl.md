@@ -21,3 +21,13 @@ This paper studies adaptation of a predesigned policy from an original objective
 ##### Citation
 
 Hao, Wenjian, Zehui Lu, Nicolas Miguel, and Shaoshuai Mou. 2025. "A Control-Barrier-Function-Based Algorithm for Policy Adaptation in Reinforcement Learning." arXiv preprint arXiv:2510.02720.
+
+```latex
+@techreport{WHao2025cbfpolic,
+  author = {W Hao, Z Lu, N Miguel, S Mou},
+  year = {2025},
+  title = {A Control-Barrier-Function-Based Algorithm for Policy Adaptation in Reinforcement Learning},
+  number = {arXiv:2510.02720},
+  url = {https://arxiv.org/pdf/2510.02720}
+}
+```

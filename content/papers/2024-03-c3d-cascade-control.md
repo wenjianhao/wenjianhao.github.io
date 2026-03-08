@@ -21,3 +21,13 @@ This paper presents a robust autonomy framework for maritime surface vessels und
 ##### Citation
 
 Li, Jianwen, Hyunsang Park, Wenjian Hao, Lei Xin, Jalil Chavez-Galaviz, Ajinkya Chaudhary, Meredith Bloss, et al. 2024. "C3d: cascade control with change point detection and deep koopman learning for autonomous surface vehicles." arXiv preprint arXiv:2403.05972.
+
+```latex
+@techreport{JLi2024c3dcasca,
+  author = {J Li, H Park, W Hao, L Xin, J Chavez-Galaviz, A Chaudhary, M Bloss, ...},
+  year = {2024},
+  title = {C3d: cascade control with change point detection and deep koopman learning for autonomous surface vehicles},
+  number = {arXiv:2403.05972},
+  url = {https://arxiv.org/pdf/2403.05972}
+}
+```

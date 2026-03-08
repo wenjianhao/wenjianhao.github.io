@@ -21,3 +21,12 @@ This thesis studies data-driven control methods in which system dynamics are lea
 ##### Citation
 
 Hao, Wenjian. 2020. "Data-Driven Control with Learned Dynamics." Clemson University.
+
+```latex
+@article{WHao2020datadriv,
+  author = {W Hao},
+  year = {2020},
+  title = {Data-Driven Control with Learned Dynamics},
+  url = {https://search.proquest.com/openview/2ed96da6da233fe07d3b7caaf4221dcb/1?pq-origsite=gscholar&cbl=44156}
+}
+```

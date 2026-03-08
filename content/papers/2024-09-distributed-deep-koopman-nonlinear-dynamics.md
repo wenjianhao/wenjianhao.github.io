@@ -21,3 +21,13 @@ This paper proposes distributed deep Koopman learning for nonlinear dynamics whe
 ##### Citation
 
 Hao, Wenjian, Lili Wang, Ayush Rai, and Shaoshuai Mou. 2024. "Distributed deep Koopman learning for nonlinear dynamics." arXiv preprint arXiv:2409.11586.
+
+```latex
+@techreport{WHao2024distribu,
+  author = {W Hao, L Wang, A Rai, S Mou},
+  year = {2024},
+  title = {Distributed deep Koopman learning for nonlinear dynamics},
+  number = {arXiv:2409.11586},
+  url = {https://arxiv.org/pdf/2409.11586}
+}
+```

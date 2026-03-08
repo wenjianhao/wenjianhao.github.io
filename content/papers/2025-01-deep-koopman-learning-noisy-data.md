@@ -21,3 +21,13 @@ This paper proposes a data-driven framework to learn a finite-dimensional Koopma
 ##### Citation
 
 Hao, Wenjian, Devesh Upadhyay, and Shaoshuai Mou. 2025. "Deep Koopman Learning using Noisy Data." Transactions on Machine Learning Research.
+
+```latex
+@techreport{WHao2025deepkoop,
+  author = {W Hao, D Upadhyay, S Mou},
+  year = {2025},
+  title = {Deep Koopman Learning using Noisy Data},
+  number = {arXiv:2405.16649},
+  url = {https://arxiv.org/pdf/2405.16649}
+}
+```

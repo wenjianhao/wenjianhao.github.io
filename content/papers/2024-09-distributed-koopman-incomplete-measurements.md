@@ -21,3 +21,13 @@ This paper considers collaborative system identification when agents have incomp
 ##### Citation
 
 Hao, Wenjian, Lili Wang, Ayush Rai, and Shaoshuai Mou. 2024. "Distributed Koopman Learning with Incomplete Measurements." arXiv preprint arXiv:2409.11586.
+
+```latex
+@techreport{WHao2024distribu,
+  author = {W Hao, L Wang, A Rai, S Mou},
+  year = {2024},
+  title = {Distributed Koopman Learning with Incomplete Measurements},
+  number = {arXiv:2409.11586},
+  url = {https://arxiv.org/pdf/2409.11586}
+}
+```

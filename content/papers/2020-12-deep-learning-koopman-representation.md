@@ -21,3 +21,13 @@ This paper introduces a data-driven model-free optimal-control approach built on
 ##### Citation
 
 Han, Yiqiang, Wenjian Hao, and Umesh Vaidya. 2020. "Deep learning of Koopman representation for control." Proceedings of the 59th IEEE Conference on Decision and Control (CDC), 1890-1895.
+
+```latex
+@inproceedings{YHan2020deeplear,
+  author = {Y Han, W Hao, U Vaidya},
+  year = {2020},
+  title = {Deep learning of Koopman representation for control},
+  booktitle = {Proceedings of the 59th IEEE Conference on Decision and Control (CDC), 1890-1895},
+  url = {https://ieeexplore.ieee.org/iel7/9303728/9303729/09304238.pdf}
+}
+```
