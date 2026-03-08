@@ -8,13 +8,19 @@ summary: "This paper proposes distributed deep Koopman learning with partial tra
 ---
 
 - [Paper](https://arxiv.org/pdf/2412.07212)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:MXK_kJrjxJIC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:MXK_kJrjxJIC)
 
 ---
 
 ##### Abstract
 
 This paper introduces distributed deep Koopman learning using partial trajectories for multi-agent dynamics learning. Each agent learns local Koopman dynamics from private trajectories and exchanges model estimates (not raw data) to reach consensus on a global model. Integrated with model predictive control, the learned model supports goal-tracking and station-keeping with good accuracy in simulation.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

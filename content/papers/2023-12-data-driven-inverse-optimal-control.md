@@ -8,13 +8,19 @@ summary: "This paper proposes an iterative data-driven inverse optimal control m
 ---
 
 - [Paper](https://ieeexplore.ieee.org/iel7/10383192/10383193/10383220.pdf)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:qjMakFHDy7sC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:qjMakFHDy7sC)
 
 ---
 
 ##### Abstract
 
 This paper develops a data-driven iterative method for inverse optimal control when system dynamics are unknown. It leverages deep Koopman representations and parameterized objective features to jointly estimate dynamics and cost-function weights from observed states and inputs. Simulations validate the approach on nonlinear optimal-control settings.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

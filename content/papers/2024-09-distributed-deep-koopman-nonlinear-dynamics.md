@@ -8,13 +8,19 @@ summary: "This paper develops a distributed deep Koopman method that learns nonl
 ---
 
 - [Paper](https://arxiv.org/pdf/2409.11586)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:W7OEmFMy1HYC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:W7OEmFMy1HYC)
 
 ---
 
 ##### Abstract
 
 This paper proposes distributed deep Koopman learning for nonlinear dynamics when individual agents have incomplete measurements. By coupling deep Koopman approximations with consensus updates, the method enables accurate global dynamics estimation without centralized data collection. Simulations demonstrate competitive prediction quality against centralized alternatives.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

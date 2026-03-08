@@ -8,13 +8,19 @@ summary: "This paper presents a data-driven actor-critic Koopman framework for c
 ---
 
 - [Paper](https://www.researchgate.net/profile/Wenjian-Hao-2/publication/371009358_Optimal_Control_of_Nonlinear_Systems_with_Unknown_Dynamics/links/691cdcd8de814309827224ae/Optimal-Control-of-Nonlinear-Systems-with-Unknown-Dynamics.pdf)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:LkGwnXOMwfcC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:LkGwnXOMwfcC)
 
 ---
 
 ##### Abstract
 
 This paper proposes a data-driven method for infinite-horizon optimal control with unknown nonlinear dynamics. It introduces a Koopman-based gradient estimation framework integrated with actor-critic ideas to iteratively update policy parameters via gradient descent. Analysis and experiments show effective convergence and competitive control performance versus model-free and model-based baselines.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

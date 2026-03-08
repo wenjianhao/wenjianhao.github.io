@@ -8,13 +8,19 @@ summary: "This paper compares model-based deep Koopman control and model-free DD
 ---
 
 - [Paper](https://arxiv.org/pdf/2006.09543)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:u5HHmVD_uO8C)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:u5HHmVD_uO8C)
 
 ---
 
 ##### Abstract
 
 This paper compares two data-driven control paradigms: model-based deep Koopman representation for control and model-free deep deterministic policy gradient. The comparison on OpenAI Gym tasks (inverted pendulum and lunar lander continuous control) evaluates robustness, control behavior, and sensitivity to initialization. Results highlight strengths and trade-offs of both methods, and validate learned Koopman dynamics against analytical models.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

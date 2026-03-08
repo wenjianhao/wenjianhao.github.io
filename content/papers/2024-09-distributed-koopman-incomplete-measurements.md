@@ -8,13 +8,19 @@ summary: "This paper develops distributed Koopman learning for networks with par
 ---
 
 - [Paper](https://arxiv.org/pdf/2409.11586)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:3fE2CSJIrl8C)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:3fE2CSJIrl8C)
 
 ---
 
 ##### Abstract
 
 This paper considers collaborative system identification when agents have incomplete local measurements. It combines Koopman lifting, deep neural networks, and consensus coordination so agents exchange lifted-state information and reconstruct global nonlinear dynamics. Experiments on Lunar Lander show performance close to centralized deep Koopman learning with full-state access.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

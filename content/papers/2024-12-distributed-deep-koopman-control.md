@@ -8,13 +8,19 @@ summary: "This paper presents a distributed deep Koopman framework for cooperati
 ---
 
 - [Paper](https://arxiv.org/pdf/2412.07212)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:YsMSGLbcyi4C)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:YsMSGLbcyi4C)
 
 ---
 
 ##### Abstract
 
 This work develops a distributed deep Koopman learning approach for control, where agents learn local dynamics and coordinate model estimates to form a global representation suitable for control. The method enables scalable learning and avoids centralized raw-data sharing. Numerical studies show the learned distributed model supports effective control performance.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

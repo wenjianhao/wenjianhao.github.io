@@ -8,13 +8,19 @@ summary: "This paper formulates policy adaptation as constrained optimization an
 ---
 
 - [Paper](https://arxiv.org/pdf/2510.02720)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:0EnyYjriUFMC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:0EnyYjriUFMC)
 
 ---
 
 ##### Abstract
 
 This paper studies adaptation of a predesigned policy from an original objective to a trade-off objective while explicitly constraining deviation from original performance. The method builds a closed-loop dynamics for policy parameters and uses control barrier functions to enforce constraint satisfaction during adaptation. Experiments on Cartpole, Lunar Lander, and a quadruped robot show practical and safe policy adaptation.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

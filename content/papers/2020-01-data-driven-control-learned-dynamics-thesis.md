@@ -8,13 +8,19 @@ summary: "This thesis studies data-driven control with learned dynamics, compari
 ---
 
 - [Paper](https://search.proquest.com/openview/2ed96da6da233fe07d3b7caaf4221dcb/1?pq-origsite=gscholar&cbl=44156)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:u-x6o8ySG0sC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:u-x6o8ySG0sC)
 
 ---
 
 ##### Abstract
 
 This thesis studies data-driven control methods in which system dynamics are learned via neural-network models. It analyzes both model-based and model-free approaches and compares their behavior and performance to clarify strengths of each paradigm. The work contributes to emerging research on sample-efficient learning and control for unknown dynamics.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

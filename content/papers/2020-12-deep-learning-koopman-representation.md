@@ -8,13 +8,19 @@ summary: "This paper develops a model-free control pipeline using deep Koopman r
 ---
 
 - [Paper](https://ieeexplore.ieee.org/iel7/9303728/9303729/09304238.pdf)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:9yKSN-GCB0IC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:9yKSN-GCB0IC)
 
 ---
 
 ##### Abstract
 
 This paper introduces a data-driven model-free optimal-control approach built on deep neural network learning of Koopman representations. The method learns lifting functions directly from data and performs controller synthesis without explicit analytical models. Demonstrations on classic OpenAI Gym control environments validate the approach.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 

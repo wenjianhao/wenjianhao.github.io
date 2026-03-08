@@ -8,13 +8,19 @@ summary: "This paper develops deep Koopman learning under bounded measurement no
 ---
 
 - [Paper](https://arxiv.org/pdf/2405.16649)
-- [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:_FxGoFyzp5QC)
+- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:_FxGoFyzp5QC)
 
 ---
 
 ##### Abstract
 
 This paper proposes a data-driven framework to learn a finite-dimensional Koopman approximation under noisy observations. The method only assumes bounded measurement noise and modifies deep Koopman formulations to explicitly characterize and mitigate noise effects by updating observable-function parameters. Experiments on benchmark systems show improved robustness compared with related Koopman-learning methods.
+
+---
+
+##### Demo
+
+Demo coming soon.
 
 ---
 
