@@ -25,6 +25,10 @@
 .profile img {
     border-radius: 50%;
     border: 1px solid var(--tertiary);
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .buttons {
