@@ -8,10 +8,6 @@
     background: var(--code-bg);
 }
 
-.header {
-    display: none;
-}
-
 .nav a {
     display: block;
 }
