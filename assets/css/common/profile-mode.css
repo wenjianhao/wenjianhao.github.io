@@ -5,43 +5,75 @@
 }
 .main .profile {
     align-items: center;
-    min-height: calc(100vh - var(--footer-height) - (var(--gap) * 2));
+    min-height: 100vh;
     font-size: var(--homesize);
     line-height: var(--lineheight);
-    padding: var(--gap);
+    padding: 36px var(--gap) 40px;
 }
 
 .profile .profile_inner {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 18px;
+    max-width: 980px;
 }
 
 .profile .profile_inner h1 {
-    font-size: 2.5rem;
+    font-size: 4.7rem;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    margin-bottom: 2px;
+}
+
+.profile .profile_inner > span {
+    max-width: 960px;
+    font-size: 2.95rem;
+    line-height: 1.45;
+    color: #222;
 }
 
 .profile img {
     border-radius: 50%;
-    border: 1px solid var(--tertiary);
+    border: 0;
+    margin-bottom: 6px;
 }
 
 .buttons {
     flex-wrap: wrap;
+    margin-top: 16px;
 }
 
 .button {
     background: var(--tertiary);
     border-radius: var(--radius);
-    margin: 6px 12px 6px 0px;
-    padding: 10px;
+    margin: 2px 16px 4px 0;
+    padding: 13px 16px;
 }
 
 .button-inner {
-    padding: 0 8px;
+    padding: 0 11px;
+    font-size: 1.95rem;
 }
 
 .button:hover {
     background: var(--lightcolor);
+}
+
+.social-icons {
+    margin-top: 6px;
+}
+
+@media (max-width: 920px) {
+    .profile .profile_inner h1 {
+        font-size: 2.9rem;
+    }
+
+    .profile .profile_inner > span {
+        font-size: 1.28rem;
+    }
+
+    .button-inner {
+        font-size: 1.25rem;
+    }
 }

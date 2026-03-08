@@ -18,6 +18,12 @@ menu:
     - name: Projects
       url: projects/
       weight: 2
+    - name: Blog
+      url: blog/
+      weight: 3
+    - name: Miscellaneous
+      url: miscellaneous/
+      weight: 4
 
 params:
   description: "Personal website of Wenjian Hao: quantitative research, machine learning, and data science."
@@ -34,7 +40,7 @@ params:
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
   ShowAllPagesInArchive: false
-  MainSections: ["research", "projects"]
+  MainSections: ["research", "projects", "blog", "miscellaneous"]
   ShowToc: false
   disableScrollToTop: true
   TocOpen: true
@@ -45,15 +51,19 @@ params:
   profileMode:
     enabled: true
     title: Wenjian Hao
-    subtitle: "Quantitative researcher focused on machine learning, statistical modeling, and practical data science."
-    imageUrl: ""
-    imageWidth: 160
-    imageHeight: 160
+    subtitle: "Welcome! I currently work as a quant at Cubist.<br>I obtained my B.Sc. and M.S. degrees in Electrical Engineering from USTC.<br>My broad interests are machine learning and quantitative finance."
+    imageUrl: "wenjian-hao.jpg"
+    imageWidth: 290
+    imageHeight: 290
     buttons:
       - name: Research
         url: research/
       - name: Projects
         url: projects/
+      - name: Blog
+        url: blog/
+      - name: Miscellaneous
+        url: miscellaneous/
 
   socialIcons:
     - name: Google Scholar

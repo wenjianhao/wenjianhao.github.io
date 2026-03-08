@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="580" viewBox="0 0 580 580" role="img" aria-label="Wenjian Hao profile placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dce7f2"/>
+      <stop offset="100%" stop-color="#a9bfdb"/>
+    </linearGradient>
+  </defs>
+  <circle cx="290" cy="290" r="290" fill="url(#bg)"/>
+  <circle cx="290" cy="250" r="116" fill="#f2f5f9"/>
+  <path d="M121 454c20-73 88-122 169-122s149 49 169 122" fill="#f2f5f9"/>
+  <text x="290" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" fill="#4e6177">WH</text>
+</svg>
