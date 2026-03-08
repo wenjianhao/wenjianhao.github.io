@@ -2,11 +2,22 @@
 title: "Accelerating Sampling-Based Control via Learned Linear Koopman Dynamics"
 date: 2026-03-01
 author: "W Hao, Y Fang, Z Lu, S Mou"
-summary: "arXiv preprint arXiv:2603.05385."
+summary: "This paper presents an efficient MPPI control framework using learned linear Koopman dynamics to reduce rollout cost while maintaining control performance."
 ---
 
-Published as an arXiv preprint.
+---
 
+- [Paper](https://arxiv.org/pdf/2603.05385)
 - [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:kNdYIx-mwKoC)
-- [arXiv](https://arxiv.org/abs/2603.05385)
 
+---
+
+##### Abstract
+
+This paper presents an efficient model predictive path integral (MPPI) control framework for systems with complex nonlinear dynamics. To improve the computational efficiency of classic MPPI while preserving control performance, we replace nonlinear trajectory propagation with a learned linear deep Koopman operator model. The resulting controller is validated in simulation and hardware experiments, showing near-MPPI performance with substantially lower computational cost for real-time robotic control.
+
+---
+
+##### Citation
+
+Hao, Wenjian, Yuxuan Fang, Zehui Lu, and Shaoshuai Mou. 2026. "Accelerating Sampling-Based Control via Learned Linear Koopman Dynamics." arXiv preprint arXiv:2603.05385.

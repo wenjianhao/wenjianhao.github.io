@@ -2,11 +2,22 @@
 title: "Distributed Koopman Learning using Partial Trajectories for Control"
 date: 2024-12-20
 author: "W Hao, Z Lu, D Upadhyay, S Mou"
-summary: "arXiv preprint arXiv:2412.07212."
+summary: "This paper proposes distributed deep Koopman learning with partial trajectories, allowing consensus dynamics learning without sharing private training data."
 ---
 
-Published as an arXiv preprint.
+---
 
+- [Paper](https://arxiv.org/pdf/2412.07212)
 - [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:MXK_kJrjxJIC)
-- [arXiv](https://arxiv.org/abs/2412.07212)
 
+---
+
+##### Abstract
+
+This paper introduces distributed deep Koopman learning using partial trajectories for multi-agent dynamics learning. Each agent learns local Koopman dynamics from private trajectories and exchanges model estimates (not raw data) to reach consensus on a global model. Integrated with model predictive control, the learned model supports goal-tracking and station-keeping with good accuracy in simulation.
+
+---
+
+##### Citation
+
+Hao, Wenjian, Zehui Lu, Devesh Upadhyay, and Shaoshuai Mou. 2024. "Distributed Koopman Learning using Partial Trajectories for Control." arXiv preprint arXiv:2412.07212.

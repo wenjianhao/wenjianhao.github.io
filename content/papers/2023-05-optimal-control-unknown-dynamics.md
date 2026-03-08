@@ -2,11 +2,22 @@
 title: "Optimal Control of Nonlinear Systems with Unknown Dynamics"
 date: 2023-05-01
 author: "W Hao, PC Heredia, S Mou"
-summary: "arXiv preprint arXiv:2305.15188."
+summary: "This paper presents a data-driven actor-critic Koopman framework for closed-loop optimal control of systems with unknown dynamics."
 ---
 
-Published as an arXiv preprint.
+---
 
+- [Paper](https://www.researchgate.net/profile/Wenjian-Hao-2/publication/371009358_Optimal_Control_of_Nonlinear_Systems_with_Unknown_Dynamics/links/691cdcd8de814309827224ae/Optimal-Control-of-Nonlinear-Systems-with-Unknown-Dynamics.pdf)
 - [Google Scholar entry](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:LkGwnXOMwfcC)
-- [arXiv](https://arxiv.org/abs/2305.15188)
 
+---
+
+##### Abstract
+
+This paper proposes a data-driven method for infinite-horizon optimal control with unknown nonlinear dynamics. It introduces a Koopman-based gradient estimation framework integrated with actor-critic ideas to iteratively update policy parameters via gradient descent. Analysis and experiments show effective convergence and competitive control performance versus model-free and model-based baselines.
+
+---
+
+##### Citation
+
+Hao, Wenjian, Paulo C. Heredia, and Shaoshuai Mou. 2023. "Optimal Control of Nonlinear Systems with Unknown Dynamics." arXiv preprint arXiv:2305.15188.
