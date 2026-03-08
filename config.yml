@@ -12,18 +12,21 @@ taxonomies:
 
 menu:
   main:
-    - name: Research
-      url: research/
+    - name: About
+      url: about/
       weight: 1
+    - name: Papers
+      url: papers/
+      weight: 2
     - name: Projects
       url: projects/
-      weight: 2
+      weight: 3
     - name: Blog
       url: blog/
-      weight: 3
+      weight: 4
     - name: Miscellaneous
       url: miscellaneous/
-      weight: 4
+      weight: 5
 
 params:
   description: "Personal website of Wenjian Hao: quantitative research, machine learning, and data science."
@@ -40,7 +43,7 @@ params:
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
   ShowAllPagesInArchive: false
-  MainSections: ["research", "projects", "blog", "miscellaneous"]
+  MainSections: ["about", "papers", "projects", "blog", "miscellaneous"]
   ShowToc: false
   disableScrollToTop: true
   TocOpen: true
@@ -51,13 +54,15 @@ params:
   profileMode:
     enabled: true
     title: Wenjian Hao
-    subtitle: "Welcome! I currently work as a quant at Cubist. I obtained my B.Sc. and M.S. degrees in Electrical Engineering from USTC. My broad interests are machine learning and quantitative finance."
+    subtitle: "I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. Shaoshuai Mou. My research focuses on data-driven modeling and control of complex dynamical systems, including Koopman-based dynamics learning, data-efficient reinforcement learning, safety-critical optimal control, and robotics."
     imageUrl: "wenjian-hao.jpg"
     imageWidth: 180
     imageHeight: 180
     buttons:
-      - name: Research
-        url: research/
+      - name: About
+        url: about/
+      - name: Papers
+        url: papers/
       - name: Projects
         url: projects/
       - name: Blog
@@ -66,12 +71,12 @@ params:
         url: miscellaneous/
 
   socialIcons:
+    - name: Email
+      url: haowjz@gmail.com:
     - name: Google Scholar
-      url: https://scholar.google.com/citations?user=31_1tYYAAAAJ&hl=en
+      url: https://scholar.google.com/citations?user=SQ2BSVsAAAAJ&hl=en
     - name: GitHub
-      url: https://github.com/hwjn
-    - name: LinkedIn
-      url: https://www.linkedin.com/in/wenjian-hao-6860556a/
+      url: https://github.com/wenjianhao
 
   assets:
     disableScrollBarStyle: true

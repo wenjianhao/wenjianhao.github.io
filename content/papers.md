@@ -1,5 +1,5 @@
 ---
-title: "Research"
+title: "Papers"
 date: 2026-03-08
 hidemeta: true
 ---
