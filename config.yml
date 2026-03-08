@@ -1,0 +1,96 @@
+baseURL: "https://www.wenjianhao.com/"
+title: Wenjian Hao
+theme: PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+pagination:
+  pagerSize: 20
+
+taxonomies:
+  tag: tags
+
+ignoreFiles:
+  - "^content/books/"
+  - "^content/courses/"
+  - "^content/data/"
+  - "^content/papers/"
+  - "^content/archive.md$"
+  - "^content/location.md$"
+  - "^content/officehours.md$"
+  - "^content/tags/"
+
+menu:
+  main:
+    - name: Research
+      url: research/
+      weight: 1
+    - name: Projects
+      url: projects/
+      weight: 2
+
+params:
+  description: "Personal website of Wenjian Hao: quantitative research, machine learning, and data science."
+  author: Wenjian Hao
+  DateFormat: "January 2006"
+  defaultTheme: light
+  hideFooter: false
+  disableThemeToggle: true
+  ShowShareButtons: false
+  ShowReadingTime: false
+  disableSpecial1stPost: true
+  disableAnchoredHeadings: true
+  ShowPostNavLinks: false
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: true
+  ShowAllPagesInArchive: false
+  MainSections: ["research", "projects"]
+  ShowToc: false
+  disableScrollToTop: true
+  TocOpen: true
+  ShowWordCount: false
+  UseHugoToc: true
+  comments: false
+  math: false
+  profileMode:
+    enabled: true
+    title: Wenjian Hao
+    subtitle: "Quantitative researcher focused on machine learning, statistical modeling, and practical data science."
+    imageUrl: ""
+    imageWidth: 160
+    imageHeight: 160
+    buttons:
+      - name: Research
+        url: research/
+      - name: Projects
+        url: projects/
+
+  socialIcons:
+    - name: Google Scholar
+      url: https://scholar.google.com/citations?user=31_1tYYAAAAJ&hl=en
+    - name: GitHub
+      url: https://github.com/hwjn
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/wenjian-hao-6860556a/
+
+  assets:
+    disableScrollBarStyle: true
+  cover:
+    hiddenInList: false
+    hiddenInSingle: true
+  label:
+    text: "Wenjian Hao"
+    icon: favicon.ico
+    iconHeight: 18
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    guessSyntax: true
+    style: autumn
+  tableOfContents:
+    endLevel: 2
+    ordered: false
+    startLevel: 2
