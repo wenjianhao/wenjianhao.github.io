@@ -22,10 +22,10 @@
     --homesize: 16px;
     --textsize: 18px;
     --h1size: 25px;
-    --entrysize: 15px;
-    --headersize: 16px;
+    --entrysize: 16px;
+    --headersize: 17px;
     --footersize: 13px;
-    --lineheight: 1.45;
+    --lineheight: 1.5;
     --lineclamp: 8;
     --marginleft: 26px;
 }

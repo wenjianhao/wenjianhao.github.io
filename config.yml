@@ -72,7 +72,7 @@ params:
 
   socialIcons:
     - name: Email
-      url: haowjz@gmail.com:
+      url: "mailto:haowjz@gmail.com"
     - name: Google Scholar
       url: https://scholar.google.com/citations?user=SQ2BSVsAAAAJ&hl=en
     - name: GitHub
