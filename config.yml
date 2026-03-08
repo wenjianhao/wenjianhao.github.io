@@ -10,16 +10,6 @@ pagination:
 taxonomies:
   tag: tags
 
-ignoreFiles:
-  - "^content/books/"
-  - "^content/courses/"
-  - "^content/data/"
-  - "^content/papers/"
-  - "^content/archive.md$"
-  - "^content/location.md$"
-  - "^content/officehours.md$"
-  - "^content/tags/"
-
 menu:
   main:
     - name: Research
