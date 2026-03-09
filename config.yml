@@ -28,6 +28,7 @@ menu:
 params:
   description: "Personal website of Wenjian Hao: quantitative research, machine learning, and data science."
   author: Wenjian Hao
+  googleAnalyticsID: "G-REPLACE_ME"
   DateFormat: "January 2006"
   defaultTheme: light
   hideFooter: true

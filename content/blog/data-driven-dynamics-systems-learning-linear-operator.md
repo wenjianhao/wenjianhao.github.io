@@ -3,9 +3,12 @@ title: "Learning Nonlinear Dynamics with Deep Linear Operators"
 date: 2026-03-09
 author: Wenjian Hao
 math: true
+summary: "A concise introduction to learning nonlinear dynamics with Koopman-inspired deep linear operators for prediction and control."
 ---
 
-Goal of this post: This post introduces data-driven dynamical systems learning using a combination of deep neural networks and linear-operator-based methods. In particular, it focuses on Koopman-inspired representations for prediction, system identification, and feedback control design in complex nonlinear systems. The discussion is intended for readers with minimal background knowledge.
+This post introduces a practical view of learning nonlinear dynamics using Koopman-inspired deep linear operators, with a focus on prediction and control.
+
+<!--more-->
 
 ## Problem Setup
 
@@ -54,7 +57,7 @@ $$
 
 If successful, this lets us use linear-system tools for prediction and control while still handling nonlinear behavior through the learned lifting map $\phi_\theta$.
 
-## Main Ideas and Algorithm
+## Main Ideas and Proposed Algorithm
 
 The core idea is to combine neural representation learning with linear operator identification:
 
