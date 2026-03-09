@@ -20,7 +20,7 @@ This paper studies adaptation of a predesigned policy from an original objective
 
 ##### Demo
 
-Demo coming soon.
+[YouTube demo](https://www.youtube.com/watch?v=iYwDWh-JNkU)
 
 ---
 
