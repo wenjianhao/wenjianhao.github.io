@@ -1,6 +1,6 @@
 ---
 title: "Secure and Safe Assured Autonomy (S2A2)"
-date: Aug 2021 - Aug 2022
+date: 2021-08 - 2022-08
 author: Wenjian Hao
 ---
 
