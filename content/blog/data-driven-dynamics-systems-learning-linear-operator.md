@@ -28,11 +28,19 @@ where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the 
 
 Popular baseline methods:
 
-- A Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ can be approximated by a parameterized function class, denoted as $\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w})$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ by minimizing the prediction error:
+- A Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ can be approximated by a parameterized function class, denoted as $\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ by minimizing the prediction error:
 
 $$
 \min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2 
 $$
+
+One can typically use gradient descent to solve this optimization problem:
+
+$$
+\boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k),
+$$
+
+where $k=0,1,2,\cdots$ denotes the iteration index, $\alpha_w(k)$ is the learning rate, and $\nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)$ denotes the gradient of $\mathbf{L}$ with respect to $\boldsymbol{w}$ evaluated at $\boldsymbol{w}(k)$.
 
 The Koopman operator:
 
