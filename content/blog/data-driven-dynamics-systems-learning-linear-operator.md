@@ -52,18 +52,20 @@ Popular baseline methods:
 
     Some notes: 
 
-- The Koopman-operator-based methods:
+The Koopman Operator:
 
-    Common evaluation metrics include one-step error, multi-step rollout error, long-horizon stability, and control cost when integrated with MPC/LQR-style controllers.
+The Koopman-operator-based methods:
 
-    Instead of modeling $f(\cdot)$ directly, we seek a lifted representation $z_t = \phi_\theta(x_t)$ in which dynamics are approximately linear:
+    - Common evaluation metrics include one-step error, multi-step rollout error, long-horizon stability, and control cost when integrated with MPC/LQR-style controllers.
 
-    \begin{equation}
-    z_{t+1} \approx A z_t + B u_t
-    \label{eq:linear-latent}
-    \end{equation}
+        Instead of modeling $f(\cdot)$ directly, we seek a lifted representation $z_t = \phi_\theta(x_t)$ in which dynamics are approximately linear:
 
-    If successful, this lets us use linear-system tools for prediction and control while still handling nonlinear behavior through the learned lifting map $\phi_\theta$.
+        \begin{equation}
+        z_{t+1} \approx A z_t + B u_t
+        \label{eq:linear-latent}
+        \end{equation}
+
+        If successful, this lets us use linear-system tools for prediction and control while still handling nonlinear behavior through the learned lifting map $\phi_\theta$.
 
 ## Main Ideas and Proposed Algorithm
 

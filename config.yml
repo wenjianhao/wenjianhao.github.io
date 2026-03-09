@@ -91,6 +91,10 @@ markup:
           block:
             - ['$$', '$$']
             - ['\\[', '\\]']
+            - ['\\begin{equation}', '\\end{equation}']
+            - ['\\begin{equation*}', '\\end{equation*}']
+            - ['\\begin{align}', '\\end{align}']
+            - ['\\begin{align*}', '\\end{align*}']
           inline:
             - ['$', '$']
             - ['\\(', '\\)']
