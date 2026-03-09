@@ -23,10 +23,12 @@ where $t=0,1,2,\cdots$ denotes the discrete-time index, $\boldsymbol{x}(t) \in \
 
 Suppose we are given a dataset 
 
+<div>
 \begin{equation}
 \mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{i=1}^{N}
 \label{eq:dataset}
 \end{equation}
+</div>
 
 where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_i$ to $\boldsymbol{f}$ at $\boldsymbol{x}_i$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The problem of interest is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.
 
@@ -78,10 +80,12 @@ The core idea is to combine neural representation learning with linear operator 
 
 A typical training objective is:
 
+<div>
 \begin{equation}
 \mathcal{L} = \lambda_{\mathrm{pred}} \mathcal{L}_{\mathrm{pred}} + \lambda_{\mathrm{roll}} \mathcal{L}_{\mathrm{roll}} + \lambda_{\mathrm{rec}} \mathcal{L}_{\mathrm{rec}} + \lambda_{\mathrm{reg}} \mathcal{L}_{\mathrm{reg}}
 \label{eq:training-objective}
 \end{equation}
+</div>
 
 Regularization can include spectral penalties on $A$, sparsity structure, or constraints motivated by stability and controllability.
 
