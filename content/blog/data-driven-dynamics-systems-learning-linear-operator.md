@@ -24,7 +24,7 @@ where $t=0,1,2,\cdots$ denotes the discrete-time index, $\boldsymbol{x}(t) \in \
 Suppose we are given a dataset 
 
 \begin{equation}
-\mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{t=1}^{N}
+\mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{i=1}^{N}
 \label{eq:dataset}
 \end{equation}
 
@@ -34,25 +34,27 @@ where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the 
 
 Popular baseline methods:
 
-- A Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in \eqref{eq:dynamics} can be approximated by a parameterized function class, denoted as $\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in \eqref{eq:dataset} by minimizing the prediction error:
+<ul>
+<li>
+A Multilayer Perceptron (MLP): the unknown dynamics $\boldsymbol{f}$ in \eqref{eq:dynamics} are approximated by $\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The objective for fitting $\boldsymbol{w}^*$ to dataset $\mathcal{D}$ in \eqref{eq:dataset} is
 
 \begin{equation}
 \boldsymbol{\hat w}^* = \arg\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2
 \label{eq:mlp-loss}
 \end{equation}
 
-One can typically use gradient descent to solve \eqref{eq:mlp-loss}:
+and gradient descent solves \eqref{eq:mlp-loss} via
 
 \begin{equation}
 \boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)
 \label{eq:gd-update}
 \end{equation}
 
-where $k=0,1,2,\cdots$ denotes the iteration index, $\alpha_w(k)$ is the learning rate, and $\nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)$ denotes the gradient of $\mathbf{L}$ with respect to $\boldsymbol{w}$ evaluated at $\boldsymbol{w}(k)$.
+where $k=0,1,2,\cdots$ is the iteration index, $\alpha_w(k)$ is the learning rate, and $\nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)$ is the gradient at $\boldsymbol{w}(k)$.
+</li>
+</ul>
 
-The Koopman Operator:
-
-The Koopman-operator-based methods:
+The Koopman operator:
 
 - Common evaluation metrics include one-step error, multi-step rollout error, long-horizon stability, and control cost when integrated with MPC/LQR-style controllers.
 

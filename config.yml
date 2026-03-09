@@ -48,7 +48,7 @@ params:
   ShowWordCount: false
   UseHugoToc: true
   comments: false
-  math: false
+  math: true
   profileMode:
     enabled: true
     title: Wenjian Hao
