@@ -38,7 +38,7 @@ Popular baseline methods:
 
 <ul>
 <li>
-A Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in \eqref{eq:dynamics} can be approximated by a parameterized function class, denoted as $\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w})$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in \eqref{eq:dataset} by minimizing the prediction error:
+Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in \eqref{eq:dynamics} can be approximated by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in \eqref{eq:dataset} by minimizing the prediction error:
 
 \begin{equation}
 \boldsymbol{\hat w}^* = \arg\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2
@@ -53,6 +53,11 @@ One can typically use gradient descent to solve \eqref{eq:mlp-loss}
 \end{equation}
 
 where $k=0,1,2,\cdots$ denotes the iteration index, $\alpha_w(k)$ is the learning rate, and $\nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)$ denotes the gradient of $\mathbf{L}$ with respect to $\boldsymbol{w}$ evaluated at $\boldsymbol{w}(k)$.
+
+Some notes:
+- The assumption that $\boldsymbol{f}$ can be represented by $\boldsymbol{\phi}$ (i.e., the existence of $\boldsymbol{w}^*$) is generally unclear in practice and depends on the expressive power of the chosen function class.
+- $\boldsymbol{\hat w}^*$ denotes the optimal parameters with respect to the training dataset, while $\boldsymbol{w}^*$ denotes the optimal parameters defined over the entire state–input space of the dynamical system. In general, $\boldsymbol{\hat w}^*$ and $\boldsymbol{w}^*$ are not equal. The gap between $\boldsymbol{w}^*$ and $\boldsymbol{\hat w}^*$ may lead to poor deployment performance of $\boldsymbol{\hat w}^*$ for state–input pairs that are not contained in the training dataset.
+- One useful existing result for \eqref{eq:gd-update} is that, to achieve $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2 = 0$, the learning rate $\alpha_w(k)$ should be diminishing. Furthermore, for a constant $\alpha_w$, $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2$ typically converges to a small constant.
 </li>
 </ul>
 
