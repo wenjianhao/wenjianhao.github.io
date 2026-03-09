@@ -19,10 +19,24 @@ where $t=0,1,2,\cdots$ denotes the discrete-time index, $\boldsymbol{x}(t) \in \
 
 Suppose we are given a dataset 
 
-$$\mathcal{D} = \{(\boldsymbol{x}_t, \boldsymbol{u}_t, \boldsymbol{x}_t^+)\},
+$$\mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{t=1}^{N},
 $$ 
 
-where $\boldsymbol{x}_t^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_t$ to $\boldsymbol{f}$ at $\boldsymbol{x}_t$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The goal is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.
+where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_i$ to $\boldsymbol{f}$ at $\boldsymbol{x}_i$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The problem of interest is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.
+
+## Baseline Methods and Preliminaries
+
+Popular baseline methods:
+
+- A Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ can be approximated by a parameterized function class, denoted as $\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w})$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ by minimizing the prediction error:
+
+$$
+\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2 
+$$
+
+The Koopman operator:
+
+Common evaluation metrics include one-step error, multi-step rollout error, long-horizon stability, and control cost when integrated with MPC/LQR-style controllers.
 
 Instead of modeling $f(\cdot)$ directly, we seek a lifted representation $z_t = \phi_\theta(x_t)$ in which dynamics are approximately linear:
 
@@ -51,15 +65,6 @@ Regularization can include spectral penalties on $A$, sparsity structure, or con
 
 After training, we can roll out trajectories with the linear latent dynamics and decode predictions back to the original state space.
 
-## Benchmark Algorithms Comparison
-
-This framework is typically evaluated on several classes of systems:
-
-- Low-dimensional canonical systems (e.g., pendulum, Duffing oscillator, Lorenz-type dynamics) to inspect interpretability and long-horizon behavior.
-- Robotics and control benchmarks (e.g., cart-pole, quadrotor variants, soft robotic systems) where control relevance matters.
-- PDE-inspired or spatiotemporal datasets where latent linear evolution can improve sample efficiency and forecasting speed.
-
-Common evaluation metrics include one-step error, multi-step rollout error, long-horizon stability, and control cost when integrated with MPC/LQR-style controllers.
 
 ## Applications
 
