@@ -1,6 +1,7 @@
 ---
 title: "Explainable Reflexive Control (RefleXAI)"
-date: 2022-08 - Present
+date: 2022-08-01T00:00:00Z
+project_period: "2022-08 to Present"
 author: Wenjian Hao
 ---
 

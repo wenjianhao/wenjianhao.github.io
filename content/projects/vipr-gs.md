@@ -1,6 +1,7 @@
 ---
 title: "Virtual Prototyping of Autonomy-Enabled Ground Systems (VIPR-GS)"
-date: 2020-10 - 2021-07
+date: 2020-10-01T00:00:00Z
+project_period: "2020-10 to 2021-07"
 author: Wenjian Hao
 ---
 
