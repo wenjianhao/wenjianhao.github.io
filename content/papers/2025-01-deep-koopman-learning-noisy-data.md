@@ -3,7 +3,7 @@ title: "Deep Koopman Learning using Noisy Data"
 date: 2025-01-01
 author: "W Hao, D Upadhyay, S Mou"
 summary: "This paper develops deep Koopman learning under bounded measurement noise by explicitly modeling and mitigating noise effects during training."
-published: "TMLR 2025"
+venue: "TMLR 2025"
 ---
 
 ---

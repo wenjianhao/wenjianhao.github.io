@@ -68,7 +68,7 @@
   <div class="entry-content">
     {{- if eq .Section "papers" }}
     <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
-    {{- with .Param "published" }}
+    {{- with .Param "venue" }}
     <p>{{ . }}</p>
     {{- end }}
     {{- else }}

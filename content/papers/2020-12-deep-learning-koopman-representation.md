@@ -3,7 +3,7 @@ title: "Deep learning of Koopman representation for control"
 date: 2020-12-01
 author: "Y Han, W Hao, U Vaidya"
 summary: "This paper develops a model-free control pipeline using deep Koopman representations learned directly from interaction data."
-published: "CDC 2020"
+venue: "CDC 2020"
 ---
 
 ---
