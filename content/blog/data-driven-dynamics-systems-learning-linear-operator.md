@@ -44,7 +44,7 @@ Regularization can include spectral penalties on $A$, sparsity structure, or con
 
 After training, we can roll out trajectories with the linear latent dynamics and decode predictions back to the original state space.
 
-## Benchmark Algorithm Comparison
+## Benchmark Algorithms Comparison
 
 This framework is typically evaluated on several classes of systems:
 
