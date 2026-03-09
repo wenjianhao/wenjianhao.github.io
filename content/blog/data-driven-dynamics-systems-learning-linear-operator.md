@@ -10,15 +10,19 @@ Goal of this post: This post introduces data-driven dynamical systems learning u
 ## Problem Setup
 
 We observe a nonlinear discrete-time system
+
 $$
 x_{t+1} = f(x_t, u_t),
 $$
+
 where $x_t \in \mathbb{R}^n$ is the state and $u_t \in \mathbb{R}^m$ is the control input. The goal is to learn a predictive model from trajectory data $\{(x_t, u_t, x_{t+1})\}$ that is accurate, stable, and useful for downstream control.
 
 Instead of modeling $f(\cdot)$ directly, we seek a lifted representation $z_t = \phi_\theta(x_t)$ in which dynamics are approximately linear:
+
 $$
 z_{t+1} \approx A z_t + B u_t.
 $$
+
 If successful, this lets us use linear-system tools for prediction and control while still handling nonlinear behavior through the learned lifting map $\phi_\theta$.
 
 ## Main Ideas and Algorithm
@@ -31,14 +35,16 @@ The core idea is to combine neural representation learning with linear operator 
 4. Train end-to-end with losses on one-step prediction, multi-step rollout, and reconstruction.
 
 A typical training objective is:
+
 $$
 \mathcal{L} = \lambda_{\mathrm{pred}} \mathcal{L}_{\mathrm{pred}} + \lambda_{\mathrm{roll}} \mathcal{L}_{\mathrm{roll}} + \lambda_{\mathrm{rec}} \mathcal{L}_{\mathrm{rec}} + \lambda_{\mathrm{reg}} \mathcal{L}_{\mathrm{reg}}.
 $$
+
 Regularization can include spectral penalties on $A$, sparsity structure, or constraints motivated by stability and controllability.
 
 After training, we can roll out trajectories with the linear latent dynamics and decode predictions back to the original state space.
 
-## Benchmarks
+## Benchmark Algorithm Comparison
 
 This framework is typically evaluated on several classes of systems:
 
