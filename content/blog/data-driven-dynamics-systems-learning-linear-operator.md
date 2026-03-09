@@ -9,13 +9,20 @@ Goal of this post: This post introduces data-driven dynamical systems learning u
 
 ## Problem Setup
 
-We observe a nonlinear discrete-time system
+Consider the discrete-time dynamical system
 
 $$
-x_{t+1} = f(x_t, u_t),
+\boldsymbol{x}(t+1) = \boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t)),
 $$
 
-where $x_t \in \mathbb{R}^n$ is the state and $u_t \in \mathbb{R}^m$ is the control input. The goal is to learn a predictive model from trajectory data $\{(x_t, u_t, x_{t+1})\}$ that is accurate, stable, and useful for downstream control.
+where $t=0,1,2,\cdots$ denotes the discrete-time index, $\boldsymbol{x}(t) \in \mathbb{R}^n$ is the system state, $\boldsymbol{u}(t) \in \mathbb{R}^m$ is the control input, and $\boldsymbol{f}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$ is the system dynamics mapping funciton. 
+
+Suppose we are given a dataset 
+
+$$\mathcal{D} = \{(\boldsymbol{x}_t, \boldsymbol{u}_t, \boldsymbol{x}_t^+)\},
+$$ 
+
+where $\boldsymbol{x}_t^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_t$ to $\boldsymbol{f}$ at $\boldsymbol{x}_t$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The goal is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.
 
 Instead of modeling $f(\cdot)$ directly, we seek a lifted representation $z_t = \phi_\theta(x_t)$ in which dynamics are approximately linear:
 
