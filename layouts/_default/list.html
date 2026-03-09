@@ -68,6 +68,9 @@
   <div class="entry-content">
     {{- if eq .Section "papers" }}
     <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
+    {{- with .Param "published" }}
+    <p>{{ . }}</p>
+    {{- end }}
     {{- else }}
     <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
     {{- end }}
