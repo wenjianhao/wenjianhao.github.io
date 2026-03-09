@@ -48,7 +48,7 @@ Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dy
 One can typically use gradient descent to solve \eqref{eq:mlp-loss}
 
 \begin{equation}
-\boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)
+\boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}(k))
 \label{eq:gd-update}
 \end{equation}
 
