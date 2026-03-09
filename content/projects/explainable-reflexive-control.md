@@ -1,6 +1,6 @@
 ---
 title: "Explainable Reflexive Control (RefleXAI)"
-date: 2026-03-08
+date: Aug 2022 - Present
 author: Wenjian Hao
 ---
 
