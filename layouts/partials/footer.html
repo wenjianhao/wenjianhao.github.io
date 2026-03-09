@@ -18,6 +18,14 @@
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">hugo</a>, <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">papermod</a>, &amp;
         <a href="https://github.com/pmichaillat/hugo-website/" rel="noopener" target="_blank">hugo-website</a>.
     </span>
+    {{- print " · "}}
+    <span id="busuanzi_container_site_uv" style="display:none;">
+        Visitors: <span id="busuanzi_value_site_uv"></span>
+    </span>
+    {{- print " · "}}
+    <span id="busuanzi_container_site_pv" style="display:none;">
+        Views: <span id="busuanzi_value_site_pv"></span>
+    </span>
 </footer>
 {{- end }}
 
@@ -58,6 +66,7 @@
     });
 
 </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 {{- if (not site.Params.disableScrollToTop) }}
 <script>
