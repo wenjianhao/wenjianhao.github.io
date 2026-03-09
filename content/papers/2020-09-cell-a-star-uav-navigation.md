@@ -20,7 +20,7 @@ This paper presents an extension of A* search and related planners for robust lo
 
 ##### Demo
 
-Demo coming soon.
+{{< youtube UuHp6dZrpSw >}}
 
 ---
 
