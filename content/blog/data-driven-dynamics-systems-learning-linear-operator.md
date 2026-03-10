@@ -38,6 +38,14 @@ Popular baseline methods:
 
 <ul>
 <li>
+Linear Regression (works well if $\boldsymbol{f}$ is linear): 
+ - Ordinary Least Squares (OLS) for basic modeling
+ - Regularized least squares (e.g., Ridge regression)
+</li>
+</ul>
+
+<ul>
+<li>
 Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in \eqref{eq:dynamics} can be represented by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in \eqref{eq:dataset} by minimizing the prediction error:
 
 \begin{equation}
@@ -62,21 +70,32 @@ Some notes:
 </li>
 </ul>
 
+TBD 
+
 The Koopman operator:
 
-- Common evaluation metrics include one-step error, multi-step rollout error, long-horizon stability, and control cost when integrated with MPC/LQR-style controllers.
+- Definition:
 
 The Koopman-operator-based methods:
 <ul>
 <li>
-Instead of modeling $f(\cdot)$ directly, we seek a lifted representation $z_t = \phi_\theta(x_t)$ in which dynamics are approximately linear:
-
+- Dynamic Mode Decomposition (DMD)
+- Extended Dynamic Mode Decomposition (EDMD)
+- Deep Koopman Operator
 </li>
 </ul>
 
 ## Main Ideas and Proposed Algorithm
 
-The core idea is to combine neural representation learning with linear operator identification:
+The main ideas:
+<div>
+\begin{equation}
+\mathcal{L} = 
+\label{eq:training-objective}
+\end{equation}
+</div>
+
+The proposed algorithm:
 
 1. Learn an encoder $\phi_\theta$ that maps original states to latent observables.
 2. Fit linear operators $(A, B)$ in latent space from data.
@@ -84,17 +103,6 @@ The core idea is to combine neural representation learning with linear operator 
 4. Train end-to-end with losses on one-step prediction, multi-step rollout, and reconstruction.
 
 A typical training objective is:
-
-<div>
-\begin{equation}
-\mathcal{L} = \lambda_{\mathrm{pred}} \mathcal{L}_{\mathrm{pred}} + \lambda_{\mathrm{roll}} \mathcal{L}_{\mathrm{roll}} + \lambda_{\mathrm{rec}} \mathcal{L}_{\mathrm{rec}} + \lambda_{\mathrm{reg}} \mathcal{L}_{\mathrm{reg}}
-\label{eq:training-objective}
-\end{equation}
-</div>
-
-Regularization can include spectral penalties on $A$, sparsity structure, or constraints motivated by stability and controllability.
-
-After training, we can roll out trajectories with the linear latent dynamics and decode predictions back to the original state space.
 
 
 ## Applications
