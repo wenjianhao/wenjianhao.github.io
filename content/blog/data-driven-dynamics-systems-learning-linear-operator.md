@@ -38,9 +38,11 @@ Popular baseline methods:
 
 <ul>
 <li>
+
 Linear Regression (works well if $\boldsymbol{f}$ is linear): 
- - Ordinary Least Squares (OLS) for basic modeling
- - Regularized least squares (e.g., Ridge regression)
+- Ordinary Least Squares (OLS) for basic modeling
+- Regularized least squares (e.g., Ridge regression)
+ 
 </li>
 </ul>
 
