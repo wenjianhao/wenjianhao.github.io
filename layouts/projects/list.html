@@ -1,23 +1,46 @@
 {{- define "main" }}
-<header class="page-header">
-  {{- partial "breadcrumbs.html" . }}
-  <h1>{{ .Title }}</h1>
-</header>
-
-{{- if .Content }}
-<div class="post-content">
-  {{- if not (.Param "disableAnchoredHeadings") }}
-  {{- partial "anchored_headings.html" .Content -}}
-  {{- else }}{{ .Content }}{{ end }}
-</div>
-{{- end }}
+<style>
+  .project-folders {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .project-folder {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--entry);
+    padding: 10px 14px;
+  }
+  .project-folder > summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    user-select: none;
+  }
+  .project-folder > summary::-webkit-details-marker {
+    display: none;
+  }
+  .project-folder > summary::before {
+    content: "▸ ";
+    color: var(--secondary);
+  }
+  .project-folder[open] > summary::before {
+    content: "▾ ";
+  }
+  .project-folder .post-entry {
+    margin-top: 12px;
+  }
+</style>
 
 {{- $funded := where .RegularPages "Params.project_group" "Funded Research Projects" }}
 {{- $personal := where .RegularPages "Params.project_group" "Personal Projects" }}
 
+<div class="project-folders">
 {{- if gt (len $funded) 0 }}
-<details>
-<summary><h2 style="display:inline;">Funded Research Projects</h2></summary>
+<details class="project-folder">
+<summary>Funded Research Projects</summary>
 {{- range sort $funded "Date" "desc" }}
 <article class="post-entry">
   <header class="entry-header">
@@ -36,8 +59,8 @@
 {{- end }}
 
 {{- if gt (len $personal) 0 }}
-<details>
-<summary><h2 style="display:inline;">Personal Projects</h2></summary>
+<details class="project-folder">
+<summary>Personal Projects</summary>
 {{- range sort $personal "Date" "desc" }}
 <article class="post-entry">
   <header class="entry-header">
@@ -54,4 +77,5 @@
 {{- end }}
 </details>
 {{- end }}
+</div>
 {{- end }}
