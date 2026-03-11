@@ -16,7 +16,8 @@
 {{- $personal := where .RegularPages "Params.project_group" "Personal Projects" }}
 
 {{- if gt (len $funded) 0 }}
-<h2>Funded Research Projects</h2>
+<details>
+<summary><h2 style="display:inline;">Funded Research Projects</h2></summary>
 {{- range sort $funded "Date" "desc" }}
 <article class="post-entry">
   <header class="entry-header">
@@ -31,10 +32,12 @@
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>
 {{- end }}
+</details>
 {{- end }}
 
 {{- if gt (len $personal) 0 }}
-<h2>Personal Projects</h2>
+<details>
+<summary><h2 style="display:inline;">Personal Projects</h2></summary>
 {{- range sort $personal "Date" "desc" }}
 <article class="post-entry">
   <header class="entry-header">
@@ -49,5 +52,6 @@
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>
 {{- end }}
+</details>
 {{- end }}
 {{- end }}
