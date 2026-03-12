@@ -31,11 +31,14 @@ Demo coming soon.
 Hao, Wenjian, Devesh Upadhyay, and Shaoshuai Mou. 2025. "Deep Koopman Learning using Noisy Data." Transactions on Machine Learning Research.
 
 ```latex
-@techreport{WHao2025deepkoop,
-  author = {W Hao, D Upadhyay, S Mou},
-  year = {2025},
-  title = {Deep Koopman Learning using Noisy Data},
-  number = {arXiv:2405.16649},
-  url = {https://arxiv.org/pdf/2405.16649}
+@article{
+hao2025deep,
+title={Deep Koopman Learning using Noisy Data},
+author={Wenjian Hao and Devesh Upadhyay and Shaoshuai Mou},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2025},
+url={https://openreview.net/forum?id=j6Rm6T2lFU},
+note={}
 }
 ```
