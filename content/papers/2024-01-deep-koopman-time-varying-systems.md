@@ -2,6 +2,7 @@
 title: "Deep Koopman learning of nonlinear time-varying systems"
 date: 2024-01-01
 author: "W Hao, B Huang, W Pan, D Wu, S Mou"
+paper_group: "Dynamics Learning for Complex Systems"
 summary: "This paper proposes deep Koopman learning for nonlinear time-varying systems with error analysis and computationally efficient prediction."
 venue: "Automatica 2024"
 ---

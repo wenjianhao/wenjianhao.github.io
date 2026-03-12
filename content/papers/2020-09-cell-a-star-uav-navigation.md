@@ -2,6 +2,7 @@
 title: "Cell a* for navigation of unmanned aerial vehicles in partially-known environments"
 date: 2020-09-01
 author: "W Hao, R Wang, A Krolicki, Y Han"
+paper_group: "Learning-Based Control for Robotics"
 summary: "This paper extends A* path planning for stable online navigation in partially known environments with lower computational burden."
 ---
 

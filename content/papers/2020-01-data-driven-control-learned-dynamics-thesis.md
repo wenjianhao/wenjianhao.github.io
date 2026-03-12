@@ -2,6 +2,7 @@
 title: "Data-Driven Control with Learned Dynamics"
 date: 2020-01-01
 author: "W Hao"
+paper_group: "Learning-Based Control for Robotics"
 summary: "This thesis studies data-driven control with learned dynamics, comparing model-based and model-free strategies for nonlinear systems."
 ---
 

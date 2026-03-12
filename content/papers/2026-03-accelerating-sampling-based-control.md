@@ -2,6 +2,7 @@
 title: "Accelerating Sampling-Based Control via Learned Linear Koopman Dynamics"
 date: 2026-03-01
 author: "W Hao, Y Fang, Z Lu, S Mou"
+paper_group: "Learning-Based Control for Robotics"
 summary: "This paper presents an efficient MPPI control framework using learned linear Koopman dynamics to reduce rollout cost while maintaining control performance."
 ---
 

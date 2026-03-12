@@ -2,6 +2,7 @@
 title: "Distributed Koopman Learning using Partial Trajectories for Control"
 date: 2024-12-20
 author: "W Hao, Z Lu, D Upadhyay, S Mou"
+paper_group: "Distributed Learning and Multi-Agent Systems"
 summary: "This paper proposes distributed deep Koopman learning with partial trajectories, allowing consensus dynamics learning without sharing private training data."
 venue: "ACC 2026"
 ---

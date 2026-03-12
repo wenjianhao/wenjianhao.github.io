@@ -2,6 +2,7 @@
 title: "Data driven control with learned dynamics: model-based versus model-free approach"
 date: 2020-06-01
 author: "W Hao, Y Han"
+paper_group: "Learning-Based Control for Robotics"
 summary: "This paper compares model-based deep Koopman control and model-free DDPG across benchmark nonlinear control tasks."
 ---
 

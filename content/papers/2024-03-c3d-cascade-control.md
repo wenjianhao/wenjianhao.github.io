@@ -2,6 +2,7 @@
 title: "C3d: cascade control with change point detection and deep koopman learning for autonomous surface vehicles"
 date: 2024-03-01
 author: "J Li, H Park, W Hao, L Xin, J Chavez-Galaviz, A Chaudhary, M Bloss, ..."
+paper_group: "Learning-Based Control for Robotics"
 summary: "This paper introduces C3D, a modular ASV control architecture combining deep Koopman learning and change-point detection for robust maritime autonomy."
 ---
 

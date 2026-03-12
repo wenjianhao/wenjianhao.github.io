@@ -2,6 +2,7 @@
 title: "A data-driven approach for inverse optimal control"
 date: 2023-12-01
 author: "Z Liang, W Hao, S Mou"
+paper_group: "Learning-Based Control for Robotics"
 summary: "This paper proposes an iterative data-driven inverse optimal control method that jointly learns unknown dynamics and objective weights."
 venue: "CDC 2023"
 ---

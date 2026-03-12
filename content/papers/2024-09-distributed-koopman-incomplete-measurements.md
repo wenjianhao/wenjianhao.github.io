@@ -2,6 +2,7 @@
 title: "Distributed Koopman Learning with Incomplete Measurements"
 date: 2024-09-20
 author: "W Hao, L Wang, A Rai, S Mou"
+paper_group: "Distributed Learning and Multi-Agent Systems"
 summary: "This paper develops distributed Koopman learning for networks with partial observations, enabling cooperative global dynamics reconstruction."
 ---
 
