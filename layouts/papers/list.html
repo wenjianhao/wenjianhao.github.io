@@ -39,10 +39,10 @@
 {{- $distributed := where .RegularPages "Params.paper_group" "Distributed Learning and Multi-Agent Systems" }}
 
 <div class="paper-folders">
-{{- if gt (len $dynamics) 0 }}
+{{- if gt (len $control) 0 }}
 <details class="paper-folder">
-<summary>Dynamics Learning for Complex Systems</summary>
-{{- range sort $dynamics "Date" "desc" }}
+<summary>Learning-Based Control for Robotics</summary>
+{{- range sort $control "Date" "desc" }}
 <article class="post-entry">
   <header class="entry-header">
     <h2 class="entry-hint-parent">{{ .Title }}</h2>
@@ -59,10 +59,10 @@
 </details>
 {{- end }}
 
-{{- if gt (len $control) 0 }}
+{{- if gt (len $dynamics) 0 }}
 <details class="paper-folder">
-<summary>Learning-Based Control for Robotics</summary>
-{{- range sort $control "Date" "desc" }}
+<summary>Dynamics Learning for Complex Systems</summary>
+{{- range sort $dynamics "Date" "desc" }}
 <article class="post-entry">
   <header class="entry-header">
     <h2 class="entry-hint-parent">{{ .Title }}</h2>
