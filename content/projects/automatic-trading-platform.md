@@ -9,9 +9,10 @@ Project goal: Designed and developed an automatic trading platform for quantitat
 
 Platform structure: The platform is organized as a modular pipeline that connects market data collection, preprocessing, feature generation, strategy logic, portfolio construction, execution, and post-trade evaluation. This structure makes it easier to test quantitative ideas in a reproducible manner while keeping research, simulation, and execution components clearly separated.
 
-![Automatic trading platform flow chart](/projects/pics/trading_flow_chart.png)
-
-*Figure: Automatic trading platform architecture.*
+<figure style="text-align: center;">
+  <img src="/projects/pics/trading_flow_chart.png" alt="Automatic trading platform flow chart" style="max-width: 100%; height: auto;">
+  <figcaption><em>Fig. 1: Automatic trading platform architecture.</em></figcaption>
+</figure>
 
 The architecture highlights how raw market data flows through the research and execution stack. Historical and live data first enter the data management layer, where they are cleaned and transformed into features for signal generation. The strategy layer then produces trading decisions, which are filtered by portfolio and risk modules before being sent to execution components.
 
