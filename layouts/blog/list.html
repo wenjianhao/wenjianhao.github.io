@@ -1,0 +1,60 @@
+{{- define "main" }}
+<style>
+  .blog-folders {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .blog-folder {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--entry);
+    padding: 10px 14px;
+  }
+  .blog-folder > summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    user-select: none;
+  }
+  .blog-folder > summary::-webkit-details-marker {
+    display: none;
+  }
+  .blog-folder > summary::before {
+    content: "▸ ";
+    color: var(--secondary);
+  }
+  .blog-folder[open] > summary::before {
+    content: "▾ ";
+  }
+  .blog-folder .post-entry {
+    margin-top: 12px;
+  }
+</style>
+
+{{- $learning := where .RegularPages "Params.blog_group" "Learning Complex Dynamical Systems" }}
+
+<div class="blog-folders">
+{{- if gt (len $learning) 0 }}
+<details class="blog-folder">
+<summary>Learning Complex Dynamical Systems</summary>
+{{- range sort $learning "Date" "desc" }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">{{ .Title }}</h2>
+  </header>
+  <div class="entry-content">
+    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+  </div>
+  <footer class="entry-footer">
+    {{- partial "post_meta.html" . -}}
+  </footer>
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+</details>
+{{- end }}
+</div>
+{{- end }}

@@ -2,6 +2,7 @@
 title: "Learning Nonlinear Dynamics with Deep Linear Operators"
 date: 2026-03-09
 author: Wenjian Hao
+blog_group: "Learning Complex Dynamical Systems"
 math: true
 summary: "A concise introduction to learning nonlinear dynamics with Koopman-inspired deep linear operators for prediction and control."
 ---
