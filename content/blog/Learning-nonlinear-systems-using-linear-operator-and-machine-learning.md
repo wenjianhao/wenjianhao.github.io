@@ -1,10 +1,10 @@
 ---
-title: "Learning Nonlinear Systems using Linear Operator and Machine Learning"
+title: "Learning Nonlinear Systems Using Linear Operators and Machine Learning"
 date: 2026-03-09
 author: Wenjian Hao
 blog_group: "Learning Complex Dynamical Systems"
 math: true
-summary: "A concise introduction to learning nonlinear dynamics with Koopman-inspired deep linear operators for prediction and control."
+summary: "A concise introduction to learning nonlinear systems using linear operators and machine learning for prediction and control."
 ---
 
 This post introduces a practical view of learning nonlinear dynamics using Koopman-inspired deep linear operators, with a focus on prediction and control.
@@ -12,6 +12,8 @@ This post introduces a practical view of learning nonlinear dynamics using Koopm
 <!--more-->
 
 ## Why care about learning nonlinear systems?
+
+### Problem setup
 
 Consider the discrete-time dynamical system
 
@@ -33,7 +35,9 @@ Suppose we are given a dataset
 
 where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_i$ to $\boldsymbol{f}$ at $\boldsymbol{x}_i$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The problem of interest is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.
 
-## What is linear operator and state-of-art methods
+## What is linear operator and state-of-the-art methods
+
+### State-of-the-art methods
 
 Popular baseline methods:
 
@@ -73,13 +77,11 @@ Some notes:
 </li>
 </ul>
 
-TBD 
+### Linear operator viewpoint
 
-The Koopman operator:
+The Koopman operator provides a way to study nonlinear dynamics through a linear evolution of observables. Instead of evolving the state directly, it evolves carefully chosen functions of the state, which can make prediction and control design more structured.
 
-- Definition:
-
-The Koopman-operator-based methods:
+The Koopman-operator-based methods include:
 <ul>
 <li>
 - Dynamic Mode Decomposition (DMD)
@@ -90,7 +92,7 @@ The Koopman-operator-based methods:
 
 ## The Proposed Method
 
-The main ideas:
+### Main ideas
 <div>
 \begin{equation}
 \mathcal{L} = 
@@ -98,7 +100,7 @@ The main ideas:
 \end{equation}
 </div>
 
-The proposed algorithm:
+### Algorithm
 
 1. Learn an encoder $\phi_\theta$ that maps original states to latent observables.
 2. Fit linear operators $(A, B)$ in latent space from data.
@@ -108,7 +110,7 @@ The proposed algorithm:
 A typical training objective is:
 
 
-## Applications
+### Applications
 
 Deep linear-operator models support multiple downstream tasks:
 
@@ -118,7 +120,7 @@ Deep linear-operator models support multiple downstream tasks:
 - Safety filtering and constrained control by combining latent predictions with CBF/MPC layers.
 - Model-based reinforcement learning with improved planning and sample efficiency.
 
-## Extensions
+### Extensions
 
 Current research directions include:
 
