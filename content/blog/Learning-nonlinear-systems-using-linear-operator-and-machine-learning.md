@@ -2,7 +2,6 @@
 title: "Learning Nonlinear Systems Using Linear Operators and Machine Learning"
 date: 2026-03-09
 author: Wenjian Hao
-blog_group: "Learning Complex Dynamical Systems"
 math: true
 summary: "A concise introduction to learning nonlinear systems using linear operators and machine learning for prediction and control."
 ---
