@@ -1,5 +1,5 @@
 ---
-title: "Learning Nonlinear Dynamics with Deep Linear Operators"
+title: "Learning Nonlinear Systems using Linear Operator and Machine Learning"
 date: 2026-03-09
 author: Wenjian Hao
 blog_group: "Learning Complex Dynamical Systems"
@@ -11,7 +11,7 @@ This post introduces a practical view of learning nonlinear dynamics using Koopm
 
 <!--more-->
 
-## Problem Setup
+## Why care about learning nonlinear systems?
 
 Consider the discrete-time dynamical system
 
@@ -33,7 +33,7 @@ Suppose we are given a dataset
 
 where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_i$ to $\boldsymbol{f}$ at $\boldsymbol{x}_i$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The problem of interest is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.
 
-## Baseline Methods and Preliminaries
+## What is linear operator and state-of-art methods
 
 Popular baseline methods:
 
@@ -88,7 +88,7 @@ The Koopman-operator-based methods:
 </li>
 </ul>
 
-## Main Ideas and Proposed Algorithm
+## The Proposed Method
 
 The main ideas:
 <div>
