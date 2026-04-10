@@ -148,6 +148,18 @@ def display_title(title):
     return title[0].upper() + title[1:].lower()
 
 
+def emphasize_author_names(author_text):
+    text = escape(author_text)
+    patterns = [
+        r'\bW Hao\b',
+        r'\bWenjian Hao\b',
+        r'\bHao,\s*Wenjian\b',
+    ]
+    for pattern in patterns:
+        text = re.sub(pattern, lambda m: f'<strong>{m.group(0)}</strong>', text)
+    return text
+
+
 def youtube_embed(video_id):
     return (
         '<div class="video-wrap">'
@@ -476,7 +488,7 @@ def render_home_section(section_id, title, items, kind):
     for item in items:
         meta = ''
         if kind == 'papers':
-            authors = escape(item['author'])
+            authors = emphasize_author_names(item['author'])
             venue_parts = []
             if item['venue']:
                 venue_parts.append(escape(item['venue']))
@@ -489,7 +501,7 @@ def render_home_section(section_id, title, items, kind):
                 resources.append(f"<a href='{escape(item['code_url'])}'>[Code]</a>")
             venue_line = ' · '.join(venue_parts)
             if resources:
-                venue_line = f"{venue_line} {' / '.join(resources)}" if venue_line else ' / '.join(resources)
+                venue_line = f"{venue_line} · {' / '.join(resources)}" if venue_line else ' / '.join(resources)
             venue_html = f"<div class='entry-venue'>{venue_line}</div>" if venue_line else ''
             meta = f"<div class='entry-authors'>{authors}</div>{venue_html}"
         else:
@@ -519,13 +531,13 @@ def paper_list_entry(item):
         resources.append(f"<a href='{escape(item['code_url'])}'>[Code]</a>")
     venue_line = ' · '.join(venue_parts)
     if resources:
-        venue_line = f"{venue_line} {' / '.join(resources)}" if venue_line else ' / '.join(resources)
+        venue_line = f"{venue_line} · {' / '.join(resources)}" if venue_line else ' / '.join(resources)
     venue_html = f"<div class='entry-venue'>{venue_line}</div>" if venue_line else ''
     return (
         "<div class='content-entry'><div class='content-entry-main'>"
         f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(display_title(item['title']))}</a></div>"
         f"<div class='entry-summary'>{escape(item['summary'])}</div>"
-        f"<div class='entry-authors'>{escape(item['author'])}</div>"
+        f"<div class='entry-authors'>{emphasize_author_names(item['author'])}</div>"
         f"{venue_html}</div></div>"
     )
 

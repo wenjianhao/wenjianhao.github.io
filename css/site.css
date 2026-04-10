@@ -38,7 +38,7 @@ a:hover {
 .site-title a,
 .home-name {
   color: #172536;
-  font-size: 1.82rem;
+  font-size: 2.12rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -46,7 +46,7 @@ a:hover {
 
 .home-role {
   margin-top: 10px;
-  font-size: 17px;
+  font-size: 1.22rem;
   color: #6b7785;
   line-height: 1.35;
 }
@@ -62,7 +62,7 @@ a:hover {
 .site-menu a,
 .home-menu a {
   color: #172536;
-  font-size: 1rem;
+  font-size: 0.98rem;
   font-weight: 400;
 }
 
@@ -80,8 +80,8 @@ a:hover {
 
 .hero-text {
   margin: 0;
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 1.02rem;
+  line-height: 1.68;
   color: #172536;
 }
 
@@ -100,7 +100,7 @@ a:hover {
   gap: 14px;
   padding: 9px 16px;
   color: #172536;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 400;
   background: #ffffff;
   border: 1px solid #d9dee5;
@@ -150,7 +150,7 @@ a:hover {
 .section-page-title {
   display: inline-block;
   color: #172536;
-  font-size: 2rem;
+  font-size: 1.76rem;
   font-weight: 500;
   line-height: 1.15;
   margin: 0 0 14px;
@@ -160,8 +160,8 @@ a:hover {
 
 .grouped-section h2 {
   color: #172536;
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.28rem;
+  font-weight: 500;
   margin: 24px 0 12px;
 }
 
@@ -170,8 +170,8 @@ a:hover {
 .article-content li,
 .article-content ol,
 .article-content ul {
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.66;
 }
 
 .content-entry {
@@ -180,8 +180,8 @@ a:hover {
 }
 
 .entry-title {
-  font-size: 1.4rem;
-  line-height: 1.3;
+  font-size: 1.24rem;
+  line-height: 1.32;
   font-weight: 500;
   color: #172536;
 }
@@ -197,8 +197,8 @@ a:hover {
 
 .entry-summary {
   margin-top: 8px;
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 0.98rem;
+  line-height: 1.62;
 }
 
 .entry-authors,
@@ -206,7 +206,7 @@ a:hover {
 .entry-year,
 .article-submeta {
   margin-top: 8px;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .entry-venue {
