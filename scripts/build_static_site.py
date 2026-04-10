@@ -327,6 +327,7 @@ def page_shell(title, content, description='', include_math=False):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
   {math}
@@ -362,6 +363,7 @@ def home_shell(title, content, description=''):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
 </head>
@@ -394,9 +396,9 @@ def hero_block():
         <div class="hero-copy">
           <p class="hero-text">{escape(SITE['intro_text'])}</p>
           <div class="hero-buttons">
-            <a class="hero-button" href="{SITE['email']}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M4 7l8 6 8-6"></path></svg><span>Email</span></a>
-            <a class="hero-button" href="{SITE['scholar']}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 4-8 4-8-4 8-4z"></path><path d="M7 11v4c0 2 2.6 4 5 4s5-2 5-4v-4"></path><path d="M20 8v5"></path></svg><span>Scholar</span></a>
-            <a class="hero-button" href="{SITE['github']}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18c-4 1.2-4-2-6-2"></path><path d="M15 21v-3.2a2.8 2.8 0 0 0-.8-2.2c2.6-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6 4.3 4.3 0 0 0 18.1 3S17 2.7 15 4.1a11.7 11.7 0 0 0-6 0C7 2.7 5.9 3 5.9 3A4.3 4.3 0 0 0 5.8 6a4.7 4.7 0 0 0-1.3 3.6c0 4.7 2.7 5.7 5.3 6a2.8 2.8 0 0 0-.8 2.2V21"></path></svg><span>GitHub</span></a>
+            <a class="hero-button" href="{SITE['email']}"><i class="bi bi-envelope" aria-hidden="true"></i><span>Email</span></a>
+            <a class="hero-button" href="{SITE['scholar']}"><i class="bi bi-mortarboard" aria-hidden="true"></i><span>Scholar</span></a>
+            <a class="hero-button" href="{SITE['github']}"><i class="bi bi-github" aria-hidden="true"></i><span>GitHub</span></a>
           </div>
         </div>
         <div class="hero-visual">

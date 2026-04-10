@@ -16,7 +16,7 @@ a:hover {
 }
 
 .container {
-  max-width: 840px;
+  max-width: 760px;
 }
 
 .site-nav-wrap,
@@ -67,14 +67,14 @@ a:hover {
 
 .hero-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 165px;
-  align-items: center;
-  column-gap: 44px;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  align-items: start;
+  column-gap: 40px;
   padding: 56px 0 8px;
 }
 
 .hero-copy {
-  max-width: 455px;
+  max-width: 410px;
 }
 
 .hero-text {
@@ -111,26 +111,21 @@ a:hover {
   text-decoration: none;
 }
 
-.hero-button svg {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 auto;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.hero-button i {
+  font-size: 0.95rem;
+  line-height: 1;
 }
 
 .hero-visual {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 56px;
 }
 
 #portrait {
-  width: 165px !important;
-  height: 165px !important;
+  width: 180px !important;
+  height: 180px !important;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -302,7 +297,7 @@ a:hover {
   }
 
   #portrait {
-    width: 145px !important;
-    height: 145px !important;
+    width: 155px !important;
+    height: 155px !important;
   }
 }
