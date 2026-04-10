@@ -13,7 +13,7 @@ ASSET_VERSION = '20260410b'
 
 SITE = {
     'title': 'Wenjian Hao',
-    'tagline': 'Ph.D. candidate, AAE, Purdue University',
+    'tagline': 'Ph.D. candidate, Purdue University AAE',
     'intro_text': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
         'Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly '
