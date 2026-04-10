@@ -13,6 +13,13 @@ STATIC = ROOT / 'static'
 SITE = {
     'title': 'Wenjian Hao',
     'tagline': 'Ph.D. candidate, Purdue University School of Aeronautics and Astronautics',
+    'intro_heading': "Hi, I'm Wenjian!",
+    'intro_text': (
+        'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
+        'Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly '
+        'data-driven dynamics learning using linear operators, data-efficient reinforcement learning, sampling-based '
+        'optimal control, safety-critical control, and robotics.'
+    ),
     'bio': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
         'Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly '
@@ -339,23 +346,62 @@ def page_shell(title, content, description='', include_math=False):
 '''
 
 
+def home_shell(title, content, description=''):
+    nav = ''.join(f'<a href="{href}">{label}</a>' for label, href in SITE['nav'])
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{escape(title)} | {escape(SITE['title'])}</title>
+  <meta name="description" content="{escape(description or title)}">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/site.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container home-top">
+    <div class="row">
+      <div class="col offset-md-1 col-lg-10">
+        <div class="home-masthead">
+          <div class="home-identity">
+            <div class="home-name">{escape(SITE['title'])}</div>
+            <div class="home-role">{escape(SITE['tagline'])}</div>
+          </div>
+          <div class="site-menu home-menu">{nav}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {content}
+</body>
+</html>
+'''
+
+
 def hero_block():
     return f'''
-<div id="header">
-  <div class="container">
-    <div class="row align-items-center hero-row">
-      <div class="col-md-3 offset-md-1 portrait-col">
-        <img src="{SITE['portrait']}" class="img-fluid" id="portrait" alt="Wenjian Hao portrait">
-      </div>
-      <div class="col-md-7">
-        <div id="header-text-name">{escape(SITE['title'])}</div>
-        <div id="header-text-title">{escape(SITE['tagline'])}</div>
-        <div id="header-text-affiliation">Learning and control of complex dynamical systems, robotics, and data-driven autonomy.</div>
-        <div id="header-text-email"><a href="{SITE['email']}">haowjz@gmail.com</a></div>
-        <div class="header-links">
-          <a href="{SITE['email']}">[Email]</a>
-          <a href="{SITE['scholar']}">[Google Scholar]</a>
-          <a href="{SITE['github']}">[GitHub]</a>
+<div class="container">
+  <div class="row">
+    <div class="col offset-md-1 col-lg-10">
+      <div class="hero-intro">
+        <div class="hero-copy">
+          <h1 class="hero-greeting">{escape(SITE['intro_heading'])}</h1>
+          <p class="hero-text">{escape(SITE['intro_text'])}</p>
+          <div class="hero-buttons">
+            <a class="hero-button" href="{SITE['email']}">Email</a>
+            <a class="hero-button" href="{SITE['scholar']}">Scholar</a>
+            <a class="hero-button" href="{SITE['github']}">GitHub</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="{SITE['portrait']}" class="img-fluid" id="portrait" alt="Wenjian Hao portrait">
         </div>
       </div>
     </div>
@@ -424,10 +470,6 @@ def render_home(papers, projects, blogs, misc):
 <div class="container">
   <div class="row">
     <div class="col offset-md-1 col-lg-10">
-      <section id="bio" class="content-section first-section">
-        <h1>Bio</h1>
-        <p>{escape(SITE['bio'])}</p>
-      </section>
       {render_home_section('papers', 'Papers', papers, 'papers')}
       {render_home_section('projects', 'Projects', projects, 'projects')}
       {render_home_section('blog', 'Blog', blogs, 'blog')}
@@ -436,7 +478,7 @@ def render_home(papers, projects, blogs, misc):
   </div>
 </div>
 '''
-    return page_shell(SITE['title'], content, SITE['bio'])
+    return home_shell(SITE['title'], content, SITE['bio'])
 
 
 def build_list_pages(papers, projects, blogs, misc):

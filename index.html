@@ -14,33 +14,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link href="/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/site.css" rel="stylesheet">
-  
 </head>
 <body>
-  <div class="site-nav-wrap">
-    <div class="container">
-      <div class="site-nav">
-        <div class="site-title"><a href="/">Wenjian Hao</a></div>
-        <div class="site-menu"><a href="/#papers">Papers</a><a href="/#projects">Projects</a><a href="/#blog">Blog</a><a href="/#miscellaneous">Miscellaneous</a></div>
+  <div class="container home-top">
+    <div class="row">
+      <div class="col offset-md-1 col-lg-10">
+        <div class="home-masthead">
+          <div class="home-identity">
+            <div class="home-name">Wenjian Hao</div>
+            <div class="home-role">Ph.D. candidate, Purdue University School of Aeronautics and Astronautics</div>
+          </div>
+          <div class="site-menu home-menu"><a href="/#papers">Papers</a><a href="/#projects">Projects</a><a href="/#blog">Blog</a><a href="/#miscellaneous">Miscellaneous</a></div>
+        </div>
       </div>
     </div>
   </div>
   
-<div id="header">
-  <div class="container">
-    <div class="row align-items-center hero-row">
-      <div class="col-md-3 offset-md-1 portrait-col">
-        <img src="/wenjian-hao.jpg" class="img-fluid" id="portrait" alt="Wenjian Hao portrait">
-      </div>
-      <div class="col-md-7">
-        <div id="header-text-name">Wenjian Hao</div>
-        <div id="header-text-title">Ph.D. candidate, Purdue University School of Aeronautics and Astronautics</div>
-        <div id="header-text-affiliation">Learning and control of complex dynamical systems, robotics, and data-driven autonomy.</div>
-        <div id="header-text-email"><a href="mailto:haowjz@gmail.com">haowjz@gmail.com</a></div>
-        <div class="header-links">
-          <a href="mailto:haowjz@gmail.com">[Email]</a>
-          <a href="https://scholar.google.com/citations?user=SQ2BSVsAAAAJ&hl=en">[Google Scholar]</a>
-          <a href="https://github.com/wenjianhao">[GitHub]</a>
+<div class="container">
+  <div class="row">
+    <div class="col offset-md-1 col-lg-10">
+      <div class="hero-intro">
+        <div class="hero-copy">
+          <h1 class="hero-greeting">Hi, I&#x27;m Wenjian!</h1>
+          <p class="hero-text">I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly data-driven dynamics learning using linear operators, data-efficient reinforcement learning, sampling-based optimal control, safety-critical control, and robotics.</p>
+          <div class="hero-buttons">
+            <a class="hero-button" href="mailto:haowjz@gmail.com">Email</a>
+            <a class="hero-button" href="https://scholar.google.com/citations?user=SQ2BSVsAAAAJ&hl=en">Scholar</a>
+            <a class="hero-button" href="https://github.com/wenjianhao">GitHub</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="/wenjian-hao.jpg" class="img-fluid" id="portrait" alt="Wenjian Hao portrait">
         </div>
       </div>
     </div>
@@ -50,10 +54,6 @@
 <div class="container">
   <div class="row">
     <div class="col offset-md-1 col-lg-10">
-      <section id="bio" class="content-section first-section">
-        <h1>Bio</h1>
-        <p>I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly data-driven dynamics learning using linear operators, data-efficient reinforcement learning, sampling-based optimal control, safety-critical control, and robotics. My work aims to develop computationally efficient and reliable learning-based control algorithms for autonomous robotic systems by integrating machine learning with control theory. These methods have been applied to a variety of robotic platforms, including manipulators, quadrupeds, drones, and autonomous ground and surface vehicles.</p>
-      </section>
       <section id='papers' class='content-section'><h1>Papers</h1><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2026-03-accelerating-sampling-based-control/'>Accelerating Sampling-Based Control via Learned Linear Koopman Dynamics</a></div><div class='entry-summary'>This paper presents an efficient MPPI control framework using learned linear Koopman dynamics to reduce rollout cost while maintaining control performance.</div><div class='entry-authors'>W Hao, Y Fang, Z Lu, S Mou</div><div class='entry-year'>2026</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2025-10-cbf-policy-adaptation-rl/'>A Control-Barrier-Function-Based Algorithm for Policy Adaptation in Reinforcement Learning</a></div><div class='entry-summary'>This paper formulates policy adaptation as constrained optimization and uses control barrier functions to guarantee objective-preserving adaptation.</div><div class='entry-authors'>W Hao, Z Lu, N Miguel, S Mou</div><div class='entry-year'>2025</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2025-01-deep-koopman-learning-noisy-data/'>Deep Koopman Learning using Noisy Data</a></div><div class='entry-summary'>This paper develops deep Koopman learning under bounded measurement noise by explicitly modeling and mitigating noise effects during training.</div><div class='entry-authors'>W Hao, D Upadhyay, S Mou</div><div class='entry-venue'>TMLR 2025</div><div class='entry-year'>2025</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2024-12-distributed-koopman-partial-trajectories/'>Distributed Koopman Learning using Partial Trajectories for Control</a></div><div class='entry-summary'>This paper proposes distributed deep Koopman learning with partial trajectories, allowing consensus dynamics learning without sharing private training data.</div><div class='entry-authors'>W Hao, Z Lu, D Upadhyay, S Mou</div><div class='entry-venue'>ACC 2026</div><div class='entry-year'>2024</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2024-09-distributed-koopman-incomplete-measurements/'>Distributed Koopman Learning with Incomplete Measurements</a></div><div class='entry-summary'>This paper develops distributed Koopman learning for networks with partial observations, enabling cooperative global dynamics reconstruction.</div><div class='entry-authors'>W Hao, L Wang, A Rai, S Mou</div><div class='entry-year'>2024</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2024-03-c3d-cascade-control/'>C3d: cascade control with change point detection and deep koopman learning for autonomous surface vehicles</a></div><div class='entry-summary'>This paper introduces C3D, a modular ASV control architecture combining deep Koopman learning and change-point detection for robust maritime autonomy.</div><div class='entry-authors'>J Li, H Park, W Hao, L Xin, J Chavez-Galaviz, A Chaudhary, M Bloss, ...</div><div class='entry-year'>2024</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2024-01-deep-koopman-time-varying-systems/'>Deep Koopman learning of nonlinear time-varying systems</a></div><div class='entry-summary'>This paper proposes deep Koopman learning for nonlinear time-varying systems with error analysis and computationally efficient prediction.</div><div class='entry-authors'>W Hao, B Huang, W Pan, D Wu, S Mou</div><div class='entry-venue'>Automatica 2024</div><div class='entry-year'>2024</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2023-12-data-driven-inverse-optimal-control/'>A data-driven approach for inverse optimal control</a></div><div class='entry-summary'>This paper proposes an iterative data-driven inverse optimal control method that jointly learns unknown dynamics and objective weights.</div><div class='entry-authors'>Z Liang, W Hao, S Mou</div><div class='entry-venue'>CDC 2023</div><div class='entry-year'>2023</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2023-05-optimal-control-unknown-dynamics/'>Optimal Control of Nonlinear Systems with Unknown Dynamics</a></div><div class='entry-summary'>This paper presents a data-driven actor-critic Koopman framework for closed-loop optimal control of systems with unknown dynamics.</div><div class='entry-authors'>W Hao, PC Heredia, S Mou</div><div class='entry-year'>2023</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2020-12-deep-learning-koopman-representation/'>Deep learning of Koopman representation for control</a></div><div class='entry-summary'>This paper develops a model-free control pipeline using deep Koopman representations learned directly from interaction data.</div><div class='entry-authors'>Y Han, W Hao, U Vaidya</div><div class='entry-venue'>CDC 2020</div><div class='entry-year'>2020</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2020-09-cell-a-star-uav-navigation/'>Cell a* for navigation of unmanned aerial vehicles in partially-known environments</a></div><div class='entry-summary'>This paper extends A* path planning for stable online navigation in partially known environments with lower computational burden.</div><div class='entry-authors'>W Hao, R Wang, A Krolicki, Y Han</div><div class='entry-year'>2020</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2020-06-data-driven-control-model-based-vs-model-free/'>Data driven control with learned dynamics: model-based versus model-free approach</a></div><div class='entry-summary'>This paper compares model-based deep Koopman control and model-free DDPG across benchmark nonlinear control tasks.</div><div class='entry-authors'>W Hao, Y Han</div><div class='entry-year'>2020</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/papers/2020-01-data-driven-control-learned-dynamics-thesis/'>Data-Driven Control with Learned Dynamics</a></div><div class='entry-summary'>This thesis studies data-driven control with learned dynamics, comparing model-based and model-free strategies for nonlinear systems.</div><div class='entry-authors'>W Hao</div><div class='entry-year'>2020</div></div></div></section>
       <section id='projects' class='content-section'><h1>Projects</h1><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/projects/automatic-trading-platform/'>Automatic Trading Platform</a></div><div class='entry-summary'>Project goal: Designed and developed an automatic trading platform for quantitative strategy research and execution. The platform integrates data ingestion, signal generation, portfolio construction, risk control, and...</div><div class='entry-year'>March 2026</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/projects/explainable-reflexive-control/'>Explainable Reflexive Control (RefleXAI)</a></div><div class='entry-summary'>Project goal: RefleXAI is a DARPA-backed effort on adaptive control for uncrewed sea vessels, developed through the Saab and Purdue University collaboration. The project focuses on explainable reflexive control...</div><div class='entry-year'>August 2022</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/projects/secure-safe-assured-autonomy/'>Secure and Safe Assured Autonomy (S2A2)</a></div><div class='entry-summary'>Project goal: S2A2 is a NASA University Leadership Initiative project focused on secure and safe assured autonomy. The program develops foundations and practical methods for autonomy that remain reliable, trustworthy,...</div><div class='entry-year'>August 2021</div></div></div><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/projects/vipr-gs/'>Virtual Prototyping of Autonomy-Enabled Ground Systems (VIPR-GS)</a></div><div class='entry-summary'>Project goal: VIPR-GS advances virtual prototyping methods for autonomy-enabled ground systems. The project emphasizes model-based engineering, simulation, and validation workflows to accelerate development and de-risk...</div><div class='entry-year'>October 2020</div></div></div></section>
       <section id='blog' class='content-section'><h1>Blog</h1><div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/blog/learning-nonlinear-systems-using-linear-operator-and-machine-learning/'>Learning Nonlinear Systems Using Linear Operators and Machine Learning</a></div><div class='entry-summary'>A concise introduction to learning nonlinear systems using linear operators and machine learning for prediction and control.</div><div class='entry-year'>March 2026</div></div></div></section>
