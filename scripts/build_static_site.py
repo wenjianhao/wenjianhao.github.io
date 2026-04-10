@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260410c'
+ASSET_VERSION = '20260410d'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -141,6 +141,13 @@ def inline_markdown(text):
     return text
 
 
+def display_title(title):
+    title = title.strip()
+    if not title:
+        return title
+    return title[0].upper() + title[1:].lower()
+
+
 def youtube_embed(video_id):
     return (
         '<div class="video-wrap">'
@@ -162,6 +169,7 @@ def render_markdown(body):
     code_lines = []
     in_math_block = False
     math_end = ''
+    math_lines = []
 
     def flush_paragraph():
         nonlocal paragraph
@@ -180,6 +188,14 @@ def render_markdown(body):
             out.append('</ol>')
             in_ol = False
 
+    def flush_math_block():
+        nonlocal in_math_block, math_end, math_lines
+        if math_lines:
+            out.append('\n'.join(math_lines))
+        in_math_block = False
+        math_end = ''
+        math_lines = []
+
     for raw in lines:
         line = raw.rstrip('\n')
         stripped = line.strip()
@@ -197,10 +213,9 @@ def render_markdown(body):
             continue
 
         if in_math_block:
-            out.append(line)
-            if stripped.startswith(math_end):
-                in_math_block = False
-                math_end = ''
+            math_lines.append(line)
+            if stripped == math_end or stripped.startswith(math_end):
+                flush_math_block()
             continue
 
         if stripped.startswith('```'):
@@ -211,12 +226,20 @@ def render_markdown(body):
             code_lines = []
             continue
 
+        if stripped == '$$':
+            flush_paragraph()
+            close_lists()
+            in_math_block = True
+            math_end = '$$'
+            math_lines = [line]
+            continue
+
         if stripped.startswith(r'\begin{equation'):
             flush_paragraph()
             close_lists()
             in_math_block = True
             math_end = r'\end{equation}'
-            out.append(line)
+            math_lines = [line]
             continue
 
         if stripped.startswith(r'\begin{align'):
@@ -224,7 +247,7 @@ def render_markdown(body):
             close_lists()
             in_math_block = True
             math_end = r'\end{align}'
-            out.append(line)
+            math_lines = [line]
             continue
 
         if not stripped:
@@ -473,7 +496,7 @@ def render_home_section(section_id, title, items, kind):
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
         cards.append(
             f"<div class='content-entry'>"
-            f"<div class='content-entry-main'><div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(item['title'])}</a></div>"
+            f"<div class='content-entry-main'><div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(display_title(item['title']) if kind in ('papers', 'blog') else item['title'])}</a></div>"
             f"<div class='entry-summary'>{escape(item['summary'])}</div>{meta}</div></div>"
         )
     return f"<section id='{section_id}' class='content-section'><h1>{escape(title)}</h1>{''.join(cards)}</section>"
@@ -500,7 +523,7 @@ def paper_list_entry(item):
     venue_html = f"<div class='entry-venue'>{venue_line}</div>" if venue_line else ''
     return (
         "<div class='content-entry'><div class='content-entry-main'>"
-        f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(item['title'])}</a></div>"
+        f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(display_title(item['title']))}</a></div>"
         f"<div class='entry-summary'>{escape(item['summary'])}</div>"
         f"<div class='entry-authors'>{escape(item['author'])}</div>"
         f"{venue_html}</div></div>"
@@ -508,6 +531,7 @@ def paper_list_entry(item):
 
 
 def render_detail(entry):
+    title = display_title(entry['title']) if entry['section'] in ('papers', 'blog') else entry['title']
     meta_parts = [entry['date_label']]
     if entry['author']:
         meta_parts.append(entry['author'])
@@ -519,14 +543,14 @@ def render_detail(entry):
   <div class="row">
     <div class="col-12">
       <div class="article-meta"><a href="/">Home</a> / <a href="/{entry['section']}/">{entry['section'].title()}</a></div>
-      <h1 class="section-page-title">{escape(entry['title'])}</h1>
+      <h1 class="section-page-title">{escape(title)}</h1>
       <div class="article-submeta">{meta}</div>
       <div class="article-content">{entry['body_html']}</div>
     </div>
   </div>
 </div>
 '''
-    return page_shell(entry['title'], body, entry['summary'], include_math=entry['math'])
+    return page_shell(title, body, entry['summary'], include_math=entry['math'])
 
 
 def render_home(papers, projects, blogs, misc):
@@ -534,7 +558,7 @@ def render_home(papers, projects, blogs, misc):
 <div class="container">
   <div class="row">
     <div class="col-12">
-      {render_home_section('papers', 'Papers', papers, 'papers')}
+      {render_home_section('papers', 'Highlighted Work', papers, 'papers')}
       {render_home_section('projects', 'Projects', projects, 'projects')}
       {render_home_section('blog', 'Blog', blogs, 'blog')}
       {render_home_section('miscellaneous', 'Miscellaneous', misc, 'miscellaneous')}
@@ -569,7 +593,7 @@ def build_list_pages(papers, projects, blogs, misc):
     write_file(ROOT / 'projects' / 'index.html', page_shell('Projects', render_grouped_list('Projects', ''.join(grouped_projects)), 'Projects'))
 
     blog_entries = ''.join(
-        f"<div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/blog/{i['slug']}/'>{escape(i['title'])}</a></div><div class='entry-summary'>{escape(i['summary'])}</div><div class='entry-year'>{i['date_label']}</div></div></div>"
+        f"<div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/blog/{i['slug']}/'>{escape(display_title(i['title']))}</a></div><div class='entry-summary'>{escape(i['summary'])}</div><div class='entry-year'>{i['date_label']}</div></div></div>"
         for i in blogs
     )
     write_file(ROOT / 'blog' / 'index.html', page_shell('Blog', render_grouped_list('Blog', blog_entries), 'Blog posts'))

@@ -38,19 +38,9 @@ where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the 
 
 Popular baseline methods:
 
-<ul>
-<li>
+- Linear regression works well when $\boldsymbol{f}$ is linear. Common variants include Ordinary Least Squares (OLS) for basic modeling and regularized least squares such as Ridge regression.
 
-Linear Regression (works well if $\boldsymbol{f}$ is linear): 
-- Ordinary Least Squares (OLS) for basic modeling
-- Regularized least squares (e.g., Ridge regression)
- 
-</li>
-</ul>
-
-<ul>
-<li>
-Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in $\eqref{eq:dynamics}$ can be represented by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in $\eqref{eq:dataset}$ by minimizing the prediction error:
+- Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in $\eqref{eq:dynamics}$ can be represented by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in $\eqref{eq:dataset}$ by minimizing the prediction error:
 
 $$
 \boldsymbol{\hat w}^* = \arg\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2
@@ -71,29 +61,21 @@ Some notes:
 - The assumption that $\boldsymbol{f}$ can be represented by $\boldsymbol{\phi}$ (i.e., the existence of $\boldsymbol{w}^*$) is generally unclear in practice and depends on the expressive power of the chosen function class.
 - $\boldsymbol{\hat w}^*$ denotes the optimal parameters with respect to the training dataset, while $\boldsymbol{w}^*$ denotes the optimal parameters defined over the entire state–input space of the dynamical system. In general, $\boldsymbol{\hat w}^*$ and $\boldsymbol{w}^*$ are not equal. The gap between $\boldsymbol{w}^*$ and $\boldsymbol{\hat w}^*$ may lead to poor deployment performance of $\boldsymbol{\hat w}^*$ for state–input pairs that are not contained in the training dataset.
 - One useful existing result for $\eqref{eq:gd-update}$ is that, to achieve $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2 = 0$, the learning rate $\alpha_w(k)$ should be diminishing. Furthermore, for a constant $\alpha_w$, $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2$ typically converges to a small constant.
-</li>
-</ul>
 
 ### Linear operator viewpoint
 
 The Koopman operator provides a way to study nonlinear dynamics through a linear evolution of observables. Instead of evolving the state directly, it evolves carefully chosen functions of the state, which can make prediction and control design more structured.
 
 The Koopman-operator-based methods include:
-<ul>
-<li>
 - Dynamic Mode Decomposition (DMD)
 - Extended Dynamic Mode Decomposition (EDMD)
 - Deep Koopman Operator
-</li>
-</ul>
 
 ## The Proposed Method
 
 ### Main ideas
-$$
-\mathcal{L} = 
-\label{eq:training-objective}
-$$
+
+A typical training objective combines one-step prediction, multi-step rollout, reconstruction, and regularization losses.
 
 ### Algorithm
 
@@ -101,9 +83,6 @@ $$
 2. Fit linear operators $(A, B)$ in latent space from data.
 3. Learn a decoder $\psi_\eta$ to reconstruct physical states from latent variables.
 4. Train end-to-end with losses on one-step prediction, multi-step rollout, and reconstruction.
-
-A typical training objective is:
-
 
 ### Applications
 

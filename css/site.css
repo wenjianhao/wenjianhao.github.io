@@ -209,6 +209,14 @@ a:hover {
   font-size: 1rem;
 }
 
+.entry-venue {
+  white-space: nowrap;
+}
+
+.entry-venue a {
+  display: inline;
+}
+
 .entry-links,
 .article-links {
   margin-top: 10px;
