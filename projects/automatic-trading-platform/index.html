@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Automatic Trading Platform | Wenjian Hao</title>
+  <meta name="description" content="Project goal: Designed and developed an automatic trading platform for quantitative strategy research and execution. The platform integrates data ingestion, signal generation, portfolio construction, risk control, and...">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/site.css" rel="stylesheet">
+  
+</head>
+<body>
+  <div class="site-nav-wrap">
+    <div class="container">
+      <div class="site-nav">
+        <div class="site-title"><a href="/">Wenjian Hao</a></div>
+        <div class="site-menu"><a href="/#papers">Papers</a><a href="/#projects">Projects</a><a href="/#blog">Blog</a><a href="/#miscellaneous">Miscellaneous</a></div>
+      </div>
+    </div>
+  </div>
+  
+<div class="container subpage article-page">
+  <div class="row">
+    <div class="col offset-md-1 col-lg-10">
+      <div class="article-meta"><a href="/">Home</a> / <a href="/projects/">Projects</a></div>
+      <h1 class="section-page-title">Automatic Trading Platform</h1>
+      <div class="article-submeta">March 2026 · Wenjian Hao</div>
+      <div class="article-content"><p>Project goal: Designed and developed an automatic trading platform for quantitative strategy research and execution. The platform integrates data ingestion, signal generation, portfolio construction, risk control, and performance evaluation in a reproducible workflow.</p>
+<p>Platform structure: The platform is organized as a modular pipeline that connects market data collection, preprocessing, feature generation, strategy logic, portfolio construction, execution, and post-trade evaluation. This structure makes it easier to test quantitative ideas in a reproducible manner while keeping research, simulation, and execution components clearly separated.</p>
+<figure style="text-align: center;">
+  <img src="/projects/pics/trading_flow_chart.png" alt="Automatic trading platform flow chart" style="max-width: 100%; height: auto;">
+  <figcaption><em>Fig. 1: Automatic trading platform architecture.</em></figcaption>
+</figure>
+<p>The architecture highlights how raw market data flows through the research and execution stack. Historical and live data first enter the data management layer, where they are cleaned and transformed into features for signal generation. The strategy layer then produces trading decisions, which are filtered by portfolio and risk modules before being sent to execution components.</p>
+<p>The final stage of the platform focuses on monitoring and evaluation. Orders, positions, and performance metrics are tracked continuously so that strategies can be diagnosed, compared, and refined over time. This design supports both rapid prototyping of new trading ideas and disciplined deployment with clear risk-control checkpoints.</p></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

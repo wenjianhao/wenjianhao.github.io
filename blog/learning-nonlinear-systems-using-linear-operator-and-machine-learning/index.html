@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Learning Nonlinear Systems Using Linear Operators and Machine Learning | Wenjian Hao</title>
+  <meta name="description" content="A concise introduction to learning nonlinear systems using linear operators and machine learning for prediction and control.">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/site.css" rel="stylesheet">
+  <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']],
+    displayMath: [['$$', '$$'], ['\[', '\]']],
+    tags: 'all'
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="site-nav-wrap">
+    <div class="container">
+      <div class="site-nav">
+        <div class="site-title"><a href="/">Wenjian Hao</a></div>
+        <div class="site-menu"><a href="/#papers">Papers</a><a href="/#projects">Projects</a><a href="/#blog">Blog</a><a href="/#miscellaneous">Miscellaneous</a></div>
+      </div>
+    </div>
+  </div>
+  
+<div class="container subpage article-page">
+  <div class="row">
+    <div class="col offset-md-1 col-lg-10">
+      <div class="article-meta"><a href="/">Home</a> / <a href="/blog/">Blog</a></div>
+      <h1 class="section-page-title">Learning Nonlinear Systems Using Linear Operators and Machine Learning</h1>
+      <div class="article-submeta">March 2026 · Wenjian Hao</div>
+      <div class="article-content"><p>This post introduces a practical view of learning nonlinear dynamics using Koopman-inspired deep linear operators, with a focus on prediction and control.</p>
+<h2 id="why-care-about-learning-nonlinear-systems">Why care about learning nonlinear systems?</h2>
+<h3 id="problem-setup">Problem setup</h3>
+<p>Consider the discrete-time dynamical system</p>
+<p>\begin{equation} \boldsymbol{x}(t+1) = \boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t)) \label{eq:dynamics} \end{equation}</p>
+<p>where $t=0,1,2,\cdots$ denotes the discrete-time index, $\boldsymbol{x}(t) \in \mathbb{R}^n$ is the system state, $\boldsymbol{u}(t) \in \mathbb{R}^m$ is the control input, and $\boldsymbol{f}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$ is the system dynamics mapping funciton.</p>
+<p>Suppose we are given a dataset</p>
+<div>
+<p>\begin{equation} \mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{i=1}^{N} \label{eq:dataset} \end{equation}</p>
+</div>
+<p>where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_i$ to $\boldsymbol{f}$ at $\boldsymbol{x}_i$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The problem of interest is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.</p>
+<h2 id="what-is-linear-operator-and-state-of-the-art-methods">What is linear operator and state-of-the-art methods</h2>
+<h3 id="state-of-the-art-methods">State-of-the-art methods</h3>
+<p>Popular baseline methods:</p>
+<ul>
+<li>
+<p>Linear Regression (works well if $\boldsymbol{f}$ is linear):</p>
+<ul>
+<li>Ordinary Least Squares (OLS) for basic modeling</li>
+<li>Regularized least squares (e.g., Ridge regression)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in \eqref{eq:dynamics} can be represented by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in \eqref{eq:dataset} by minimizing the prediction error:</p>
+<p>\begin{equation} \boldsymbol{\hat w}^* = \arg\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2 \label{eq:mlp-loss} \end{equation}</p>
+<p>One can typically use gradient descent to solve \eqref{eq:mlp-loss}</p>
+<p>\begin{equation} \boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}(k)) \label{eq:gd-update} \end{equation}</p>
+<p>where $k=0,1,2,\cdots$ denotes the iteration index, $\alpha_w(k)$ is the learning rate, and $\nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)$ denotes the gradient of $\mathbf{L}$ with respect to $\boldsymbol{w}$ evaluated at $\boldsymbol{w}(k)$.</p>
+<p>Some notes:</p>
+<ul>
+<li>The assumption that $\boldsymbol{f}$ can be represented by $\boldsymbol{\phi}$ (i.e., the existence of $\boldsymbol{w}^*$) is generally unclear in practice and depends on the expressive power of the chosen function class.</li>
+<li>$\boldsymbol{\hat w}^*$ denotes the optimal parameters with respect to the training dataset, while $\boldsymbol{w}^*$ denotes the optimal parameters defined over the entire state–input space of the dynamical system. In general, $\boldsymbol{\hat w}^*$ and $\boldsymbol{w}^*$ are not equal. The gap between $\boldsymbol{w}^*$ and $\boldsymbol{\hat w}^*$ may lead to poor deployment performance of $\boldsymbol{\hat w}^*$ for state–input pairs that are not contained in the training dataset.</li>
+<li>One useful existing result for \eqref{eq:gd-update} is that, to achieve $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2 = 0$, the learning rate $\alpha_w(k)$ should be diminishing. Furthermore, for a constant $\alpha_w$, $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2$ typically converges to a small constant.</li>
+</ul>
+</li>
+</ul>
+<h3 id="linear-operator-viewpoint">Linear operator viewpoint</h3>
+<p>The Koopman operator provides a way to study nonlinear dynamics through a linear evolution of observables. Instead of evolving the state directly, it evolves carefully chosen functions of the state, which can make prediction and control design more structured.</p>
+<p>The Koopman-operator-based methods include:</p>
+<ul>
+<li>
+<ul>
+<li>Dynamic Mode Decomposition (DMD)</li>
+<li>Extended Dynamic Mode Decomposition (EDMD)</li>
+<li>Deep Koopman Operator</li>
+</ul>
+</li>
+</ul>
+<h2 id="the-proposed-method">The Proposed Method</h2>
+<h3 id="main-ideas">Main ideas</h3>
+<div>
+<p>\begin{equation} \mathcal{L} = \label{eq:training-objective} \end{equation}</p>
+</div>
+<h3 id="algorithm">Algorithm</h3>
+<ol>
+<li>Learn an encoder $\phi_\theta$ that maps original states to latent observables.</li>
+<li>Fit linear operators $(A, B)$ in latent space from data.</li>
+<li>Learn a decoder $\psi_\eta$ to reconstruct physical states from latent variables.</li>
+<li>Train end-to-end with losses on one-step prediction, multi-step rollout, and reconstruction.</li>
+</ol>
+<p>A typical training objective is:</p>
+<h3 id="applications">Applications</h3>
+<p>Deep linear-operator models support multiple downstream tasks:</p>
+<ul>
+<li>Long-horizon forecasting in nonlinear physical systems.</li>
+<li>System identification when first-principles models are unavailable or expensive.</li>
+<li>Controller synthesis in latent space using linear optimal control methods.</li>
+<li>Safety filtering and constrained control by combining latent predictions with CBF/MPC layers.</li>
+<li>Model-based reinforcement learning with improved planning and sample efficiency.</li>
+</ul>
+<h3 id="extensions">Extensions</h3>
+<p>Current research directions include:</p>
+<ul>
+<li>Time-varying and input-dependent operators $(A_t, B_t)$.</li>
+<li>Stochastic and uncertainty-aware Koopman models for noisy environments.</li>
+<li>Physics-informed lifting functions that embed invariants or conservation structure.</li>
+<li>Distributed and partial-observation formulations for multi-agent systems.</li>
+<li>Online adaptation for nonstationary dynamics and domain shifts.</li>
+</ul>
+<p>These extensions aim to close the gap between elegant operator theory and robust real-world deployment.</p></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
