@@ -16,15 +16,15 @@ SITE = {
     'tagline': 'Ph.D. candidate, Purdue University AAE',
     'intro_text': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
-        'Shaoshuai Mou. My research focuses on learning-based control for autonomous robots, data-driven modeling '
-        'of nonlinear dynamics using globally linear representations, data-efficient reinforcement learning; '
-        'optimal, safety-critical, and sampling-based control, and multi-agent systems.'
+        'Shaoshuai Mou. My research focuses on learning-based control for autonomous robots; data-driven modeling '
+        'of nonlinear dynamics using globally linear representations; data-efficient reinforcement learning; '
+        'optimal, safety-critical, and sampling-based control; and multi-agent systems.'
     ),
     'bio': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
-        'Shaoshuai Mou. My research focuses on learning-based control for autonomous robots, data-driven modeling '
-        'of nonlinear dynamics using globally linear representations, data-efficient reinforcement learning; '
-        'optimal, safety-critical, and sampling-based control, and multi-agent systems.'
+        'Shaoshuai Mou. My research focuses on learning-based control for autonomous robots; data-driven modeling '
+        'of nonlinear dynamics using globally linear representations; data-efficient reinforcement learning; '
+        'optimal, safety-critical, and sampling-based control; and multi-agent systems.'
     ),
     'portrait': '/wenjian-hao.jpg',
     'email': 'mailto:haowjz@gmail.com',
@@ -160,6 +160,8 @@ def render_markdown(body):
     in_code = False
     code_lang = ''
     code_lines = []
+    in_math_block = False
+    math_end = ''
 
     def flush_paragraph():
         nonlocal paragraph
@@ -194,12 +196,35 @@ def render_markdown(body):
                 code_lines.append(line)
             continue
 
+        if in_math_block:
+            out.append(line)
+            if stripped.startswith(math_end):
+                in_math_block = False
+                math_end = ''
+            continue
+
         if stripped.startswith('```'):
             flush_paragraph()
             close_lists()
             in_code = True
             code_lang = stripped[3:].strip()
             code_lines = []
+            continue
+
+        if stripped.startswith(r'\begin{equation'):
+            flush_paragraph()
+            close_lists()
+            in_math_block = True
+            math_end = r'\end{equation}'
+            out.append(line)
+            continue
+
+        if stripped.startswith(r'\begin{align'):
+            flush_paragraph()
+            close_lists()
+            in_math_block = True
+            math_end = r'\end{align}'
+            out.append(line)
             continue
 
         if not stripped:
@@ -276,6 +301,18 @@ def excerpt_from_body(body):
     return text[:220].rsplit(' ', 1)[0] + '...' if len(text) > 220 else text
 
 
+def extract_resource_links(body):
+    pdf_url = ''
+    code_url = ''
+    for label, url in re.findall(r'-\s+\[([^\]]+)\]\(([^)]+)\)', body):
+        norm = label.strip().lower()
+        if not pdf_url and norm == 'paper':
+            pdf_url = url
+        if not code_url and ('code' in norm):
+            code_url = url
+    return pdf_url, code_url
+
+
 def load_entries(section):
     entries = []
     for path in sorted((CONTENT / section).glob('*.md')):
@@ -284,6 +321,7 @@ def load_entries(section):
         raw = read_file(path)
         front, body = parse_front_matter(raw)
         rendered = render_markdown(body)
+        pdf_url, code_url = extract_resource_links(body)
         dt = parse_date(str(front.get('date', '1970-01-01')))
         slug = slugify(path.stem)
         if section == 'blog' and path.stem:
@@ -302,6 +340,8 @@ def load_entries(section):
             'group': front.get('paper_group') or front.get('project_group') or '',
             'venue': front.get('venue', ''),
             'math': bool(front.get('math')),
+            'pdf_url': pdf_url,
+            'code_url': code_url,
         })
     entries.sort(key=lambda x: x['date'], reverse=True)
     return entries
@@ -432,12 +472,18 @@ def render_grouped_list(title, grouped_html):
 
 def paper_list_entry(item):
     venue = f"<div class='entry-venue'>{escape(item['venue'])}</div>" if item['venue'] else ''
+    resources = []
+    if item.get('pdf_url'):
+        resources.append(f"<a href='{escape(item['pdf_url'])}'>[pdf]</a>")
+    if item.get('code_url'):
+        resources.append(f"<a href='{escape(item['code_url'])}'>[code]</a>")
+    resource_html = f"<div class='entry-links'>{' / '.join(resources)}</div>" if resources else ''
     return (
         "<div class='content-entry'><div class='content-entry-main'>"
         f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(item['title'])}</a></div>"
         f"<div class='entry-summary'>{escape(item['summary'])}</div>"
         f"<div class='entry-authors'>{escape(item['author'])}</div>"
-        f"{venue}<div class='entry-year'>{item['year']}</div></div></div>"
+        f"{venue}<div class='entry-year'>{item['year']}</div>{resource_html}</div></div>"
     )
 
 
@@ -448,6 +494,12 @@ def render_detail(entry):
     if entry['venue']:
         meta_parts.append(entry['venue'])
     meta = ' · '.join(escape(x) for x in meta_parts if x)
+    resources = []
+    if entry.get('pdf_url'):
+        resources.append(f"<a href='{escape(entry['pdf_url'])}'>[pdf]</a>")
+    if entry.get('code_url'):
+        resources.append(f"<a href='{escape(entry['code_url'])}'>[code]</a>")
+    resource_html = f"<div class='entry-links article-links'>{' / '.join(resources)}</div>" if resources else ''
     body = f'''
 <div class="container subpage article-page">
   <div class="row">
@@ -456,6 +508,7 @@ def render_detail(entry):
       <h1 class="section-page-title">{escape(entry['title'])}</h1>
       <div class="article-submeta">{meta}</div>
       <div class="article-content">{entry['body_html']}</div>
+      {resource_html}
     </div>
   </div>
 </div>
@@ -543,8 +596,8 @@ def clean_old_outputs():
 
 
 def main():
-    copy_static_assets()
     clean_old_outputs()
+    copy_static_assets()
     papers = load_entries('papers')
     projects = load_entries('projects')
     blogs = load_entries('blog')

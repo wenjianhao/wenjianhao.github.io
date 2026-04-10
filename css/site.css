@@ -38,7 +38,7 @@ a:hover {
 .site-title a,
 .home-name {
   color: #172536;
-  font-size: 2.05rem;
+  font-size: 1.82rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -207,6 +207,17 @@ a:hover {
 .article-submeta {
   margin-top: 8px;
   font-size: 1rem;
+}
+
+.entry-links,
+.article-links {
+  margin-top: 10px;
+  font-size: 0.98rem;
+}
+
+.entry-links a,
+.article-links a {
+  color: #1b63b7;
 }
 
 .article-meta {
