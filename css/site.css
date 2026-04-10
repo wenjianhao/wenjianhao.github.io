@@ -16,7 +16,7 @@ a:hover {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1140px;
 }
 
 .site-nav-wrap,
@@ -67,14 +67,14 @@ a:hover {
 
 .hero-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 240px;
+  grid-template-columns: minmax(0, 1fr) 280px;
   align-items: center;
-  column-gap: 56px;
-  padding: 56px 0 8px;
+  column-gap: 72px;
+  padding: 62px 0 10px;
 }
 
 .hero-copy {
-  max-width: 500px;
+  max-width: 640px;
 }
 
 .hero-text {
@@ -116,8 +116,8 @@ a:hover {
 }
 
 #portrait {
-  width: 220px;
-  height: 220px;
+  width: 280px;
+  height: 280px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -289,7 +289,7 @@ a:hover {
   }
 
   #portrait {
-    width: 210px;
-    height: 210px;
+    width: 220px;
+    height: 220px;
   }
 }
