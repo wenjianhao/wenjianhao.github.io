@@ -35,16 +35,17 @@
 
 .post-entry {
     position: relative;
-    margin-bottom: var(--gap);
-    padding: var(--gap);
-    background: var(--entry);
-    border-radius: var(--radius);
-    transition: transform 0.1s;
-    border: 2px solid var(--border);
+    margin-bottom: 0;
+    padding: 22px 0;
+    background: transparent;
+    border-radius: 0;
+    transition: color 0.12s ease;
+    border: 0;
+    border-bottom: 1px solid var(--border);
 }
 
 .post-entry:hover {
-     border: 2px solid var(--darkcolor);
+    color: var(--primary);
 }
 
 .tag-entry .entry-cover {
@@ -52,14 +53,15 @@
 }
 
 .entry-header h2 {
-    font-size: 20px;
-    line-height: var(--lineheight);
+    font-size: 28px;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
 }
 
 .entry-content {
-    margin: 20px 10px;
+    margin: 12px 0 0;
     color: var(--secondary);
-    font-size: var(--entrysize);
+    font-size: 17px;
     line-height: var(--lineheight);
     overflow: hidden;
     display: -webkit-box;
@@ -68,8 +70,9 @@
 }
 
 .entry-footer {
-    color: var(--content);
-    font-size: var(--entrysize);
+    color: var(--secondary);
+    font-size: 15px;
+    margin-top: 10px;
 }
 
 .entry-link {

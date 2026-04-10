@@ -2,12 +2,27 @@
     position: relative;
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     max-width: calc(var(--main-width) + var(--gap) * 2);
-    margin: auto;
-    padding: var(--gap);
+    margin: 0 auto;
+    padding: calc(var(--gap) * 1.4) var(--gap) calc(var(--gap) * 2);
 }
 
 .page-header h1 {
     font-size: var(--h1size);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.page-header,
+.post-header {
+    max-width: 780px;
+}
+
+.post-content,
+.post-header,
+.page-header,
+.pagination,
+.post-entry {
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 
 .pagination {
@@ -29,12 +44,12 @@
 
 .social-icons a {
     display: inline-flex;
-    padding: 10px 14px 10px 0px;
+    padding: 8px 14px 8px 0;
 }
 
 .social-icons a svg {
-    height: 30px;
-    width: 30px;
+    height: 26px;
+    width: 26px;
 }
 
 .social-icons a:hover {
