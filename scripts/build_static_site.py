@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260410g'
+ASSET_VERSION = '20260410h'
 
 SITE = {
     'title': 'Wenjian Hao',
