@@ -455,7 +455,16 @@ def render_home_section(section_id, title, items, kind):
         if kind == 'papers':
             authors = escape(item['author'])
             venue = f"<div class='entry-venue'>{escape(item['venue'])}</div>" if item['venue'] else ''
-            meta = f"<div class='entry-authors'>{authors}</div>{venue}<div class='entry-year'>{item['year']}</div>"
+            year_html = ''
+            if not item['venue'] or not re.search(r'\b(19|20)\d{2}\b', item['venue']):
+                year_html = f"<div class='entry-year'>{item['year']}</div>"
+            resources = []
+            if item.get('pdf_url'):
+                resources.append(f"<a href='{escape(item['pdf_url'])}'>[pdf]</a>")
+            if item.get('code_url'):
+                resources.append(f"<a href='{escape(item['code_url'])}'>[code]</a>")
+            resource_html = f"<div class='entry-links'>{' / '.join(resources)}</div>" if resources else ''
+            meta = f"<div class='entry-authors'>{authors}</div>{venue}{year_html}{resource_html}"
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
         cards.append(
@@ -472,6 +481,9 @@ def render_grouped_list(title, grouped_html):
 
 def paper_list_entry(item):
     venue = f"<div class='entry-venue'>{escape(item['venue'])}</div>" if item['venue'] else ''
+    year_html = ''
+    if not item['venue'] or not re.search(r'\b(19|20)\d{2}\b', item['venue']):
+        year_html = f"<div class='entry-year'>{item['year']}</div>"
     resources = []
     if item.get('pdf_url'):
         resources.append(f"<a href='{escape(item['pdf_url'])}'>[pdf]</a>")
@@ -483,7 +495,7 @@ def paper_list_entry(item):
         f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(item['title'])}</a></div>"
         f"<div class='entry-summary'>{escape(item['summary'])}</div>"
         f"<div class='entry-authors'>{escape(item['author'])}</div>"
-        f"{venue}<div class='entry-year'>{item['year']}</div>{resource_html}</div></div>"
+        f"{venue}{year_html}{resource_html}</div></div>"
     )
 
 
@@ -494,12 +506,6 @@ def render_detail(entry):
     if entry['venue']:
         meta_parts.append(entry['venue'])
     meta = ' · '.join(escape(x) for x in meta_parts if x)
-    resources = []
-    if entry.get('pdf_url'):
-        resources.append(f"<a href='{escape(entry['pdf_url'])}'>[pdf]</a>")
-    if entry.get('code_url'):
-        resources.append(f"<a href='{escape(entry['code_url'])}'>[code]</a>")
-    resource_html = f"<div class='entry-links article-links'>{' / '.join(resources)}</div>" if resources else ''
     body = f'''
 <div class="container subpage article-page">
   <div class="row">
@@ -508,7 +514,6 @@ def render_detail(entry):
       <h1 class="section-page-title">{escape(entry['title'])}</h1>
       <div class="article-submeta">{meta}</div>
       <div class="article-content">{entry['body_html']}</div>
-      {resource_html}
     </div>
   </div>
 </div>

@@ -47,18 +47,10 @@ window.MathJax = {
 <h2 id="why-care-about-learning-nonlinear-systems">Why care about learning nonlinear systems?</h2>
 <h3 id="problem-setup">Problem setup</h3>
 <p>Consider the discrete-time dynamical system</p>
-\begin{equation}
-\boldsymbol{x}(t+1) = \boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))
-\label{eq:dynamics}
-\end{equation}
+<p>$$ \boldsymbol{x}(t+1) = \boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t)) \label{eq:dynamics} $$</p>
 <p>where $t=0,1,2,\cdots$ denotes the discrete-time index, $\boldsymbol{x}(t) \in \mathbb{R}^n$ is the system state, $\boldsymbol{u}(t) \in \mathbb{R}^m$ is the control input, and $\boldsymbol{f}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$ is the system dynamics mapping funciton.</p>
 <p>Suppose we are given a dataset</p>
-<div>
-\begin{equation}
-\mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{i=1}^{N}
-\label{eq:dataset}
-\end{equation}
-</div>
+<p>$$ \mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{i=1}^{N} \label{eq:dataset} $$</p>
 <p>where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_i$ to $\boldsymbol{f}$ at $\boldsymbol{x}_i$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The problem of interest is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.</p>
 <h2 id="what-is-linear-operator-and-state-of-the-art-methods">What is linear operator and state-of-the-art methods</h2>
 <h3 id="state-of-the-art-methods">State-of-the-art methods</h3>
@@ -74,22 +66,16 @@ window.MathJax = {
 </ul>
 <ul>
 <li>
-<p>Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in \eqref{eq:dynamics} can be represented by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in \eqref{eq:dataset} by minimizing the prediction error:</p>
-\begin{equation}
-\boldsymbol{\hat w}^* = \arg\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2
-\label{eq:mlp-loss}
-\end{equation}
-<p>One can typically use gradient descent to solve \eqref{eq:mlp-loss}</p>
-\begin{equation}
-\boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}(k))
-\label{eq:gd-update}
-\end{equation}
+<p>Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in $\eqref{eq:dynamics}$ can be represented by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in $\eqref{eq:dataset}$ by minimizing the prediction error:</p>
+<p>$$ \boldsymbol{\hat w}^* = \arg\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2 \label{eq:mlp-loss} $$</p>
+<p>One can typically use gradient descent to solve $\eqref{eq:mlp-loss}$</p>
+<p>$$ \boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}(k)) \label{eq:gd-update} $$</p>
 <p>where $k=0,1,2,\cdots$ denotes the iteration index, $\alpha_w(k)$ is the learning rate, and $\nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)$ denotes the gradient of $\mathbf{L}$ with respect to $\boldsymbol{w}$ evaluated at $\boldsymbol{w}(k)$.</p>
 <p>Some notes:</p>
 <ul>
 <li>The assumption that $\boldsymbol{f}$ can be represented by $\boldsymbol{\phi}$ (i.e., the existence of $\boldsymbol{w}^*$) is generally unclear in practice and depends on the expressive power of the chosen function class.</li>
 <li>$\boldsymbol{\hat w}^*$ denotes the optimal parameters with respect to the training dataset, while $\boldsymbol{w}^*$ denotes the optimal parameters defined over the entire state–input space of the dynamical system. In general, $\boldsymbol{\hat w}^*$ and $\boldsymbol{w}^*$ are not equal. The gap between $\boldsymbol{w}^*$ and $\boldsymbol{\hat w}^*$ may lead to poor deployment performance of $\boldsymbol{\hat w}^*$ for state–input pairs that are not contained in the training dataset.</li>
-<li>One useful existing result for \eqref{eq:gd-update} is that, to achieve $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2 = 0$, the learning rate $\alpha_w(k)$ should be diminishing. Furthermore, for a constant $\alpha_w$, $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2$ typically converges to a small constant.</li>
+<li>One useful existing result for $\eqref{eq:gd-update}$ is that, to achieve $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2 = 0$, the learning rate $\alpha_w(k)$ should be diminishing. Furthermore, for a constant $\alpha_w$, $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2$ typically converges to a small constant.</li>
 </ul>
 </li>
 </ul>
@@ -107,12 +93,7 @@ window.MathJax = {
 </ul>
 <h2 id="the-proposed-method">The Proposed Method</h2>
 <h3 id="main-ideas">Main ideas</h3>
-<div>
-\begin{equation}
-\mathcal{L} = 
-\label{eq:training-objective}
-\end{equation}
-</div>
+<p>$$ \mathcal{L} = \label{eq:training-objective} $$</p>
 <h3 id="algorithm">Algorithm</h3>
 <ol>
 <li>Learn an encoder $\phi_\theta$ that maps original states to latent observables.</li>
@@ -140,7 +121,6 @@ window.MathJax = {
 <li>Online adaptation for nonstationary dynamics and domain shifts.</li>
 </ul>
 <p>These extensions aim to close the gap between elegant operator theory and robust real-world deployment.</p></div>
-      
     </div>
   </div>
 </div>
