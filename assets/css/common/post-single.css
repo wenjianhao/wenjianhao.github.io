@@ -4,10 +4,8 @@
 }
 
 .post-title {
-    margin-bottom: 16px;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    line-height: 1.03;
-    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+    font-size: 36px;
 }
 
 .post-description {
@@ -32,7 +30,6 @@
     color: var(--content);
     line-height: var(--lineheight);
     font-size: var(--textsize);
-    max-width: 820px;
 }
 
 .post-content h3,
@@ -48,15 +45,12 @@
 }
 
 .post-content h2 {
-    margin: 42px auto 18px;
-    font-size: 28px;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
+    margin: 32px auto 24px;
+    font-size: 24px;
 }
 
 .post-content h3 {
-    font-size: 21px;
-    line-height: 1.22;
+    font-size: 19px;    
 }
 
 .post-content h4 {
@@ -259,10 +253,10 @@
 }
 
 .post-content figure > figcaption {
-    color: var(--secondary);
-    font-size: 15px;
-    font-weight: 500;
-    margin: 8px 0 18px;
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: bold;
+    margin: 8px 0 16px;
 }
 
 .post-content figure > figcaption > p {

@@ -35,16 +35,16 @@
 
 .post-entry {
     position: relative;
-    margin-bottom: 0;
-    padding: 22px 0;
-    background: transparent;
-    border-radius: 0;
-    border: 0;
-    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--gap);
+    padding: var(--gap);
+    background: var(--entry);
+    border-radius: var(--radius);
+    transition: transform 0.1s;
+    border: 2px solid var(--border);
 }
 
 .post-entry:hover {
-     background: transparent;
+     border: 2px solid var(--darkcolor);
 }
 
 .tag-entry .entry-cover {
@@ -52,13 +52,12 @@
 }
 
 .entry-header h2 {
-    font-size: 25px;
-    line-height: 1.2;
-    letter-spacing: -0.03em;
+    font-size: 20px;
+    line-height: var(--lineheight);
 }
 
 .entry-content {
-    margin: 12px 0 0;
+    margin: 20px 10px;
     color: var(--secondary);
     font-size: var(--entrysize);
     line-height: var(--lineheight);
@@ -69,9 +68,8 @@
 }
 
 .entry-footer {
-    color: var(--secondary);
-    font-size: 15px;
-    margin-top: 8px;
+    color: var(--content);
+    font-size: var(--entrysize);
 }
 
 .entry-link {

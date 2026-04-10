@@ -1,49 +1,49 @@
 :root {
-    --gap: 26px;
-    --content-gap: 18px;
-    --nav-width: 1120px;
-    --main-width: 980px;
-    --header-height: 58px;
-    --footer-height: 56px;
-    --radius: 10px;
+    --gap: 24px;
+    --content-gap: 20px;
+    --nav-width: 1024px;
+    --main-width: 720px;
+    --header-height: 44px;
+    --footer-height: 70px;
+    --radius: 8px;
     --theme: rgb(255, 255, 255);
     --entry: rgb(255, 255, 255);
-    --primary: rgb(22, 22, 22);
+    --primary: rgb(30, 30, 30);
     --secondary: rgb(108, 108, 108);
-    --tertiary: rgb(228, 228, 228);
+    --tertiary: rgb(214, 214, 214);
     --gray: rgb(165, 165, 165);
-    --content: rgb(38, 38, 38);
+    --content: rgb(30, 30, 30);
     --code-block-bg: rgb(28, 29, 33);
-    --code-bg: rgb(246, 246, 246);
-    --border: rgb(233, 233, 233);
-    --darkcolor: #4e5d79;
-    --lightcolor: #d8deea;
+    --code-bg: rgb(245, 245, 245);
+    --border: rgb(238, 238, 238);
+    --darkcolor: #6a7ba2;
+    --lightcolor: #cbd1de;
     --semibold: 500;
-    --homesize: 17px;
-    --textsize: 19px;
-    --h1size: 30px;
-    --entrysize: 17px;
-    --headersize: 16px;
+    --homesize: 16px;
+    --textsize: 18px;
+    --h1size: 25px;
+    --entrysize: 16px;
+    --headersize: 17px;
     --footersize: 13px;
-    --lineheight: 1.6;
-    --lineclamp: 6;
-    --marginleft: 22px;
+    --lineheight: 1.5;
+    --lineclamp: 8;
+    --marginleft: 26px;
 }
 
 .dark {
-    --theme: rgb(22, 23, 25);
-    --entry: rgb(28, 30, 33);
-    --primary: rgb(230, 230, 230);
-    --secondary: rgb(165, 165, 165);
-    --tertiary: rgb(62, 64, 67);
-    --content: rgb(210, 210, 210);
-    --code-block-bg: rgb(41, 42, 46);
-    --code-bg: rgb(49, 50, 55);
-    --border: rgb(56, 57, 60);
+    --theme: rgb(29, 30, 32);
+    --entry: rgb(46, 46, 51);
+    --primary: rgb(218, 218, 219);
+    --secondary: rgb(155, 156, 157);
+    --tertiary: rgb(65, 66, 68);
+    --content: rgb(196, 196, 197);
+    --code-block-bg: rgb(46, 46, 51);
+    --code-bg: rgb(55, 56, 62);
+    --border: rgb(51, 51, 51);
 }
 
 .list {
-    background: var(--theme);
+    background: var(--code-bg);
 }
 
 .dark.list {
