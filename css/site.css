@@ -115,13 +115,15 @@ a:hover {
 .hero-button i {
   font-size: 0.9rem;
   line-height: 1;
+  color: #6b7785;
 }
 
 .hero-visual {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 34px;
+  padding-top: 20px;
+  padding-left: 12px;
 }
 
 #portrait {
