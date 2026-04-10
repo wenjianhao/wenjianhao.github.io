@@ -9,10 +9,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
+ASSET_VERSION = '20260410b'
 
 SITE = {
     'title': 'Wenjian Hao',
-    'tagline': 'Ph.D. candidate, Purdue University School of Aeronautics and Astronautics',
+    'tagline': 'Ph.D. candidate, AAE, Purdue University',
     'intro_text': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
         'Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly '
@@ -326,8 +327,8 @@ def page_shell(title, content, description='', include_math=False):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
+  <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
   {math}
 </head>
 <body>
@@ -361,13 +362,13 @@ def home_shell(title, content, description=''):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
+  <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
 </head>
 <body>
   <div class="container home-top">
     <div class="row">
-      <div class="col offset-md-1 col-lg-10">
+      <div class="col-12">
         <div class="home-masthead">
           <div class="home-identity">
             <div class="home-name">{escape(SITE['title'])}</div>
@@ -388,7 +389,7 @@ def hero_block():
     return f'''
 <div class="container">
   <div class="row">
-    <div class="col offset-md-1 col-lg-10">
+    <div class="col-12">
       <div class="hero-intro">
         <div class="hero-copy">
           <p class="hero-text">{escape(SITE['intro_text'])}</p>
@@ -427,7 +428,7 @@ def render_home_section(section_id, title, items, kind):
 
 
 def render_grouped_list(title, grouped_html):
-    return f"<div class='container subpage'><div class='row'><div class='col offset-md-1 col-lg-10'><h1 class='section-page-title'>{escape(title)}</h1>{grouped_html}</div></div></div>"
+    return f"<div class='container subpage'><div class='row'><div class='col-12'><h1 class='section-page-title'>{escape(title)}</h1>{grouped_html}</div></div></div>"
 
 
 def paper_list_entry(item):
@@ -451,7 +452,7 @@ def render_detail(entry):
     body = f'''
 <div class="container subpage article-page">
   <div class="row">
-    <div class="col offset-md-1 col-lg-10">
+    <div class="col-12">
       <div class="article-meta"><a href="/">Home</a> / <a href="/{entry['section']}/">{entry['section'].title()}</a></div>
       <h1 class="section-page-title">{escape(entry['title'])}</h1>
       <div class="article-submeta">{meta}</div>
@@ -467,7 +468,7 @@ def render_home(papers, projects, blogs, misc):
     content = hero_block() + f'''
 <div class="container">
   <div class="row">
-    <div class="col offset-md-1 col-lg-10">
+    <div class="col-12">
       {render_home_section('papers', 'Papers', papers, 'papers')}
       {render_home_section('projects', 'Projects', projects, 'projects')}
       {render_home_section('blog', 'Blog', blogs, 'blog')}
@@ -556,7 +557,7 @@ def main():
     for entry in papers + projects + blogs + misc:
         write_file(ROOT / entry['section'] / entry['slug'] / 'index.html', render_detail(entry))
 
-    write_file(ROOT / '404.html', page_shell('404', '<div class="container subpage"><div class="row"><div class="col offset-md-1 col-lg-10"><h1 class="section-page-title">404</h1><p>Page not found.</p></div></div></div>', 'Page not found'))
+    write_file(ROOT / '404.html', page_shell('404', '<div class="container subpage"><div class="row"><div class="col-12"><h1 class="section-page-title">404</h1><p>Page not found.</p></div></div></div>', 'Page not found'))
 
 
 if __name__ == '__main__':
