@@ -16,18 +16,15 @@ SITE = {
     'tagline': 'Ph.D. candidate, Purdue University AAE',
     'intro_text': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
-        'Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly '
-        'data-driven dynamics learning using linear operators, data-efficient reinforcement learning, sampling-based '
-        'optimal control, safety-critical control, and robotics.'
+        'Shaoshuai Mou. My research focuses on learning-based control for autonomous robots, data-driven modeling '
+        'of nonlinear dynamics using globally linear representations, data-efficient reinforcement learning; '
+        'optimal, safety-critical, and sampling-based control, and multi-agent systems.'
     ),
     'bio': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
-        'Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly '
-        'data-driven dynamics learning using linear operators, data-efficient reinforcement learning, sampling-based '
-        'optimal control, safety-critical control, and robotics. My work aims to develop computationally efficient '
-        'and reliable learning-based control algorithms for autonomous robotic systems by integrating machine '
-        'learning with control theory. These methods have been applied to a variety of robotic platforms, including '
-        'manipulators, quadrupeds, drones, and autonomous ground and surface vehicles.'
+        'Shaoshuai Mou. My research focuses on learning-based control for autonomous robots, data-driven modeling '
+        'of nonlinear dynamics using globally linear representations, data-efficient reinforcement learning; '
+        'optimal, safety-critical, and sampling-based control, and multi-agent systems.'
     ),
     'portrait': '/wenjian-hao.jpg',
     'email': 'mailto:haowjz@gmail.com',
