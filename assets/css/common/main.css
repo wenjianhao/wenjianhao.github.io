@@ -3,11 +3,13 @@
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: auto;
-    padding: var(--gap);
+    padding: 24px var(--gap) 48px;
 }
 
 .page-header h1 {
-    font-size: var(--h1size);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--primary);
 }
 
 .pagination {
@@ -29,16 +31,111 @@
 
 .social-icons a {
     display: inline-flex;
-    padding: 10px 14px 10px 0px;
+    padding: 8px 14px 8px 0;
 }
 
 .social-icons a svg {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
 }
 
 .social-icons a:hover {
     color: var(--darkcolor);
+}
+
+.home-sections {
+    margin-top: 44px;
+}
+
+.home-section {
+    margin-top: 56px;
+}
+
+.home-section h2 {
+    font-size: 2.15rem;
+    font-weight: 400;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+
+.home-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 90px;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.home-item-title {
+    color: var(--primary);
+    font-size: 1.14rem;
+    font-weight: 500;
+}
+
+.home-item-summary {
+    margin: 8px 0 0;
+    color: var(--secondary);
+    font-size: 0.99rem;
+    line-height: 1.65;
+}
+
+.home-item-meta,
+.home-item-date {
+    color: var(--secondary);
+    font-size: 0.95rem;
+    margin-top: 8px;
+}
+
+.home-item-date {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.page-section-list {
+    margin-top: 18px;
+}
+
+.section-group {
+    margin-top: 44px;
+}
+
+.section-group:first-child {
+    margin-top: 0;
+}
+
+.section-group-title {
+    margin: 0 0 12px;
+    color: var(--primary);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.paper-venue {
+    margin-top: 10px;
+    color: var(--secondary);
+}
+
+@media (max-width: 700px) {
+    .main {
+        padding-top: 18px;
+    }
+
+    .home-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .home-item-date {
+        text-align: left;
+        margin-top: 0;
+    }
+
+    .section-group-title,
+    .home-section h2,
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
 }
 
 code {

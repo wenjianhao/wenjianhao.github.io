@@ -2,6 +2,75 @@
 
 {{- if (and site.Params.profileMode.enabled .IsHome) }}
 {{- partial "index_profile.html" . }}
+{{- $papers := where site.RegularPages "Section" "papers" }}
+{{- $projects := where site.RegularPages "Section" "projects" }}
+{{- $blogs := where site.RegularPages "Section" "blog" }}
+{{- $misc := where site.RegularPages "Section" "miscellaneous" }}
+
+<div class="home-sections">
+  {{- if gt (len $papers) 0 }}
+  <section class="home-section">
+    <h2>Papers</h2>
+    {{- range sort $papers "Date" "desc" }}
+    <article class="home-item">
+      <div class="home-item-main">
+        <a class="home-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
+        <p class="home-item-summary">{{ .Param "summary" | plainify | htmlUnescape }}</p>
+        {{- with .Param "venue" }}
+        <div class="home-item-meta">{{ . }}</div>
+        {{- end }}
+      </div>
+      <div class="home-item-date">{{ .Date | time.Format (default "2006" site.Params.DateFormat) }}</div>
+    </article>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  {{- if gt (len $projects) 0 }}
+  <section class="home-section">
+    <h2>Projects</h2>
+    {{- range sort $projects "Date" "desc" }}
+    <article class="home-item">
+      <div class="home-item-main">
+        <a class="home-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
+        <p class="home-item-summary">{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      </div>
+      <div class="home-item-date">{{ .Date | time.Format (default "2006" site.Params.DateFormat) }}</div>
+    </article>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  {{- if gt (len $blogs) 0 }}
+  <section class="home-section">
+    <h2>Blog</h2>
+    {{- range sort $blogs "Date" "desc" }}
+    <article class="home-item">
+      <div class="home-item-main">
+        <a class="home-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
+        <p class="home-item-summary">{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      </div>
+      <div class="home-item-date">{{ .Date | time.Format (default "2006" site.Params.DateFormat) }}</div>
+    </article>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  {{- if gt (len $misc) 0 }}
+  <section class="home-section">
+    <h2>Miscellaneous</h2>
+    {{- range sort $misc "Date" "desc" }}
+    <article class="home-item">
+      <div class="home-item-main">
+        <a class="home-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
+        <p class="home-item-summary">{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      </div>
+      <div class="home-item-date">{{ .Date | time.Format (default "2006" site.Params.DateFormat) }}</div>
+    </article>
+    {{- end }}
+  </section>
+  {{- end }}
+</div>
 {{- else }} {{/* if not profileMode */}}
 
 {{- if not .IsHome | and .Title }}

@@ -1,102 +1,67 @@
 {{- define "main" }}
-<style>
-  .paper-folders {
-    display: grid;
-    gap: 12px;
-    margin-top: 16px;
-  }
-  .paper-folder {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--entry);
-    padding: 10px 14px;
-  }
-  .paper-folder > summary {
-    list-style: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary);
-    user-select: none;
-  }
-  .paper-folder > summary::-webkit-details-marker {
-    display: none;
-  }
-  .paper-folder > summary::before {
-    content: "▸ ";
-    color: var(--secondary);
-  }
-  .paper-folder[open] > summary::before {
-    content: "▾ ";
-  }
-  .paper-folder .post-entry {
-    margin-top: 12px;
-  }
-</style>
-
-{{- $dynamics := where .RegularPages "Params.paper_group" "Dynamics Learning for Complex Systems" }}
 {{- $control := where .RegularPages "Params.paper_group" "Learning-Based Control for Robotics" }}
+{{- $dynamics := where .RegularPages "Params.paper_group" "Dynamics Learning for Complex Systems" }}
 {{- $distributed := where .RegularPages "Params.paper_group" "Distributed Learning and Multi-Agent Systems" }}
 
-<div class="paper-folders">
-{{- if gt (len $control) 0 }}
-<details class="paper-folder">
-<summary>Learning-Based Control for Robotics</summary>
-{{- range sort $control "Date" "desc" }}
-<article class="post-entry">
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">{{ .Title }}</h2>
-  </header>
-  <div class="entry-content">
-    <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
-    {{- with .Param "venue" }}
-    <p>{{ . }}</p>
+<div class="page-section-list">
+  {{- if gt (len $control) 0 }}
+  <section class="section-group">
+    <h1 class="section-group-title">Learning-Based Control for Robotics</h1>
+    {{- range sort $control "Date" "desc" }}
+    <article class="post-entry">
+      <header class="entry-header">
+        <h2 class="entry-hint-parent">{{ .Title }}</h2>
+      </header>
+      <div class="entry-content">
+        <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
+        {{- with .Param "venue" }}
+        <p class="paper-venue">{{ . }}</p>
+        {{- end }}
+      </div>
+      <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+    </article>
     {{- end }}
-  </div>
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</article>
-{{- end }}
-</details>
-{{- end }}
+  </section>
+  {{- end }}
 
-{{- if gt (len $dynamics) 0 }}
-<details class="paper-folder">
-<summary>Dynamics Learning for Complex Systems</summary>
-{{- range sort $dynamics "Date" "desc" }}
-<article class="post-entry">
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">{{ .Title }}</h2>
-  </header>
-  <div class="entry-content">
-    <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
-    {{- with .Param "venue" }}
-    <p>{{ . }}</p>
+  {{- if gt (len $dynamics) 0 }}
+  <section class="section-group">
+    <h1 class="section-group-title">Dynamics Learning for Complex Systems</h1>
+    {{- range sort $dynamics "Date" "desc" }}
+    <article class="post-entry">
+      <header class="entry-header">
+        <h2 class="entry-hint-parent">{{ .Title }}</h2>
+      </header>
+      <div class="entry-content">
+        <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
+        {{- with .Param "venue" }}
+        <p class="paper-venue">{{ . }}</p>
+        {{- end }}
+      </div>
+      <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+    </article>
     {{- end }}
-  </div>
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</article>
-{{- end }}
-</details>
-{{- end }}
+  </section>
+  {{- end }}
 
-{{- if gt (len $distributed) 0 }}
-<details class="paper-folder">
-<summary>Distributed Learning and Multi-Agent Systems</summary>
-{{- range sort $distributed "Date" "desc" }}
-<article class="post-entry">
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">{{ .Title }}</h2>
-  </header>
-  <div class="entry-content">
-    <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
-    {{- with .Param "venue" }}
-    <p>{{ . }}</p>
+  {{- if gt (len $distributed) 0 }}
+  <section class="section-group">
+    <h1 class="section-group-title">Distributed Learning and Multi-Agent Systems</h1>
+    {{- range sort $distributed "Date" "desc" }}
+    <article class="post-entry">
+      <header class="entry-header">
+        <h2 class="entry-hint-parent">{{ .Title }}</h2>
+      </header>
+      <div class="entry-content">
+        <p>{{ .Param "summary" | plainify | htmlUnescape }}</p>
+        {{- with .Param "venue" }}
+        <p class="paper-venue">{{ . }}</p>
+        {{- end }}
+      </div>
+      <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+    </article>
     {{- end }}
-  </div>
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</article>
-{{- end }}
-</details>
-{{- end }}
+  </section>
+  {{- end }}
 </div>
 {{- end }}

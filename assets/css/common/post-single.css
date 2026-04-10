@@ -4,8 +4,10 @@
 }
 
 .post-title {
-    margin-bottom: 20px;
-    font-size: 36px;
+    margin-bottom: 16px;
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.08;
 }
 
 .post-description {
@@ -30,6 +32,7 @@
     color: var(--content);
     line-height: var(--lineheight);
     font-size: var(--textsize);
+    max-width: 860px;
 }
 
 .post-content h3,
@@ -45,16 +48,18 @@
 }
 
 .post-content h2 {
-    margin: 32px auto 24px;
-    font-size: 24px;
+    margin: 34px auto 18px;
+    font-size: 30px;
+    font-weight: 400;
 }
 
 .post-content h3 {
-    font-size: 19px;    
+    font-size: 22px;
+    font-weight: 500;
 }
 
 .post-content h4 {
-    font-size: 15px;    
+    font-size: 15px;
     font-weight: var(--semibold);
     text-transform: uppercase;
     color: var(--gray);
@@ -76,7 +81,7 @@
 .post-meta a,
 .toc a:hover {
     box-shadow: 0 2px 0 var(--darkcolor);
-    color: currentColor; 
+    color: currentColor;
 }
 
 .post-content a code {
@@ -100,7 +105,7 @@
 .post-content ol,
 .post-content ul {
     padding-inline-start: 20px;
-    margin-left: var(--marginleft); 
+    margin-left: var(--marginleft);
 }
 
 .post-content li {
@@ -224,7 +229,7 @@
 .post-content blockquote {
     margin: 20px 0;
     padding: 0 20px;
-    color: var(--secondary);    
+    color: var(--secondary);
     border-inline-start: 6px solid var(--tertiary);
 }
 
@@ -253,189 +258,8 @@
 }
 
 .post-content figure > figcaption {
-    color: var(--primary);
-    font-size: 16px;
-    font-weight: bold;
-    margin: 8px 0 16px;
-}
-
-.post-content figure > figcaption > p {
     color: var(--secondary);
-    font-size: 14px;
-    font-weight: normal;
-}
-
-.toc {
-    margin: 0 2px 20px 2px;
-    border: 1px solid var(--border);
-    background: var(--code-bg);
-    border-radius: var(--radius);
-    padding: 0.4em;
-}
-
-.toc li::marker {
-    color: var(--tertiary);
-}
-
-.dark .toc {
-    background: var(--entry);
-}
-
-.toc details summary {
-    cursor: zoom-in;
-    margin-inline-start: 10px;
-    user-select: none;
-}
-
-.toc details[open] summary {
-    cursor: zoom-out;
-}
-
-.toc .details {
-    display: inline;
-    font-weight: var(--semibold);
-    text-transform: uppercase;
     font-size: 15px;
-}
-
-.toc .inner {
-    margin: 5px 20px 0;
-    padding: 0 10px;
-    opacity: 0.9;
-    font-size: 16px;
-}
-
-.toc li ul {
-    margin-inline-start: var(--gap);
-}
-
-.toc summary:focus {
-    outline: 0;
-}
-
-.post-footer {
-    margin-top: 60px;
-}
-
-.post-footer>* {
-    margin-bottom: 10px;
-}
-
-.post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-
-.post-tags li {
-    display: inline-block;
-}
-
-.post-tags a,
-.share-buttons,
-.paginav {
-    border-radius: var(--radius);
-    background: var(--code-bg);
-}
-
-.post-tags a {
-    display: block;
-    padding: 0 10px;
-    color: var(--secondary);
-    font-size: 16px;
-    line-height: 32px;
-    background: var(--code-bg);
-}
-
-.post-tags a:hover {
-    background: var(--lightcolor);
-}
-
-.paginav a:hover {
-    background: var(--lightcolor);
-}
-
-.share-buttons {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    overflow-x: auto;
-    gap: 10px;
-}
-
-.share-buttons li,
-.share-buttons a {
-    display: inline-flex;
-}
-
-
-.share-buttons a:not(:last-of-type) {
-    margin-inline-end: 12px;
-}
-
-h1:hover .anchor,
-h2:hover .anchor,
-h3:hover .anchor,
-h4:hover .anchor,
-h5:hover .anchor,
-h6:hover .anchor {
-    display: inline-flex;
-    color: var(--darkcolor);
-    margin-inline-start: 10px;
-    font-weight: 700;
-    user-select: none;
-    box-shadow: 0 0px 0 var(--darkcolor);
-}
-
-.paginav {
-    display: flex;
-    line-height: var(--lineheight);
-    font-size: var(--footersize);
-}
-
-.paginav a {
-    padding-inline-start: 15px;
-    padding-inline-end: 15px;
-    border-radius: var(--radius);
-    color: var(--secondary);
-}
-
-.paginav .title {
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: small;
-    color: var(--secondary);
-}
-
-.paginav .prev,
-.paginav .next {
-    width: 50%;
-}
-
-
-.paginav .next {
-    margin-inline-start: auto;
-    text-align: right;
-}
-
-[dir="rtl"] .paginav .next {
-    text-align: left;
-}
-
-h1>a>svg {
-    display: inline;
-}
-
-img.in-text {
-    display: inline;
-    margin: auto;
-}
-
-a[href^="#fn:"], a[href^="#fnref:"] {
-     box-shadow: 0 0px 0 var(--darkcolor);
-}
-
-a[href^="#fn:"]:hover, a[href^="#fnref:"]:hover {
-    color: var(--darkcolor);
+    font-weight: 500;
+    margin: 8px 0 16px;
 }
