@@ -2,21 +2,22 @@
 <style>
   .project-folders {
     display: grid;
-    gap: 4px;
-    margin-top: 8px;
+    gap: 12px;
+    margin-top: 16px;
   }
   .project-folder {
-    border-bottom: 1px solid var(--border);
-    padding: 18px 0 6px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--entry);
+    padding: 10px 14px;
   }
   .project-folder > summary {
     list-style: none;
     cursor: pointer;
-    font-size: 1.55rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--primary);
     user-select: none;
-    letter-spacing: -0.03em;
   }
   .project-folder > summary::-webkit-details-marker {
     display: none;
@@ -29,7 +30,7 @@
     content: "▾ ";
   }
   .project-folder .post-entry {
-    margin-top: 6px;
+    margin-top: 12px;
   }
 </style>
 

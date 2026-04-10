@@ -5,8 +5,7 @@
     margin-inline-start: auto;
     margin-inline-end: auto;
     line-height: var(--header-height);
-    background: transparent;
-    border-bottom: 1px solid var(--border);
+    background: var(--code-bg);
 }
 
 .nav a {
@@ -16,8 +15,7 @@
 .logo,
 #menu {
     display: flex;
-    margin: 0 var(--gap);
-    align-items: center;
+    margin: auto var(--gap);
 }
 
 .logo {
@@ -27,7 +25,6 @@
 .logo a {
     font-size: var(--headersize);
     font-weight: var(--semibold);
-    letter-spacing: -0.02em;
 }
 
 .logo a img, .logo a svg {
@@ -41,7 +38,7 @@
 
 button#theme-toggle {
     font-size: 20px;
-    margin: auto 6px;
+    margin: auto 4px;
 }
 
 body.dark #moon {
@@ -61,16 +58,16 @@ body:not(.dark) #sun {
 }
 
 #menu li + li {
-    margin-inline-start: 18px;
+    margin-inline-start: var(--gap);
 }
 
 #menu a {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: var(--headersize);
+    font-weight: 400;
 }
 
 #menu .active {
-    border-bottom: 2px solid var(--primary);
+    border-bottom: 2px solid var(--darkcolor);
 }
 
 .lang-switch li,
