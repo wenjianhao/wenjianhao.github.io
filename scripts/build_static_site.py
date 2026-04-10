@@ -13,7 +13,6 @@ STATIC = ROOT / 'static'
 SITE = {
     'title': 'Wenjian Hao',
     'tagline': 'Ph.D. candidate, Purdue University School of Aeronautics and Astronautics',
-    'intro_heading': "Hi, I'm Wenjian!",
     'intro_text': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
         'Shaoshuai Mou. My research focuses on learning and control of complex dynamical systems, particularly '
@@ -392,7 +391,6 @@ def hero_block():
     <div class="col offset-md-1 col-lg-10">
       <div class="hero-intro">
         <div class="hero-copy">
-          <h1 class="hero-greeting">{escape(SITE['intro_heading'])}</h1>
           <p class="hero-text">{escape(SITE['intro_text'])}</p>
           <div class="hero-buttons">
             <a class="hero-button" href="{SITE['email']}">Email</a>
