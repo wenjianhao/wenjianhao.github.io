@@ -120,7 +120,8 @@ a:hover {
 .hero-visual {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 34px;
 }
 
 #portrait {
