@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260410b'
+ASSET_VERSION = '20260410c'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -396,9 +396,9 @@ def hero_block():
         <div class="hero-copy">
           <p class="hero-text">{escape(SITE['intro_text'])}</p>
           <div class="hero-buttons">
-            <a class="hero-button" href="{SITE['email']}"><i class="bi bi-envelope" aria-hidden="true"></i><span>Email</span></a>
-            <a class="hero-button" href="{SITE['scholar']}"><i class="bi bi-mortarboard" aria-hidden="true"></i><span>Scholar</span></a>
-            <a class="hero-button" href="{SITE['github']}"><i class="bi bi-github" aria-hidden="true"></i><span>GitHub</span></a>
+            <a class="hero-button" href="{SITE['email']}"><span>Email</span><i class="bi bi-envelope-fill" aria-hidden="true"></i></a>
+            <a class="hero-button" href="{SITE['scholar']}"><span>Scholar</span><i class="bi bi-mortarboard-fill" aria-hidden="true"></i></a>
+            <a class="hero-button" href="{SITE['github']}"><span>GitHub</span><i class="bi bi-github" aria-hidden="true"></i></a>
           </div>
         </div>
         <div class="hero-visual">
