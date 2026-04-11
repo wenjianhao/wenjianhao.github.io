@@ -350,3 +350,67 @@ a:hover {
     height: 155px !important;
   }
 }
+
+@media (max-width: 640px) {
+  .container {
+    max-width: calc(100% - 28px) !important;
+  }
+
+  .site-nav,
+  .home-masthead {
+    padding: 18px 0 14px;
+  }
+
+  .site-title a,
+  .home-name {
+    font-size: 1.72rem;
+  }
+
+  .home-role {
+    font-size: 0.94rem;
+  }
+
+  .site-menu,
+  .home-menu {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .site-menu a,
+  .home-menu a {
+    font-size: 0.94rem;
+  }
+
+  .hero-intro {
+    padding-top: 30px;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .hero-buttons {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .hero-button {
+    min-width: 0;
+    padding: 8px 14px;
+    font-size: 0.94rem;
+    gap: 10px;
+  }
+
+  .hero-visual {
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  #portrait {
+    width: 145px !important;
+    height: 145px !important;
+    left: 0;
+    top: 0;
+  }
+}

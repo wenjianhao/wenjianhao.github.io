@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260410j'
+ASSET_VERSION = '20260410k'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -145,7 +145,9 @@ def display_title(title):
     title = title.strip()
     if not title:
         return title
-    return title[0].upper() + title[1:].lower()
+    text = title[0].upper() + title[1:].lower()
+    text = re.sub(r'\bkoopman\b', 'Koopman', text, flags=re.IGNORECASE)
+    return text
 
 
 def emphasize_author_names(author_text):
