@@ -13,17 +13,17 @@
 }
 
 [data-theme='dark'] {
-  --bg: #0f1722;
-  --surface: #0f1722;
-  --surface-alt: #172333;
+  --bg: #0b0b0c;
+  --surface: #0b0b0c;
+  --surface-alt: #151618;
   --text: #e7edf5;
   --muted: #b2bfce;
   --muted-2: #93a3b8;
-  --line: #2b3b4f;
+  --line: #2a2c31;
   --link: #8cbcff;
   --link-hover: #b3d0ff;
-  --code-bg: #152131;
-  --code-line: #2b3b4f;
+  --code-bg: #17191d;
+  --code-line: #2a2c31;
 }
 
 body {
