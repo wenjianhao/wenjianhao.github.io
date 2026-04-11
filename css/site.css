@@ -100,7 +100,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 0;
-  margin-left: -4px;
+  margin-left: 0;
   margin-right: 0;
   padding: 2px 4px;
   border: 0;
