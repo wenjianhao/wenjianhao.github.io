@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260410l'
+ASSET_VERSION = '20260410n'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -77,9 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!button) return;
   const applyLabel = () => {
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
     button.innerHTML = dark
-      ? '<i class="bi bi-sun" aria-hidden="true"></i><span>Light</span>'
-      : '<i class="bi bi-moon" aria-hidden="true"></i><span>Night</span>';
+      ? '<i class="bi bi-sun" aria-hidden="true"></i>'
+      : '<i class="bi bi-moon" aria-hidden="true"></i>';
   };
   applyLabel();
   button.addEventListener('click', function() {
@@ -443,7 +444,7 @@ def page_shell(title, content, description='', include_math=False):
     <div class="container">
       <div class="site-nav">
         <div class="site-title"><a href="/">{escape(SITE['title'])}</a></div>
-        <div class="site-menu"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button>{nav}</div>
+        <div class="site-menu">{nav}<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button></div>
       </div>
     </div>
   </div>
@@ -483,7 +484,7 @@ def home_shell(title, content, description=''):
             <div class="home-name">{escape(SITE['title'])}</div>
             <div class="home-role">{escape(SITE['tagline'])}</div>
           </div>
-          <div class="site-menu home-menu"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button>{nav}</div>
+          <div class="site-menu home-menu">{nav}<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button></div>
         </div>
       </div>
     </div>
