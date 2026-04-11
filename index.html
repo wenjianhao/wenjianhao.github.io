@@ -13,8 +13,36 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="/css/bootstrap.min.css?v=20260410k" rel="stylesheet">
-  <link href="/css/site.css?v=20260410k" rel="stylesheet">
+  <link href="/css/bootstrap.min.css?v=20260410l" rel="stylesheet">
+  <link href="/css/site.css?v=20260410l" rel="stylesheet">
+  <script>
+(function() {
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const button = document.querySelector('[data-theme-toggle]');
+  if (!button) return;
+  const applyLabel = () => {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    button.innerHTML = dark
+      ? '<i class="bi bi-sun" aria-hidden="true"></i><span>Light</span>'
+      : '<i class="bi bi-moon" aria-hidden="true"></i><span>Night</span>';
+  };
+  applyLabel();
+  button.addEventListener('click', function() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const next = dark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    applyLabel();
+  });
+});
+</script>
 </head>
 <body>
   <div class="container home-top">
@@ -25,7 +53,7 @@
             <div class="home-name">Wenjian Hao</div>
             <div class="home-role">Ph.D. candidate, Purdue University AAE</div>
           </div>
-          <div class="site-menu home-menu"><a href="/#papers">Papers</a><a href="/#projects">Projects</a><a href="/#blog">Blog</a><a href="/#miscellaneous">Miscellaneous</a></div>
+          <div class="site-menu home-menu"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button><a href="/#papers">Papers</a><a href="/#projects">Projects</a><a href="/#blog">Blog</a><a href="/#miscellaneous">Miscellaneous</a></div>
         </div>
       </div>
     </div>

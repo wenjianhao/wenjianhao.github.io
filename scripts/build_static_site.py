@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260410k'
+ASSET_VERSION = '20260410l'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -60,6 +60,37 @@ window.MathJax = {
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+""".strip()
+
+THEME_SCRIPT = """
+<script>
+(function() {
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const button = document.querySelector('[data-theme-toggle]');
+  if (!button) return;
+  const applyLabel = () => {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    button.innerHTML = dark
+      ? '<i class="bi bi-sun" aria-hidden="true"></i><span>Light</span>'
+      : '<i class="bi bi-moon" aria-hidden="true"></i><span>Night</span>';
+  };
+  applyLabel();
+  button.addEventListener('click', function() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const next = dark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    applyLabel();
+  });
+});
+</script>
 """.strip()
 
 
@@ -405,13 +436,14 @@ def page_shell(title, content, description='', include_math=False):
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
   {math}
+  {THEME_SCRIPT}
 </head>
 <body>
   <div class="site-nav-wrap">
     <div class="container">
       <div class="site-nav">
         <div class="site-title"><a href="/">{escape(SITE['title'])}</a></div>
-        <div class="site-menu">{nav}</div>
+        <div class="site-menu"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button>{nav}</div>
       </div>
     </div>
   </div>
@@ -440,6 +472,7 @@ def home_shell(title, content, description=''):
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
+  {THEME_SCRIPT}
 </head>
 <body>
   <div class="container home-top">
@@ -450,7 +483,7 @@ def home_shell(title, content, description=''):
             <div class="home-name">{escape(SITE['title'])}</div>
             <div class="home-role">{escape(SITE['tagline'])}</div>
           </div>
-          <div class="site-menu home-menu">{nav}</div>
+          <div class="site-menu home-menu"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button>{nav}</div>
         </div>
       </div>
     </div>
