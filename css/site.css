@@ -100,11 +100,11 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 0;
-  margin-left: 8px;
+  margin-left: 2px;
   margin-right: 0;
-  padding: 6px 8px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 0;
   background: transparent;
   color: var(--text);
   font-size: 1rem;
@@ -113,7 +113,7 @@ a:hover {
 }
 
 .theme-toggle:hover {
-  background: var(--surface-alt);
+  background: transparent;
 }
 
 .theme-toggle i {
