@@ -84,14 +84,14 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   padding-top: 8px;
 }
 
 .site-menu a,
 .home-menu a {
   color: var(--text);
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
