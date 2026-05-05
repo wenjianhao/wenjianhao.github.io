@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260410p'
+ASSET_VERSION = '20260505a'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -66,7 +66,8 @@ THEME_SCRIPT = """
 <script>
 (function() {
   const saved = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  const prefersDark = media && media.matches;
   const theme = saved || (prefersDark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
 })();
@@ -74,22 +75,38 @@ THEME_SCRIPT = """
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const button = document.querySelector('[data-theme-toggle]');
-  if (!button) return;
+  const media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  const syncWithSystem = () => {
+    if (!media || localStorage.getItem('theme')) return;
+    document.documentElement.setAttribute('data-theme', media.matches ? 'dark' : 'light');
+    if (button) applyLabel();
+  };
   const applyLabel = () => {
+    if (!button) return;
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
     button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
     button.innerHTML = dark
       ? '<i class="bi bi-sun" aria-hidden="true"></i>'
       : '<i class="bi bi-moon" aria-hidden="true"></i>';
   };
+  syncWithSystem();
   applyLabel();
-  button.addEventListener('click', function() {
-    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = dark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    applyLabel();
-  });
+  if (button) {
+    button.addEventListener('click', function() {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const next = dark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      applyLabel();
+    });
+  }
+  if (media) {
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', syncWithSystem);
+    } else if (typeof media.addListener === 'function') {
+      media.addListener(syncWithSystem);
+    }
+  }
 });
 </script>
 """.strip()
