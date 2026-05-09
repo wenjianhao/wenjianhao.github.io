@@ -428,6 +428,8 @@ def load_entries(section):
             'math': bool(front.get('math')),
             'pdf_url': pdf_url,
             'code_url': code_url,
+            'media': front.get('media', ''),
+            'media_alt': front.get('media_alt', front.get('title', path.stem)),
         })
     entries.sort(key=lambda x: x['date'], reverse=True)
     return entries
@@ -559,8 +561,17 @@ def render_home_section(section_id, title, items, kind):
             meta = f"<div class='entry-authors'>{authors}</div>{venue_html}"
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
+        media = ''
+        if kind == 'papers' and item.get('media'):
+            media = (
+                f"<div class='entry-media'>"
+                f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}'>"
+                f"</div>"
+            )
+        entry_class = "content-entry content-entry-featured" if media else "content-entry"
         cards.append(
-            f"<div class='content-entry'>"
+            f"<div class='{entry_class}'>"
+            f"{media}"
             f"<div class='content-entry-main'><div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(display_title(item['title']) if kind in ('papers', 'blog') else item['title'])}</a></div>"
             f"<div class='entry-summary'>{escape(item['summary'])}</div>{meta}</div></div>"
         )
@@ -586,8 +597,17 @@ def paper_list_entry(item):
     if resources:
         venue_line = f"{venue_line} · {' / '.join(resources)}" if venue_line else ' / '.join(resources)
     venue_html = f"<div class='entry-venue'>{venue_line}</div>" if venue_line else ''
+    media = ''
+    if item.get('media'):
+        media = (
+            f"<div class='entry-media'>"
+            f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}'>"
+            f"</div>"
+        )
+    entry_class = "content-entry content-entry-featured" if media else "content-entry"
     return (
-        "<div class='content-entry'><div class='content-entry-main'>"
+        f"<div class='{entry_class}'>"
+        f"{media}<div class='content-entry-main'>"
         f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(display_title(item['title']))}</a></div>"
         f"<div class='entry-summary'>{escape(item['summary'])}</div>"
         f"<div class='entry-authors'>{emphasize_author_names(item['author'])}</div>"

@@ -239,6 +239,24 @@ a:hover {
   border-bottom: 1px solid #d9dee5;
 }
 
+.content-entry-featured {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.entry-media {
+  width: 100%;
+}
+
+.entry-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 .entry-title {
   font-size: 1.12rem;
   line-height: 1.32;

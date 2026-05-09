@@ -5,6 +5,8 @@ author: "W Hao, B Huang, W Pan, D Wu, S Mou"
 paper_group: "Dynamics Learning for Complex Systems"
 summary: "This paper proposes deep Koopman learning for nonlinear time-varying systems with error analysis and computationally efficient prediction."
 venue: "Automatica 2024"
+media: "/papers/media/deep-koopman-time-varying-systems.gif"
+media_alt: "Deep Koopman learning time-varying systems gamma comparison animation"
 ---
 
 ---
