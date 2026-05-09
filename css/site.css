@@ -240,14 +240,14 @@ a:hover {
 }
 
 .content-entry-featured {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
+  display: flex !important;
   gap: 18px;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .entry-media {
-  width: 100%;
+  flex: 0 0 180px;
+  width: 180px;
 }
 
 .entry-media img {
@@ -255,6 +255,11 @@ a:hover {
   width: 100%;
   height: auto;
   border-radius: 8px;
+}
+
+.content-entry-featured .content-entry-main {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .entry-title {
@@ -484,5 +489,15 @@ a:hover {
     height: 145px !important;
     left: 0;
     top: 0;
+  }
+
+  .content-entry-featured {
+    display: block !important;
+  }
+
+  .entry-media {
+    width: 100%;
+    max-width: 220px;
+    margin-bottom: 14px;
   }
 }

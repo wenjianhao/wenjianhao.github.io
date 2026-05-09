@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260505a'
+ASSET_VERSION = '20260509a'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -564,15 +564,17 @@ def render_home_section(section_id, title, items, kind):
         media = ''
         if kind == 'papers' and item.get('media'):
             media = (
-                f"<div class='entry-media'>"
-                f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}'>"
+                f"<div class='entry-media' style='flex:0 0 180px;width:180px;'>"
+                f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:auto;border-radius:8px;'>"
                 f"</div>"
             )
         entry_class = "content-entry content-entry-featured" if media else "content-entry"
+        entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
+        main_style = " style='min-width:0;flex:1 1 auto;'" if media else ""
         cards.append(
-            f"<div class='{entry_class}'>"
+            f"<div class='{entry_class}'{entry_style}>"
             f"{media}"
-            f"<div class='content-entry-main'><div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(display_title(item['title']) if kind in ('papers', 'blog') else item['title'])}</a></div>"
+            f"<div class='content-entry-main'{main_style}><div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(display_title(item['title']) if kind in ('papers', 'blog') else item['title'])}</a></div>"
             f"<div class='entry-summary'>{escape(item['summary'])}</div>{meta}</div></div>"
         )
     return f"<section id='{section_id}' class='content-section'><h1>{escape(title)}</h1>{''.join(cards)}</section>"
@@ -600,14 +602,16 @@ def paper_list_entry(item):
     media = ''
     if item.get('media'):
         media = (
-            f"<div class='entry-media'>"
-            f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}'>"
+            f"<div class='entry-media' style='flex:0 0 180px;width:180px;'>"
+            f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:auto;border-radius:8px;'>"
             f"</div>"
         )
     entry_class = "content-entry content-entry-featured" if media else "content-entry"
+    entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
+    main_style = " style='min-width:0;flex:1 1 auto;'" if media else ""
     return (
-        f"<div class='{entry_class}'>"
-        f"{media}<div class='content-entry-main'>"
+        f"<div class='{entry_class}'{entry_style}>"
+        f"{media}<div class='content-entry-main'{main_style}>"
         f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(display_title(item['title']))}</a></div>"
         f"<div class='entry-summary'>{escape(item['summary'])}</div>"
         f"<div class='entry-authors'>{emphasize_author_names(item['author'])}</div>"
