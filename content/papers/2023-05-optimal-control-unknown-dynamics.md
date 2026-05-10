@@ -9,7 +9,7 @@ media: "/papers/media/optimal-control-unknown-dynamics-quadruped.gif"
 media_alt: "Optimal control of nonlinear systems quadruped animation"
 media_fit: "fill"
 media_box_width: 220
-media_width: 200
+media_width: 188
 media_height: 176
 ---
 
