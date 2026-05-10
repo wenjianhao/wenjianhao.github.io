@@ -431,6 +431,7 @@ def load_entries(section):
             'media': front.get('media', ''),
             'media_alt': front.get('media_alt', front.get('title', path.stem)),
             'media_fit': front.get('media_fit', 'contain'),
+            'media_width': front.get('media_width', '220'),
             'media_height': front.get('media_height', '132'),
             'order': int(front.get('paper_order', 9999)) if section == 'papers' else 9999,
         })
@@ -546,17 +547,18 @@ def entry_media_html(item):
         return ''
     media_path = str(item['media'])
     media_fit = escape(str(item.get('media_fit', 'contain')))
+    media_width = escape(str(item.get('media_width', '220')))
     media_height = escape(str(item.get('media_height', '132')))
     if media_path.lower().endswith(('.mp4', '.webm', '.mov')):
         return (
-            f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
+            f"<div class='entry-media' style='flex:0 0 {media_width}px;width:{media_width}px;'>"
             f"<video autoplay loop muted playsinline preload='metadata' aria-label='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:{media_height}px;object-fit:{media_fit};border-radius:8px;'>"
             f"<source src='{escape(media_path)}'>"
             f"</video>"
             f"</div>"
         )
     return (
-        f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
+        f"<div class='entry-media' style='flex:0 0 {media_width}px;width:{media_width}px;'>"
         f"<img src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:{media_height}px;object-fit:{media_fit};border-radius:8px;'>"
         f"</div>"
     )
