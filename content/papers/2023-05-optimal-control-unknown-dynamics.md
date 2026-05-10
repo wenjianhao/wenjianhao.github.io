@@ -7,7 +7,8 @@ paper_order: 40
 summary: "This paper presents a data-driven actor-critic Koopman framework for closed-loop optimal control of systems with unknown dynamics."
 media: "/papers/media/optimal-control-unknown-dynamics-quadruped.gif"
 media_alt: "Optimal control of nonlinear systems quadruped animation"
-media_fit: "cover"
+media_fit: "contain"
+media_height: 176
 ---
 
 ---
