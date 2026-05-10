@@ -4,6 +4,8 @@ date: 2025-10-01
 author: "W Hao, Z Lu, N Miguel, S Mou"
 paper_group: "Learning-Based Control for Robotics"
 summary: "This paper formulates policy adaptation as constrained optimization and uses control barrier functions to guarantee objective-preserving adaptation."
+media: "/papers/media/cbf-policy-adaptation-rl.gif"
+media_alt: "Control-barrier-function-based policy adaptation robot motion animation"
 ---
 
 ---

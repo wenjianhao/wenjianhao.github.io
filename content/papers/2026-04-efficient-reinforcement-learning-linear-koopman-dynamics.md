@@ -4,6 +4,8 @@ date: 2026-04-01
 author: "W Hao, Y Fang, Z Lu, S Mou"
 paper_group: "Learning-Based Control for Robotics"
 summary: "This paper presents an online model-based reinforcement learning framework that combines learned linear Koopman dynamics with actor-critic policy optimization for efficient control of nonlinear robotic systems."
+media: "/papers/media/efficient-reinforcement-learning-linear-koopman-dynamics.gif"
+media_alt: "Efficient reinforcement learning robotic arm animation"
 ---
 
 ---
