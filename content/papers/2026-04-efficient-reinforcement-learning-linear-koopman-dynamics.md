@@ -3,6 +3,7 @@ title: "Efficient Reinforcement Learning using Linear Koopman Dynamics for Nonli
 date: 2026-04-01
 author: "W Hao, Y Fang, Z Lu, S Mou"
 paper_group: "Learning-Based Control for Robotics"
+paper_order: 10
 summary: "This paper presents an online model-based reinforcement learning framework that combines learned linear Koopman dynamics with actor-critic policy optimization for efficient control of nonlinear robotic systems."
 media: "/papers/media/efficient-reinforcement-learning-linear-koopman-dynamics.gif"
 media_alt: "Efficient reinforcement learning robotic arm animation"
@@ -22,7 +23,10 @@ This paper presents an online model-based reinforcement learning framework for o
 
 ##### Demo
 
-Demo coming soon.
+<video controls muted loop playsinline preload="metadata" style="display: block; width: 100%; max-width: 760px; height: auto; border-radius: 8px; margin: 18px auto;">
+  <source src="/papers/media/pgdk-tro.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 

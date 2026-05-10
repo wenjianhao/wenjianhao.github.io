@@ -3,8 +3,9 @@ title: "Optimal Control of Nonlinear Systems with Unknown Dynamics"
 date: 2023-05-01
 author: "W Hao, PC Heredia, S Mou"
 paper_group: "Learning-Based Control for Robotics"
+paper_order: 40
 summary: "This paper presents a data-driven actor-critic Koopman framework for closed-loop optimal control of systems with unknown dynamics."
-media: "/papers/media/optimal-control-unknown-dynamics-quadruped.gif"
+media: "/papers/media/pgdk-tro.mp4"
 media_alt: "Optimal control of nonlinear systems quadruped animation"
 ---
 
@@ -23,7 +24,10 @@ This paper proposes a data-driven method for infinite-horizon optimal control wi
 
 ##### Demo
 
-Demo coming soon.
+<video controls muted loop playsinline preload="metadata" style="display: block; width: 100%; max-width: 760px; height: auto; border-radius: 8px; margin: 18px auto;">
+  <source src="/papers/media/pgdk-tro.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 

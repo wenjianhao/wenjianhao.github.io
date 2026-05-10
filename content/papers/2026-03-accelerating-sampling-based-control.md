@@ -3,6 +3,7 @@ title: "Accelerating Sampling-Based Control via Learned Linear Koopman Dynamics"
 date: 2026-03-01
 author: "W Hao, Y Fang, Z Lu, S Mou"
 paper_group: "Learning-Based Control for Robotics"
+paper_order: 20
 summary: "This paper presents an efficient MPPI control framework using learned linear Koopman dynamics to reduce rollout cost while maintaining control performance."
 media: "/papers/media/accelerating-sampling-based-control.gif"
 media_alt: "Accelerating sampling-based control robot motion animation"
@@ -23,7 +24,10 @@ This paper presents an efficient model predictive path integral (MPPI) control f
 
 ##### Demo
 
-Demo coming soon.
+<video controls muted loop playsinline preload="metadata" style="display: block; width: 100%; max-width: 760px; height: auto; border-radius: 8px; margin: 18px auto;">
+  <source src="/papers/media/mppi-dk.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 

@@ -430,8 +430,9 @@ def load_entries(section):
             'code_url': code_url,
             'media': front.get('media', ''),
             'media_alt': front.get('media_alt', front.get('title', path.stem)),
+            'order': int(front.get('paper_order', 9999)) if section == 'papers' else 9999,
         })
-    entries.sort(key=lambda x: x['date'], reverse=True)
+    entries.sort(key=lambda x: (x['order'], -x['date'].timestamp()))
     return entries
 
 
@@ -538,6 +539,40 @@ def hero_block():
 '''
 
 
+def entry_media_html(item):
+    if not item.get('media'):
+        return ''
+    media_path = str(item['media'])
+    if media_path.lower().endswith(('.mp4', '.webm', '.mov')):
+        return (
+            f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
+            f"<video autoplay loop muted playsinline preload='metadata' aria-label='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:132px;object-fit:cover;border-radius:8px;'>"
+            f"<source src='{escape(media_path)}'>"
+            f"</video>"
+            f"</div>"
+        )
+    return (
+        f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
+        f"<img src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:132px;object-fit:contain;border-radius:8px;'>"
+        f"</div>"
+    )
+
+
+def content_entry_html(item, kind, meta='', title=None):
+    media = entry_media_html(item)
+    entry_class = "content-entry content-entry-featured" if media else "content-entry"
+    entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
+    main_style = " style='min-width:0;flex:1 1 auto;'" if media else ""
+    entry_title = title if title is not None else (display_title(item['title']) if kind in ('papers', 'blog') else item['title'])
+    return (
+        f"<div class='{entry_class}'{entry_style}>"
+        f"{media}"
+        f"<div class='content-entry-main'{main_style}>"
+        f"<div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(entry_title)}</a></div>"
+        f"<div class='entry-summary'>{escape(item['summary'])}</div>{meta}</div></div>"
+    )
+
+
 def render_home_section(section_id, title, items, kind):
     cards = []
     for item in items:
@@ -561,22 +596,7 @@ def render_home_section(section_id, title, items, kind):
             meta = f"<div class='entry-authors'>{authors}</div>{venue_html}"
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
-        media = ''
-        if kind == 'papers' and item.get('media'):
-            media = (
-                f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
-                f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:132px;object-fit:contain;border-radius:8px;'>"
-                f"</div>"
-            )
-        entry_class = "content-entry content-entry-featured" if media else "content-entry"
-        entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
-        main_style = " style='min-width:0;flex:1 1 auto;'" if media else ""
-        cards.append(
-            f"<div class='{entry_class}'{entry_style}>"
-            f"{media}"
-            f"<div class='content-entry-main'{main_style}><div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(display_title(item['title']) if kind in ('papers', 'blog') else item['title'])}</a></div>"
-            f"<div class='entry-summary'>{escape(item['summary'])}</div>{meta}</div></div>"
-        )
+        cards.append(content_entry_html(item, kind, meta))
     return f"<section id='{section_id}' class='content-section'><h1>{escape(title)}</h1>{''.join(cards)}</section>"
 
 
@@ -599,24 +619,8 @@ def paper_list_entry(item):
     if resources:
         venue_line = f"{venue_line} · {' / '.join(resources)}" if venue_line else ' / '.join(resources)
     venue_html = f"<div class='entry-venue'>{venue_line}</div>" if venue_line else ''
-    media = ''
-    if item.get('media'):
-        media = (
-            f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
-            f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:132px;object-fit:contain;border-radius:8px;'>"
-            f"</div>"
-        )
-    entry_class = "content-entry content-entry-featured" if media else "content-entry"
-    entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
-    main_style = " style='min-width:0;flex:1 1 auto;'" if media else ""
-    return (
-        f"<div class='{entry_class}'{entry_style}>"
-        f"{media}<div class='content-entry-main'{main_style}>"
-        f"<div class='entry-title'><a href='/papers/{item['slug']}/'>{escape(display_title(item['title']))}</a></div>"
-        f"<div class='entry-summary'>{escape(item['summary'])}</div>"
-        f"<div class='entry-authors'>{emphasize_author_names(item['author'])}</div>"
-        f"{venue_html}</div></div>"
-    )
+    meta = f"<div class='entry-authors'>{emphasize_author_names(item['author'])}</div>{venue_html}"
+    return content_entry_html(item, 'papers', meta)
 
 
 def render_detail(entry):
@@ -674,10 +678,7 @@ def build_list_pages(papers, projects, blogs, misc):
         items = [p for p in projects if p['group'] in (group, source_group)]
         if not items:
             continue
-        entries = ''.join(
-            f"<div class='content-entry'><div class='content-entry-main'><div class='entry-title'><a href='/projects/{i['slug']}/'>{escape(i['title'])}</a></div><div class='entry-summary'>{escape(i['summary'])}</div><div class='entry-year'>{i['date_label']}</div></div></div>"
-            for i in items
-        )
+        entries = ''.join(content_entry_html(i, 'projects', f"<div class='entry-year'>{i['date_label']}</div>") for i in items)
         grouped_projects.append(f"<section class='content-section grouped-section'><h2>{escape(group)}</h2>{entries}</section>")
     write_file(ROOT / 'projects' / 'index.html', page_shell('Projects', render_grouped_list('Projects', ''.join(grouped_projects)), 'Projects'))
 

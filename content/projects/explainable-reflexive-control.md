@@ -4,6 +4,7 @@ date: 2022-08-01T00:00:00Z
 project_period: "2022-08 to Present"
 author: Wenjian Hao
 project_group: "Funded Research Projects"
+media: "/projects/media/reflexai.png"
 ---
 
 Project goal: RefleXAI is a DARPA-backed effort on adaptive control for uncrewed sea vessels, developed through the Saab and Purdue University collaboration. The project focuses on explainable reflexive control strategies that can respond quickly and robustly in uncertain maritime operating conditions.
