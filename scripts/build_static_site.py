@@ -526,6 +526,7 @@ def hero_block():
     <div class="col-12">
       <div class="hero-intro">
         <div class="hero-copy">
+          <h2 class="hero-heading">Short Biography</h2>
           <p class="hero-text">{escape(SITE['intro_text'])}</p>
           <div class="hero-buttons">
             <a class="hero-button" href="{SITE['email']}"><i class="bi bi-envelope" aria-hidden="true"></i><span>Email</span></a>
