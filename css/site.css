@@ -253,7 +253,8 @@ a:hover {
 .entry-media img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 132px;
+  object-fit: contain;
   border-radius: 8px;
 }
 
