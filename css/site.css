@@ -201,6 +201,7 @@ a:hover {
 }
 
 .content-section h1,
+.hero-heading,
 .section-page-title {
   display: inline-block;
   color: var(--text);
