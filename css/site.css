@@ -241,19 +241,20 @@ a:hover {
 
 .content-entry-featured {
   display: flex !important;
-  gap: 18px;
+  gap: 20px;
   align-items: flex-start;
 }
 
 .entry-media {
-  flex: 0 0 180px;
-  width: 180px;
+  flex: 0 0 220px;
+  width: 220px;
 }
 
 .entry-media img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 132px;
+  object-fit: cover;
   border-radius: 8px;
 }
 
@@ -282,6 +283,13 @@ a:hover {
   margin-top: 8px;
   font-size: 1.02rem;
   line-height: 1.68;
+}
+
+.content-entry-featured .entry-summary {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .entry-authors,

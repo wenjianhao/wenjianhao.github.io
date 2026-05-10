@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260509b'
+ASSET_VERSION = '20260509c'
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -564,8 +564,8 @@ def render_home_section(section_id, title, items, kind):
         media = ''
         if kind == 'papers' and item.get('media'):
             media = (
-                f"<div class='entry-media' style='flex:0 0 180px;width:180px;'>"
-                f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:auto;border-radius:8px;'>"
+                f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
+                f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:132px;object-fit:cover;border-radius:8px;'>"
                 f"</div>"
             )
         entry_class = "content-entry content-entry-featured" if media else "content-entry"
@@ -602,8 +602,8 @@ def paper_list_entry(item):
     media = ''
     if item.get('media'):
         media = (
-            f"<div class='entry-media' style='flex:0 0 180px;width:180px;'>"
-            f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:auto;border-radius:8px;'>"
+            f"<div class='entry-media' style='flex:0 0 220px;width:220px;'>"
+            f"<img src='{escape(item['media'])}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:100%;height:132px;object-fit:cover;border-radius:8px;'>"
             f"</div>"
         )
     entry_class = "content-entry content-entry-featured" if media else "content-entry"
