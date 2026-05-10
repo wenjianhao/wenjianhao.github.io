@@ -8,7 +8,7 @@ summary: "This paper presents a data-driven actor-critic Koopman framework for c
 media: "/papers/media/optimal-control-unknown-dynamics-quadruped.gif"
 media_alt: "Optimal control of nonlinear systems quadruped animation"
 media_fit: "fill"
-media_width: 220
+media_width: 200
 media_height: 176
 ---
 
