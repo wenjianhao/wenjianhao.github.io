@@ -5,8 +5,8 @@ author: "W Hao, PC Heredia, S Mou"
 paper_group: "Learning-Based Control for Robotics"
 paper_order: 40
 summary: "This paper presents a data-driven actor-critic Koopman framework for closed-loop optimal control of systems with unknown dynamics."
-media: "/papers/media/pgdk-tro.mp4"
-media_alt: "Optimal control of nonlinear systems quadruped animation"
+media: "/papers/media/optimal-control-unknown-dynamics-robotic-arm.gif"
+media_alt: "Optimal control of nonlinear systems robotic arm animation"
 ---
 
 ---
