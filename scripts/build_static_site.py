@@ -595,6 +595,7 @@ def visitor_preview_section():
           <path d="M832 370l37-10 40 8 25 31-20 22-43 4-35-12-18-24z"/>
         </g>
         <g class="visitor-dot-layer" data-visitor-dots></g>
+        <g class="visitor-label-layer" data-visitor-labels></g>
       </svg>
       <div class="visitor-caption" data-visitor-caption>Loading visitor geography...</div>
     </div>
@@ -603,6 +604,10 @@ def visitor_preview_section():
       <div class="visitor-pill"><span class="visitor-pill-label">Visitors</span><span class="visitor-pill-value" data-visitor-visitors>--</span></div>
       <div class="visitor-pill"><span class="visitor-pill-label">Countries</span><span class="visitor-pill-value" data-visitor-countries>--</span></div>
       <div class="visitor-note" data-visitor-updated>Waiting for analytics data.</div>
+      <div class="visitor-country-list-wrap">
+        <div class="visitor-country-list-title">Top countries</div>
+        <div class="visitor-country-list" data-visitor-country-list></div>
+      </div>
     </div>
   </div>
 </section>

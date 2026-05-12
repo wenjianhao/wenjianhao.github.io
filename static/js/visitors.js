@@ -78,6 +78,19 @@
     "NEW ZEALAND": "NZ"
   };
 
+  const labelOffsets = {
+    US: [14, -14],
+    CA: [14, -18],
+    GB: [14, -10],
+    DE: [14, 16],
+    IN: [14, 18],
+    CN: [14, -14],
+    AU: [14, -12],
+    BR: [14, -12],
+    JP: [14, -10],
+    KR: [14, 16]
+  };
+
   function formatNumber(value) {
     return new Intl.NumberFormat("en-US").format(Number(value || 0));
   }
@@ -106,6 +119,8 @@
     const updatedEl = section.querySelector("[data-visitor-updated]");
     const captionEl = section.querySelector("[data-visitor-caption]");
     const dotLayer = section.querySelector("[data-visitor-dots]");
+    const labelLayer = section.querySelector("[data-visitor-labels]");
+    const countryListEl = section.querySelector("[data-visitor-country-list]");
 
     viewsEl.textContent = formatNumber(data.views);
     visitorsEl.textContent = formatNumber(data.visitors);
@@ -129,6 +144,8 @@
       : "Country-level visitor locations from GoatCounter";
 
     dotLayer.innerHTML = "";
+    labelLayer.innerHTML = "";
+    countryListEl.innerHTML = "";
     const locations = Array.isArray(data.locations) ? data.locations.slice() : [];
     const usable = locations
       .map((item) => {
@@ -141,6 +158,8 @@
       .filter(Boolean)
       .sort((a, b) => b.weight - a.weight)
       .slice(0, 30);
+
+    const topCountries = usable.slice(0, 6);
 
     const maxWeight = usable.reduce((max, item) => Math.max(max, item.weight), 1);
 
@@ -165,6 +184,43 @@
 
       dotLayer.appendChild(halo);
       dotLayer.appendChild(dot);
+    }
+
+    for (const item of topCountries) {
+      const [x, y] = project(item.centroid[0], item.centroid[1]);
+      const [dx, dy] = labelOffsets[item.code] || [12, -12];
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", x.toFixed(1));
+      line.setAttribute("y1", y.toFixed(1));
+      line.setAttribute("x2", (x + dx).toFixed(1));
+      line.setAttribute("y2", (y + dy).toFixed(1));
+      line.setAttribute("class", "visitor-label-line");
+
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("x", (x + dx + 4).toFixed(1));
+      label.setAttribute("y", (y + dy + 4).toFixed(1));
+      label.setAttribute("class", "visitor-label-text");
+      label.textContent = item.name || item.code;
+
+      labelLayer.appendChild(line);
+      labelLayer.appendChild(label);
+    }
+
+    for (const item of topCountries) {
+      const row = document.createElement("div");
+      row.className = "visitor-country-row";
+
+      const left = document.createElement("div");
+      left.className = "visitor-country-name";
+      left.textContent = item.name || item.code;
+
+      const right = document.createElement("div");
+      right.className = "visitor-country-count";
+      right.textContent = formatNumber(item.weight);
+
+      row.appendChild(left);
+      row.appendChild(right);
+      countryListEl.appendChild(row);
     }
   }
 

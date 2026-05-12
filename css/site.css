@@ -221,6 +221,18 @@ a:hover {
   stroke-width: 2;
 }
 
+.visitor-label-line {
+  stroke: var(--muted-2);
+  stroke-width: 1.2;
+  opacity: 0.7;
+}
+
+.visitor-label-text {
+  fill: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+}
+
 .visitor-caption {
   margin-top: 10px;
   font-size: 0.9rem;
@@ -259,6 +271,41 @@ a:hover {
   margin-top: 4px;
   font-size: 0.88rem;
   line-height: 1.45;
+  color: var(--muted-2);
+}
+
+.visitor-country-list-wrap {
+  margin-top: 6px;
+}
+
+.visitor-country-list-title {
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+  color: var(--muted-2);
+}
+
+.visitor-country-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.visitor-country-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.visitor-country-name {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.visitor-country-count {
+  font-size: 0.94rem;
   color: var(--muted-2);
 }
 
@@ -539,6 +586,10 @@ a:hover {
     min-width: 155px;
     flex: 1 1 155px;
   }
+
+  .visitor-label-text {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -612,5 +663,9 @@ a:hover {
     width: 100%;
     max-width: 220px;
     margin-bottom: 14px;
+  }
+
+  .visitor-label-text {
+    font-size: 12px;
   }
 }
