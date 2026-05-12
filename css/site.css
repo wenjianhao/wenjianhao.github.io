@@ -193,11 +193,11 @@ a:hover {
 .content-section,
 .grouped-section,
 .article-page {
-  margin-top: 30px;
+  margin-top: 38px;
 }
 
 .first-section {
-  margin-top: 52px;
+  margin-top: 56px;
 }
 
 .content-section h1,
@@ -338,6 +338,11 @@ a:hover {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+#papers .entry-title {
+  font-size: 1.06rem;
+  line-height: 1.24;
 }
 
 .entry-links,

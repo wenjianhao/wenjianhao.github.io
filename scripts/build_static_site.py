@@ -428,6 +428,7 @@ def load_entries(section):
             'author': front.get('author', ''),
             'summary': summary,
             'home_summary': tighten_summary(summary),
+            'home_project_summary': tighten_summary(summary, 96),
             'body_html': rendered,
             'slug': slug,
             'section': section,
@@ -593,7 +594,12 @@ def render_home_section(section_id, title, items, kind):
     cards = []
     for item in items:
         meta = ''
-        summary_text = item['home_summary'] if kind == 'papers' else item['summary']
+        if kind == 'papers':
+            summary_text = item['home_summary']
+        elif kind == 'projects':
+            summary_text = item['home_project_summary']
+        else:
+            summary_text = item['summary']
         if kind == 'papers':
             authors = emphasize_author_names(item['author'])
             venue_parts = []
