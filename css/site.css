@@ -172,6 +172,73 @@ a:hover {
   color: var(--muted-2);
 }
 
+.visitor-preview-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 22px;
+  align-items: start;
+  padding: 12px 0 8px;
+}
+
+.visitor-map-wrap {
+  padding: 18px 20px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.visitor-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.visitor-dot {
+  fill: var(--link);
+  opacity: 0.9;
+}
+
+.visitor-caption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--muted-2);
+}
+
+.visitor-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.visitor-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.visitor-pill-label {
+  font-size: 0.93rem;
+  color: var(--muted-2);
+}
+
+.visitor-pill-value {
+  font-size: 0.98rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.visitor-note {
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--muted-2);
+}
+
 .hero-visual {
   display: flex;
   justify-content: flex-start;
@@ -434,6 +501,20 @@ a:hover {
   #portrait {
     width: 155px !important;
     height: 155px !important;
+  }
+
+  .visitor-preview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .visitor-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .visitor-pill {
+    min-width: 155px;
+    flex: 1 1 155px;
   }
 }
 

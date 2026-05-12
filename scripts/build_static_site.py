@@ -544,6 +544,47 @@ def hero_block():
 '''
 
 
+def visitor_preview_section():
+    return '''
+<section id="visitors" class="content-section visitor-preview-section">
+  <h1>Visitors</h1>
+  <div class="visitor-preview-card">
+    <div class="visitor-map-wrap">
+      <svg class="visitor-map" viewBox="0 0 960 430" aria-label="Preview world map of visitor locations" role="img">
+        <g fill="none" stroke="none">
+          <path fill="var(--surface-alt)" d="M112 145l27-22 44-6 34 10 14 21-6 23-25 6-16 17-36 4-27-20-18-18z"/>
+          <path fill="var(--surface-alt)" d="M203 207l20-12 30 6 22 18-10 23-28 5-23-8-15-18z"/>
+          <path fill="var(--surface-alt)" d="M388 129l41-17 70-10 57 12 32 19 14 18-6 14-40 1-31-8-36 11-22 20-39-2-32-19-12-21z"/>
+          <path fill="var(--surface-alt)" d="M459 196l28-10 32 8 18 21-10 17-34 10-28-8-14-18z"/>
+          <path fill="var(--surface-alt)" d="M549 184l27-4 39 14 34 20 9 26-20 13-27-2-23-18-20-8-17-24z"/>
+          <path fill="var(--surface-alt)" d="M645 141l31-10 45 2 26 13-7 17-36 12-42-2-22-16z"/>
+          <path fill="var(--surface-alt)" d="M705 232l20-10 42 0 28 18-9 23-35 5-34-6-16-18z"/>
+          <path fill="var(--surface-alt)" d="M790 302l32-10 49 15 18 30-20 16-47-7-27-22z"/>
+        </g>
+        <g>
+          <circle class="visitor-dot" cx="172" cy="148" r="6"></circle>
+          <circle class="visitor-dot" cx="225" cy="221" r="5"></circle>
+          <circle class="visitor-dot" cx="448" cy="146" r="6"></circle>
+          <circle class="visitor-dot" cx="512" cy="209" r="5"></circle>
+          <circle class="visitor-dot" cx="660" cy="160" r="6"></circle>
+          <circle class="visitor-dot" cx="734" cy="247" r="5"></circle>
+          <circle class="visitor-dot" cx="832" cy="330" r="5"></circle>
+          <circle class="visitor-dot" cx="286" cy="292" r="5"></circle>
+        </g>
+      </svg>
+      <div class="visitor-caption">Approximate visitor locations</div>
+    </div>
+    <div class="visitor-stats">
+      <div class="visitor-pill"><span class="visitor-pill-label">Views</span><span class="visitor-pill-value">12,438</span></div>
+      <div class="visitor-pill"><span class="visitor-pill-label">Visitors</span><span class="visitor-pill-value">3,184</span></div>
+      <div class="visitor-pill"><span class="visitor-pill-label">Countries</span><span class="visitor-pill-value">42</span></div>
+      <div class="visitor-note">Preview only. Real analytics are not connected yet.</div>
+    </div>
+  </div>
+</section>
+'''
+
+
 def entry_media_html(item):
     if not item.get('media'):
         return ''
@@ -664,6 +705,7 @@ def render_home(papers, projects, blogs, misc):
       {render_home_section('projects', 'Projects', projects, 'projects')}
       {render_home_section('blog', 'Blog', blogs, 'blog')}
       {render_home_section('miscellaneous', 'Miscellaneous', misc, 'miscellaneous')}
+      {visitor_preview_section()}
     </div>
   </div>
 </div>
