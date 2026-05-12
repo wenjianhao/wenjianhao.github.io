@@ -9,7 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260510b'
+ASSET_VERSION = '20260511a'
+GOATCOUNTER_CODE = os.getenv('GOATCOUNTER_CODE', '').strip()
+GOATCOUNTER_ENDPOINT = os.getenv('GOATCOUNTER_ENDPOINT', '').strip()
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -110,6 +112,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 """.strip()
+
+
+def goatcounter_tracking_script():
+    endpoint = GOATCOUNTER_ENDPOINT
+    if not endpoint and GOATCOUNTER_CODE:
+        if GOATCOUNTER_CODE.startswith('http://') or GOATCOUNTER_CODE.startswith('https://'):
+            endpoint = GOATCOUNTER_CODE.rstrip('/')
+        else:
+            endpoint = f'https://{GOATCOUNTER_CODE}.goatcounter.com/count'
+    if not endpoint:
+        return ''
+    return (
+        f'<script data-goatcounter="{escape(endpoint)}" async '
+        'src="https://gc.zgo.at/count.js"></script>'
+    )
 
 
 def read_file(path):
@@ -443,6 +460,7 @@ def load_entries(section):
 def page_shell(title, content, description='', include_math=False):
     nav = ''.join(f'<a href="{href}">{label}</a>' for label, href in SITE['nav'])
     math = MATHJAX if include_math else ''
+    tracking = goatcounter_tracking_script()
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -462,6 +480,7 @@ def page_shell(title, content, description='', include_math=False):
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
   {math}
   {THEME_SCRIPT}
+  {tracking}
 </head>
 <body>
   <div class="site-nav-wrap">
@@ -480,6 +499,7 @@ def page_shell(title, content, description='', include_math=False):
 
 def home_shell(title, content, description=''):
     nav = ''.join(f'<a href="{href}">{label}</a>' for label, href in SITE['nav'])
+    tracking = goatcounter_tracking_script()
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -498,6 +518,7 @@ def home_shell(title, content, description=''):
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
   {THEME_SCRIPT}
+  {tracking}
 </head>
 <body>
   <div class="container home-top">
@@ -514,6 +535,7 @@ def home_shell(title, content, description=''):
     </div>
   </div>
   {content}
+  <script defer src="/js/visitors.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 '''
@@ -550,35 +572,37 @@ def visitor_preview_section():
   <h1>Visitors</h1>
   <div class="visitor-preview-card">
     <div class="visitor-map-wrap">
-      <svg class="visitor-map" viewBox="0 0 960 430" aria-label="Preview world map of visitor locations" role="img">
-        <g fill="none" stroke="none">
-          <path fill="var(--surface-alt)" d="M112 145l27-22 44-6 34 10 14 21-6 23-25 6-16 17-36 4-27-20-18-18z"/>
-          <path fill="var(--surface-alt)" d="M203 207l20-12 30 6 22 18-10 23-28 5-23-8-15-18z"/>
-          <path fill="var(--surface-alt)" d="M388 129l41-17 70-10 57 12 32 19 14 18-6 14-40 1-31-8-36 11-22 20-39-2-32-19-12-21z"/>
-          <path fill="var(--surface-alt)" d="M459 196l28-10 32 8 18 21-10 17-34 10-28-8-14-18z"/>
-          <path fill="var(--surface-alt)" d="M549 184l27-4 39 14 34 20 9 26-20 13-27-2-23-18-20-8-17-24z"/>
-          <path fill="var(--surface-alt)" d="M645 141l31-10 45 2 26 13-7 17-36 12-42-2-22-16z"/>
-          <path fill="var(--surface-alt)" d="M705 232l20-10 42 0 28 18-9 23-35 5-34-6-16-18z"/>
-          <path fill="var(--surface-alt)" d="M790 302l32-10 49 15 18 30-20 16-47-7-27-22z"/>
+      <svg class="visitor-map" viewBox="0 0 1000 500" aria-label="World map of visitor locations" role="img" data-visitor-map>
+        <g class="visitor-grid">
+          <line x1="166" y1="40" x2="166" y2="460"></line>
+          <line x1="333" y1="40" x2="333" y2="460"></line>
+          <line x1="500" y1="40" x2="500" y2="460"></line>
+          <line x1="666" y1="40" x2="666" y2="460"></line>
+          <line x1="833" y1="40" x2="833" y2="460"></line>
+          <line x1="40" y1="125" x2="960" y2="125"></line>
+          <line x1="40" y1="250" x2="960" y2="250"></line>
+          <line x1="40" y1="375" x2="960" y2="375"></line>
         </g>
-        <g>
-          <circle class="visitor-dot" cx="172" cy="148" r="6"></circle>
-          <circle class="visitor-dot" cx="225" cy="221" r="5"></circle>
-          <circle class="visitor-dot" cx="448" cy="146" r="6"></circle>
-          <circle class="visitor-dot" cx="512" cy="209" r="5"></circle>
-          <circle class="visitor-dot" cx="660" cy="160" r="6"></circle>
-          <circle class="visitor-dot" cx="734" cy="247" r="5"></circle>
-          <circle class="visitor-dot" cx="832" cy="330" r="5"></circle>
-          <circle class="visitor-dot" cx="286" cy="292" r="5"></circle>
+        <g class="visitor-land">
+          <path d="M78 123l18-22 36-16 41-10 52 4 27 18 10 27-8 23-30 8-18 23-34 16-33 24-29 4-19-15-27-31-18-29 8-24z"/>
+          <path d="M241 203l37 3 27 12 17 24-11 30-28 9-33-6-21-20-8-24z"/>
+          <path d="M286 285l33 19 22 40 7 45-17 39-26 20-29-11-15-36 6-35-13-31 9-28z"/>
+          <path d="M451 79l22-7 17 3 8 14-10 15-19 2-16-7-5-13z"/>
+          <path d="M401 145l17-28 45-17 85-10 61 14 38 25 21 29-4 18-48 2-32-8-32 8-24 20-34 1-20 16-36 9-39-6-33-21-10-25z"/>
+          <path d="M507 195l20 3 27 18 14 27-9 22-31 13-34-4-22-20 7-27 28-32z"/>
+          <path d="M586 174l26-13 48-10 64 6 57 20 37 31 7 35-23 18-29-2-25-22-34-6-23-19-42-18-29-20-14-17z"/>
+          <path d="M744 285l31-4 38 12 28 26-10 32-37 7-48-5-23-25-7-26z"/>
+          <path d="M832 370l37-10 40 8 25 31-20 22-43 4-35-12-18-24z"/>
         </g>
+        <g class="visitor-dot-layer" data-visitor-dots></g>
       </svg>
-      <div class="visitor-caption">Approximate visitor locations</div>
+      <div class="visitor-caption" data-visitor-caption>Loading visitor geography...</div>
     </div>
     <div class="visitor-stats">
-      <div class="visitor-pill"><span class="visitor-pill-label">Views</span><span class="visitor-pill-value">12,438</span></div>
-      <div class="visitor-pill"><span class="visitor-pill-label">Visitors</span><span class="visitor-pill-value">3,184</span></div>
-      <div class="visitor-pill"><span class="visitor-pill-label">Countries</span><span class="visitor-pill-value">42</span></div>
-      <div class="visitor-note">Preview only. Real analytics are not connected yet.</div>
+      <div class="visitor-pill"><span class="visitor-pill-label">Views</span><span class="visitor-pill-value" data-visitor-views>--</span></div>
+      <div class="visitor-pill"><span class="visitor-pill-label">Visitors</span><span class="visitor-pill-value" data-visitor-visitors>--</span></div>
+      <div class="visitor-pill"><span class="visitor-pill-label">Countries</span><span class="visitor-pill-value" data-visitor-countries>--</span></div>
+      <div class="visitor-note" data-visitor-updated>Waiting for analytics data.</div>
     </div>
   </div>
 </section>
