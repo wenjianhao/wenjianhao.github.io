@@ -386,6 +386,14 @@ def excerpt_from_body(body):
     return text[:220].rsplit(' ', 1)[0] + '...' if len(text) > 220 else text
 
 
+def tighten_summary(text, max_chars=112):
+    text = ' '.join(str(text).split())
+    if len(text) <= max_chars:
+        return text
+    trimmed = text[:max_chars].rsplit(' ', 1)[0].rstrip(' ,;:')
+    return trimmed + '...'
+
+
 def extract_resource_links(body):
     pdf_url = ''
     code_url = ''
@@ -419,6 +427,7 @@ def load_entries(section):
             'year': format_year(dt),
             'author': front.get('author', ''),
             'summary': summary,
+            'home_summary': tighten_summary(summary),
             'body_html': rendered,
             'slug': slug,
             'section': section,
@@ -546,21 +555,21 @@ def entry_media_html(item):
     if not item.get('media'):
         return ''
     media_path = str(item['media'])
-    media_fit = escape(str(item.get('media_fit', 'contain')))
-    media_box_width = escape(str(item.get('media_box_width', '220')))
-    media_width = escape(str(item.get('media_width', '220')))
-    media_height = escape(str(item.get('media_height', '132')))
     if media_path.lower().endswith(('.mp4', '.webm', '.mov')):
         return (
-            f"<div class='entry-media' style='flex:0 0 {media_box_width}px;width:{media_box_width}px;'>"
-            f"<video autoplay loop muted playsinline preload='metadata' aria-label='{escape(item.get('media_alt', item['title']))}' style='display:block;width:{media_width}px;height:{media_height}px;object-fit:{media_fit};border-radius:8px;margin:0 auto;'>"
+            "<div class='entry-media'>"
+            "<div class='entry-media-frame'>"
+            f"<video class='entry-media-asset' autoplay loop muted playsinline preload='metadata' aria-label='{escape(item.get('media_alt', item['title']))}'>"
             f"<source src='{escape(media_path)}'>"
             f"</video>"
+            "</div>"
             f"</div>"
         )
     return (
-        f"<div class='entry-media' style='flex:0 0 {media_box_width}px;width:{media_box_width}px;'>"
-        f"<img src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}' style='display:block;width:{media_width}px;height:{media_height}px;object-fit:{media_fit};border-radius:8px;margin:0 auto;'>"
+        "<div class='entry-media'>"
+        "<div class='entry-media-frame'>"
+        f"<img class='entry-media-asset' src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}'>"
+        "</div>"
         f"</div>"
     )
 
@@ -584,6 +593,7 @@ def render_home_section(section_id, title, items, kind):
     cards = []
     for item in items:
         meta = ''
+        summary_text = item['home_summary'] if kind == 'papers' else item['summary']
         if kind == 'papers':
             authors = emphasize_author_names(item['author'])
             venue_parts = []
@@ -603,7 +613,7 @@ def render_home_section(section_id, title, items, kind):
             meta = f"<div class='entry-authors'>{authors}</div>{venue_html}"
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
-        cards.append(content_entry_html(item, kind, meta))
+        cards.append(content_entry_html({**item, 'summary': summary_text}, kind, meta))
     return f"<section id='{section_id}' class='content-section'><h1>{escape(title)}</h1>{''.join(cards)}</section>"
 
 
