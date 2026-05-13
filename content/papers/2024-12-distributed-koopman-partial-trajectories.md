@@ -5,7 +5,7 @@ author: "W Hao, Z Lu, D Upadhyay, S Mou"
 paper_group: "Distributed Learning and Multi-Agent Systems"
 summary: "This paper proposes distributed deep Koopman learning with partial trajectories, allowing consensus dynamics learning without sharing private training data."
 venue: "ACC 2026"
-media: "/papers/media/distributed-koopman-partial-trajectories.png"
+media: "/papers/media/distributed-koopman-partial-trajectories-animation.gif"
 ---
 
 ---
@@ -21,9 +21,9 @@ This paper introduces distributed deep Koopman learning using partial trajectori
 
 ---
 
-##### Demo
+##### Proposed method
 
-Demo coming soon.
+<img src="/papers/media/distributed-koopman-partial-trajectories-method.png" alt="Distributed Koopman learning using partial trajectories proposed method" class="img-fluid">
 
 ---
 
