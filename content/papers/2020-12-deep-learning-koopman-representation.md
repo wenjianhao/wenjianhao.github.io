@@ -4,8 +4,8 @@ date: 2020-12-01
 author: "Y Han*, W Hao*, U Vaidya"
 paper_group: "Learning-Based Control for Robotics"
 paper_order: 60
-media: "/papers/media/deep-learning-koopman-representation-control.png"
-media_alt: "Deep learning of Koopman representation for control figure"
+media: "/papers/media/deep-learning-koopman-representation-control.gif"
+media_alt: "Deep learning of Koopman representation for control RC car animation"
 summary: "This paper develops a model-free control pipeline using deep Koopman representations learned directly from interaction data."
 venue: "CDC 2020"
 ---
