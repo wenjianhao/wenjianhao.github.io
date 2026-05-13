@@ -23,9 +23,9 @@ This paper introduces a data-driven model-free optimal-control approach built on
 
 ---
 
-##### Demo
+##### Proposed method
 
-Demo coming soon.
+<img src="/papers/media/deep-learning-koopman-representation-control-method.png" alt="Deep learning of Koopman representation for control proposed method" class="img-fluid">
 
 ---
 
