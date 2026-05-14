@@ -5,8 +5,8 @@ author: "W Hao, Y Fang, Z Lu, S Mou"
 paper_group: "Learning-Based Control for Robotics"
 paper_order: 20
 summary: "This paper presents an efficient MPPI control framework using learned linear Koopman dynamics to reduce rollout cost while maintaining control performance."
-media: "/papers/media/accelerating-sampling-based-control.gif"
-media_alt: "Accelerating sampling-based control robot motion animation"
+media: "/papers/media/accelerating-sampling-based-control-latest.gif"
+media_alt: "Accelerating sampling-based control robot motion latest animation"
 ---
 
 ---
