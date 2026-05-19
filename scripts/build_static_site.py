@@ -36,7 +36,7 @@ SITE = {
         ('Blog', '/#blog'),
         ('Miscellaneous', '/#miscellaneous'),
     ],
-    'clustrmaps_src': '',
+    'clustrmaps_src': '//clustrmaps.com/map_v2.js?d=D0erRdicXADlNnq7N3E5I-snIw2dC5zoUHb403BYXuk&cl=ffffff&w=a',
 }
 
 PAPER_GROUPS = [
