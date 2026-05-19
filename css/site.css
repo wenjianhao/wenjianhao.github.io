@@ -548,3 +548,36 @@ a:hover {
   }
 
 }
+
+
+.visitor-section {
+  margin-bottom: 32px;
+}
+
+.visitor-card {
+  padding: 20px 22px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.clustrmaps-widget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+}
+
+.clustrmaps-widget iframe,
+.clustrmaps-widget img,
+.clustrmaps-widget > div {
+  max-width: 100%;
+}
+
+.visitor-caption {
+  margin-top: 12px;
+  color: var(--muted-2);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  text-align: center;
+}

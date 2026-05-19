@@ -36,6 +36,7 @@ SITE = {
         ('Blog', '/#blog'),
         ('Miscellaneous', '/#miscellaneous'),
     ],
+    'clustrmaps_src': '',
 }
 
 PAPER_GROUPS = [
@@ -590,6 +591,14 @@ def content_entry_html(item, kind, meta='', title=None):
     )
 
 
+
+
+def render_visitor_section():
+    src = SITE.get('clustrmaps_src', '').strip()
+    if not src:
+        return ''
+    return f"""<section id='visitors' class='content-section visitor-section'><h1>Visitors</h1><div class='visitor-card'><div id='clustrmaps-widget' class='clustrmaps-widget'><script type='text/javascript' id='clustrmaps' src='{escape(src)}'></script></div><div class='visitor-caption'>Approximate visitor locations and counts</div></div></section>"""
+
 def render_home_section(section_id, title, items, kind):
     cards = []
     for item in items:
@@ -678,6 +687,7 @@ def render_home(papers, projects, blogs, misc):
       {render_home_section('projects', 'Projects', projects, 'projects')}
       {render_home_section('blog', 'Blog', blogs, 'blog')}
       {render_home_section('miscellaneous', 'Miscellaneous', misc, 'miscellaneous')}
+      {render_visitor_section()}
     </div>
   </div>
 </div>
