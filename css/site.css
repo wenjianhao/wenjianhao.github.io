@@ -554,21 +554,13 @@ a:hover {
   margin-bottom: 32px;
 }
 
-.visitor-card {
-  padding: 18px 18px 12px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--surface);
-  width: 33%;
-  min-width: 260px;
-  margin: 0 auto;
-}
 
 .clustrmaps-widget {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 0;
+  width: 100%;
 }
 
 .clustrmaps-widget iframe,
@@ -577,16 +569,4 @@ a:hover {
   max-width: 100%;
 }
 
-.visitor-caption {
-  margin-top: 12px;
-  color: var(--muted-2);
-  font-size: 0.95rem;
-  line-height: 1.45;
-  text-align: center;
-}
 
-@media (max-width: 900px) {
-  .visitor-card {
-    width: min(100%, 320px);
-  }
-}

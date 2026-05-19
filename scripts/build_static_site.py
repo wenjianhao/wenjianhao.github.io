@@ -597,7 +597,7 @@ def render_visitor_section():
     src = SITE.get('clustrmaps_src', '').strip()
     if not src:
         return ''
-    return f"""<section id='visitors' class='content-section visitor-section'><h1>Visitors</h1><div class='visitor-card'><div id='clustrmaps-widget' class='clustrmaps-widget'><script type='text/javascript' id='clustrmaps' src='{escape(src)}'></script></div><div class='visitor-caption'>Approximate visitor locations and counts</div></div></section>"""
+    return f"""<section id='visitors' class='content-section visitor-section'><div id='clustrmaps-widget' class='clustrmaps-widget'><script type='text/javascript' id='clustrmaps' src='{escape(src)}'></script></div></section>"""
 
 def render_home_section(section_id, title, items, kind):
     cards = []
