@@ -560,13 +560,25 @@ a:hover {
   justify-content: center;
   align-items: center;
   min-height: 0;
-  width: 100%;
+  width: 33%;
+  min-width: 260px;
+  margin: 0 auto;
 }
 
 .clustrmaps-widget iframe,
 .clustrmaps-widget img,
-.clustrmaps-widget > div {
-  max-width: 100%;
+.clustrmaps-widget > div,
+.clustrmaps-widget > span,
+.clustrmaps-widget canvas {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 
+
+@media (max-width: 900px) {
+  .clustrmaps-widget {
+    width: min(100%, 320px);
+  }
+}
