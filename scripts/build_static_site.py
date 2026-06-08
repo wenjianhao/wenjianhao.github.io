@@ -38,9 +38,9 @@ SITE = {
     ],
     'clustrmaps_src': '//clustrmaps.com/map_v2.js?d=D0erRdicXADlNnq7N3E5I-snIw2dC5zoUHb403BYXuk&cl=ffffff&w=a',
     'giscus_repo': 'wenjianhao/wenjianhao.github.io',
-    'giscus_repo_id': '',
+    'giscus_repo_id': 'R_kgDORhxH1w',
     'giscus_category': 'General',
-    'giscus_category_id': '',
+    'giscus_category_id': 'DIC_kwDORhxH184C-xzQ',
     'giscus_mapping': 'pathname',
     'giscus_lang': 'en',
 }
@@ -694,7 +694,6 @@ def render_comments(entry):
     if not (repo and repo_id and category and category_id):
         return ''
 
-    term = f"/blog/{entry['slug']}/"
     return f"""
       <section class="article-comments">
         <h2>Comments</h2>
@@ -705,11 +704,10 @@ def render_comments(entry):
           data-category="{escape(category)}"
           data-category-id="{escape(category_id)}"
           data-mapping="{escape(SITE.get('giscus_mapping', 'pathname'))}"
-          data-term="{escape(term)}"
-          data-strict="1"
+          data-strict="0"
           data-reactions-enabled="1"
           data-emit-metadata="0"
-          data-input-position="top"
+          data-input-position="bottom"
           data-theme="preferred_color_scheme"
           data-lang="{escape(SITE.get('giscus_lang', 'en'))}"
           crossorigin="anonymous"
