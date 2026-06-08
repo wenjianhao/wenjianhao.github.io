@@ -37,6 +37,12 @@ SITE = {
         ('Miscellaneous', '/#miscellaneous'),
     ],
     'clustrmaps_src': '//clustrmaps.com/map_v2.js?d=D0erRdicXADlNnq7N3E5I-snIw2dC5zoUHb403BYXuk&cl=ffffff&w=a',
+    'giscus_repo': 'wenjianhao/wenjianhao.github.io',
+    'giscus_repo_id': '',
+    'giscus_category': 'General',
+    'giscus_category_id': '',
+    'giscus_mapping': 'pathname',
+    'giscus_lang': 'en',
 }
 
 PAPER_GROUPS = [
@@ -663,6 +669,7 @@ def render_detail(entry):
     if entry['venue']:
         meta_parts.append(entry['venue'])
     meta = ' · '.join(escape(x) for x in meta_parts if x)
+    comments_html = render_comments(entry) if entry['section'] == 'blog' else ''
     body = f'''
 <div class="container subpage article-page">
   <div class="row">
@@ -671,11 +678,45 @@ def render_detail(entry):
       <h1 class="section-page-title">{escape(title)}</h1>
       <div class="article-submeta">{meta}</div>
       <div class="article-content">{entry['body_html']}</div>
+      {comments_html}
     </div>
   </div>
 </div>
 '''
     return page_shell(title, body, entry['summary'], include_math=entry['math'])
+
+
+def render_comments(entry):
+    repo = SITE.get('giscus_repo', '').strip()
+    repo_id = SITE.get('giscus_repo_id', '').strip()
+    category = SITE.get('giscus_category', '').strip()
+    category_id = SITE.get('giscus_category_id', '').strip()
+    if not (repo and repo_id and category and category_id):
+        return ''
+
+    term = f"/blog/{entry['slug']}/"
+    return f"""
+      <section class="article-comments">
+        <h2>Comments</h2>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="{escape(repo)}"
+          data-repo-id="{escape(repo_id)}"
+          data-category="{escape(category)}"
+          data-category-id="{escape(category_id)}"
+          data-mapping="{escape(SITE.get('giscus_mapping', 'pathname'))}"
+          data-term="{escape(term)}"
+          data-strict="1"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="{escape(SITE.get('giscus_lang', 'en'))}"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </section>
+    """
 
 
 def render_home(papers, projects, blogs, misc):
