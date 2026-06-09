@@ -43,6 +43,8 @@ SITE = {
     'giscus_category_id': 'DIC_kwDORhxH184C-xzQ',
     'giscus_mapping': 'pathname',
     'giscus_lang': 'en',
+    'giscus_theme_light': 'noborder_light',
+    'giscus_theme_dark': 'noborder_dark',
 }
 
 PAPER_GROUPS = [
@@ -83,10 +85,20 @@ THEME_SCRIPT = """
 document.addEventListener('DOMContentLoaded', function() {
   const button = document.querySelector('[data-theme-toggle]');
   const media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  const syncGiscusTheme = () => {
+    const frame = document.querySelector('iframe.giscus-frame');
+    if (!frame) return;
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    frame.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: dark ? 'noborder_dark' : 'noborder_light' } } },
+      'https://giscus.app'
+    );
+  };
   const syncWithSystem = () => {
     if (!media || localStorage.getItem('theme')) return;
     document.documentElement.setAttribute('data-theme', media.matches ? 'dark' : 'light');
     if (button) applyLabel();
+    syncGiscusTheme();
   };
   const applyLabel = () => {
     if (!button) return;
@@ -105,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
       applyLabel();
+      syncGiscusTheme();
     });
   }
   if (media) {
@@ -114,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
       media.addListener(syncWithSystem);
     }
   }
+  setTimeout(syncGiscusTheme, 250);
 });
 </script>
 """.strip()
@@ -708,7 +722,7 @@ def render_comments(entry):
           data-reactions-enabled="1"
           data-emit-metadata="0"
           data-input-position="bottom"
-          data-theme="preferred_color_scheme"
+          data-theme="{escape(SITE.get('giscus_theme_light', 'noborder_light'))}"
           data-lang="{escape(SITE.get('giscus_lang', 'en'))}"
           crossorigin="anonymous"
           async>
