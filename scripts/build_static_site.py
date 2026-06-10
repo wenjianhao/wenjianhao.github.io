@@ -464,6 +464,7 @@ def load_entries(section):
             'media_box_width': front.get('media_box_width', '220'),
             'media_width': front.get('media_width', '220'),
             'media_height': front.get('media_height', '132'),
+            'homepage': front.get('homepage', True),
             'order': int(front.get('paper_order', 9999)) if section == 'papers' else 9999,
         })
     entries.sort(key=lambda x: (x['order'], -x['date'].timestamp()))
@@ -732,11 +733,12 @@ def render_comments(entry):
 
 
 def render_home(papers, projects, blogs, misc):
+    homepage_papers = [item for item in papers if item.get('homepage', True)]
     content = hero_block() + f'''
 <div class="container">
   <div class="row">
     <div class="col-12">
-      {render_home_section('papers', 'Highlighted Work', papers, 'papers')}
+      {render_home_section('papers', 'Highlighted Work', homepage_papers, 'papers')}
       {render_home_section('projects', 'Projects', projects, 'projects')}
       {render_home_section('blog', 'Blog', blogs, 'blog')}
       {render_home_section('miscellaneous', 'Miscellaneous', misc, 'miscellaneous')}
