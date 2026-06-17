@@ -647,6 +647,8 @@ def render_home_section(section_id, title, items, kind):
                 venue_line = f"{venue_line} · {' / '.join(resources)}" if venue_line else ' / '.join(resources)
             venue_html = f"<div class='entry-venue'>{venue_line}</div>" if venue_line else ''
             meta = f"<div class='entry-authors'>{authors}</div>{venue_html}"
+        elif kind == 'projects':
+            meta = project_meta_html(item)
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
         cards.append(content_entry_html({**item, 'summary': summary_text}, kind, meta))
@@ -674,6 +676,13 @@ def paper_list_entry(item):
     venue_html = f"<div class='entry-venue'>{venue_line}</div>" if venue_line else ''
     meta = f"<div class='entry-authors'>{emphasize_author_names(item['author'])}</div>{venue_html}"
     return content_entry_html(item, 'papers', meta)
+
+
+def project_meta_html(item):
+    parts = [escape(item['date_label'])]
+    if item.get('code_url'):
+        parts.append(f"<a href='{escape(item['code_url'])}'>[Code]</a>")
+    return f"<div class='entry-year'>{' · '.join(parts)}</div>"
 
 
 def render_detail(entry):
@@ -766,7 +775,7 @@ def build_list_pages(papers, projects, blogs, misc):
         items = [p for p in projects if p['group'] in (group, source_group)]
         if not items:
             continue
-        entries = ''.join(content_entry_html(i, 'projects', f"<div class='entry-year'>{i['date_label']}</div>") for i in items)
+        entries = ''.join(content_entry_html(i, 'projects', project_meta_html(i)) for i in items)
         grouped_projects.append(f"<section class='content-section grouped-section'><h2>{escape(group)}</h2>{entries}</section>")
     write_file(ROOT / 'projects' / 'index.html', page_shell('Projects', render_grouped_list('Projects', ''.join(grouped_projects)), 'Projects'))
 
