@@ -129,8 +129,7 @@ a:hover {
   }
 }
 #portrait { display: block; max-width: 100%; height: auto; border-radius: 50%; }
-.home-role { margin: 16px 0; font-size: 0.875rem; line-height: 1.48; }
-.profile-links { font-size: 0.8125rem; }
+.home-role { margin: 16px 0; line-height: 1.48; }
 .profile-links, .profile-nav { display: grid; justify-items: start; gap: 6px; }
 .profile-links a { display: inline-flex; align-items: center; gap: 10px; }
 .profile-nav { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.875rem; }
@@ -216,12 +215,14 @@ a:hover {
 }
 
 .entry-media .entry-media-frame-video,
-.entry-media-frame-video video.entry-media-asset {
+.entry-media-frame-video video.entry-media-asset,
+.entry-media .entry-media-frame-natural,
+.entry-media-frame-natural img.entry-media-asset {
   height: auto;
 }
 
 @media (min-width: 641px) {
-  #papers .entry-media:is(:has(.entry-media-frame-video), :has(img[src*="efficient-reinforcement-learning-linear-koopman-dynamics.gif"])) {
+  #papers .entry-media:is(:has(.entry-media-frame-video), :has(.entry-media-frame-natural), :has(img[src*="efficient-reinforcement-learning-linear-koopman-dynamics.gif"])) {
     align-self: stretch;
     position: relative;
 
@@ -246,7 +247,6 @@ a:hover {
 }
 
 .entry-title {
-  font-size: 1.1em;
   line-height: 1.56;
   font-weight: 700;
   color: var(--text);
@@ -281,12 +281,6 @@ a:hover {
 .entry-year,
 .article-submeta {
   margin-top: 8px;
-  font-size: inherit;
-}
-
-.article-page .article-submeta,
-.article-page .article-meta {
-  font-size: 0.9rem;
 }
 
 .entry-venue {
@@ -307,7 +301,6 @@ a:hover {
 .entry-links,
 .article-links {
   margin-top: 10px;
-  font-size: 0.98rem;
 }
 
 .entry-links a,
@@ -317,7 +310,6 @@ a:hover {
 
 .article-meta {
   margin-bottom: 14px;
-  font-size: 0.95rem;
 }
 
 .article-content h2 {
@@ -342,6 +334,7 @@ a:hover {
 }
 
 .article-content pre {
+  font-size: inherit;
   background: var(--code-bg);
   border: 1px solid var(--code-line);
   border-radius: 6px;
@@ -351,7 +344,7 @@ a:hover {
 
 .article-content code {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.95em;
+  font-size: inherit;
 }
 
 .article-content figure {
@@ -362,7 +355,6 @@ a:hover {
   margin-top: 10px;
   text-align: center;
   color: var(--muted);
-  font-size: 0.95rem;
 }
 
 .article-content iframe {

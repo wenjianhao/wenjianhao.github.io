@@ -593,9 +593,10 @@ def entry_media_html(item):
             f"</div>"
         )
     loading = " loading='lazy' decoding='async' fetchpriority='low'" if item.get('lazy_image') else ''
+    frame = 'entry-media-frame entry-media-frame-natural' if item.get('media_natural') else 'entry-media-frame'
     return (
         "<div class='entry-media'>"
-        "<div class='entry-media-frame'>"
+        f"<div class='{frame}'>"
         f"<img class='entry-media-asset'{loading} src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}'>"
         "</div>"
         f"</div>"

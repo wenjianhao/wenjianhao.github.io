@@ -50,11 +50,11 @@ def render(ffmpeg, source, output, poster):
             history.append(pair)
             img = Image.new('RGB', (w, h), '#fbfaf6')
             draw = ImageDraw.Draw(img)
-            draw.text((22, 15), 'One-step prediction', fill=ink, font=large)
+            draw.text((22, 15), 'Fast time-varying system', fill=ink, font=large)
             draw.line((26, 79, 69, 79), fill=actual, width=7)
             draw.text((82, 62), 'True state', fill=ink, font=small)
             draw.ellipse((228, 72, 242, 86), outline=forecast, width=3)
-            draw.text((255, 62), 'Prediction from the proposed method', fill=ink, font=small)
+            draw.text((255, 62), 'Predicted state', fill=ink, font=small)
             for dim, top in enumerate((112, 286)):
                 bottom = top + 147
                 draw.text((19, top+51), ('x1', 'x2')[dim], fill=ink, font=large)

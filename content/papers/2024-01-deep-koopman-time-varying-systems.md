@@ -9,8 +9,7 @@ venue: "Automatica 2024"
 media: "/papers/media/deep-koopman-time-varying-systems-web.mp4"
 media_poster: "/papers/media/deep-koopman-time-varying-systems-web.jpg"
 media_alt: "Deep Koopman learning time-varying systems gamma comparison animation"
-home_media: "/papers/media/time-varying-koopman-tracking.mp4"
-home_media_poster: "/papers/media/time-varying-koopman-tracking.jpg"
+home_media: "/papers/media/time-varying-koopman-tracking.gif"
 home_media_alt: "Recorded one-step Deep Koopman predictions (circles) against the true states (line) as the fast-varying system evolves, gamma = 6."
 ---
 
