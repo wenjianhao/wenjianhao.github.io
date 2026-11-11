@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = '20260511a'
+ASSET_VERSION = "20261111a"
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -30,6 +30,7 @@ SITE = {
     'email': 'mailto:haowjz@gmail.com',
     'scholar': 'https://scholar.google.com/citations?user=SQ2BSVsAAAAJ&hl=en',
     'github': 'https://github.com/wenjianhao',
+    'company': 'https://robot-mind.com/',
     'nav': [
         ('Papers', '/#papers'),
         ('Projects', '/#projects'),
@@ -440,7 +441,14 @@ def load_entries(section):
         slug = slugify(path.stem)
         if section == 'blog' and path.stem:
             slug = slugify(path.stem)
-        summary = front.get('summary') or excerpt_from_body(body)
+        use_abstract = front.get('summary_from_abstract', False)
+        if use_abstract:
+            abstract = re.search(r'^##### Abstract\s*\n(.+?)(?=\n---|\n#|\Z)', body, re.M | re.S)
+            if not abstract:
+                raise ValueError(f'Missing Abstract section: {path}')
+            summary = ' '.join(abstract[1].split())
+        else:
+            summary = front.get('summary') or excerpt_from_body(body)
         entries.append({
             'title': front.get('title', path.stem),
             'date': dt,
@@ -448,7 +456,8 @@ def load_entries(section):
             'year': format_year(dt),
             'author': front.get('author', ''),
             'summary': summary,
-            'home_summary': tighten_summary(summary),
+            'home_summary': summary if use_abstract else tighten_summary(summary),
+            'full_summary': use_abstract,
             'home_project_summary': tighten_summary(summary, 96),
             'body_html': rendered,
             'slug': slug,
@@ -459,6 +468,8 @@ def load_entries(section):
             'pdf_url': pdf_url,
             'code_url': code_url,
             'media': front.get('media', ''),
+            'media_poster': front.get('media_poster', ''),
+            'media_hlg': front.get('media_hlg', ''),
             'media_alt': front.get('media_alt', front.get('title', path.stem)),
             'media_fit': front.get('media_fit', 'contain'),
             'media_box_width': front.get('media_box_width', '220'),
@@ -487,7 +498,7 @@ def page_shell(title, content, description='', include_math=False):
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
@@ -524,66 +535,52 @@ def home_shell(title, content, description=''):
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
   {THEME_SCRIPT}
 </head>
 <body>
-  <div class="container home-top">
-    <div class="row">
-      <div class="col-12">
-        <div class="home-masthead">
-          <div class="home-identity">
-            <div class="home-name">{escape(SITE['title'])}</div>
-            <div class="home-role">{escape(SITE['tagline'])}</div>
-          </div>
-          <div class="site-menu home-menu">{nav}<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button></div>
-        </div>
+  <div class="home-layout">
+    <aside class="profile" aria-label="Profile">
+      <h1 class="home-name">{escape(SITE['title'])}</h1>
+      <img src="{escape(SITE['portrait'])}" id="portrait" alt="Wenjian Hao portrait" width="160" height="160">
+      <p class="home-role">{escape(SITE['tagline'])}</p>
+      <div class="profile-links">
+        <a href="{escape(SITE['email'])}"><i class="bi bi-envelope" aria-hidden="true"></i>Email</a>
+        <a href="{escape(SITE['scholar'])}"><i class="bi bi-mortarboard" aria-hidden="true"></i>Scholar</a>
+        <a href="{escape(SITE['github'])}"><i class="bi bi-github" aria-hidden="true"></i>GitHub</a>
+        <a href="{escape(SITE['company'])}"><i class="bi bi-building" aria-hidden="true"></i>Robot Mind</a>
       </div>
+      <nav class="profile-nav" aria-label="Site sections">{nav}<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button></nav>
+    </aside>
+    <main class="home-content">
+      <section aria-labelledby="bio-heading">
+        <h2 class="hero-heading" id="bio-heading">Short Biography</h2>
+        <p class="hero-text">{escape(SITE['intro_text'])}</p>
+      </section>
+      {content}
+    </main>
   </div>
-</div>
-  {content}
 </body>
 </html>
 '''
 
 
-def hero_block():
-    return f'''
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="hero-intro">
-        <div class="hero-copy">
-          <h2 class="hero-heading">Short Biography</h2>
-          <p class="hero-text">{escape(SITE['intro_text'])}</p>
-          <div class="hero-buttons">
-            <a class="hero-button" href="{SITE['email']}"><i class="bi bi-envelope" aria-hidden="true"></i><span>Email</span></a>
-            <a class="hero-button" href="{SITE['scholar']}"><i class="bi bi-mortarboard" aria-hidden="true"></i><span>Scholar</span></a>
-            <a class="hero-button" href="{SITE['github']}"><i class="bi bi-github" aria-hidden="true"></i><span>GitHub</span></a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <img src="{SITE['portrait']}" class="img-fluid" id="portrait" alt="Wenjian Hao portrait">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-'''
-
 def entry_media_html(item):
     if not item.get('media'):
         return ''
     media_path = str(item['media'])
-    if media_path.lower().endswith(('.mp4', '.webm', '.mov')):
+    if media_path.partition('?')[0].lower().endswith(('.mp4', '.webm', '.mov')):
+        poster = f" poster='{escape(item['media_poster'])}'" if item.get('media_poster') else ''
+        hlg = (f"""<source src="{escape(item['media_hlg'])}" type='video/mp4; codecs="hvc1"'>"""
+               if item.get('media_hlg') else '')
         return (
             "<div class='entry-media'>"
-            "<div class='entry-media-frame'>"
-            f"<video class='entry-media-asset' autoplay loop muted playsinline preload='metadata' aria-label='{escape(item.get('media_alt', item['title']))}'>"
-            f"<source src='{escape(media_path)}'>"
+            "<div class='entry-media-frame entry-media-frame-video'>"
+            f"<video class='entry-media-asset' autoplay loop muted playsinline preload='metadata'{poster} aria-label='{escape(item.get('media_alt', item['title']))}'>"
+            f"{hlg}<source src='{escape(media_path)}'>"
             f"</video>"
             "</div>"
             f"</div>"
@@ -600,6 +597,8 @@ def entry_media_html(item):
 def content_entry_html(item, kind, meta='', title=None):
     media = entry_media_html(item)
     entry_class = "content-entry content-entry-featured" if media else "content-entry"
+    if item.get('full_summary'):
+        entry_class += " full-summary"
     entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
     main_style = " style='min-width:0;flex:1 1 auto;'" if media else ""
     entry_title = title if title is not None else (display_title(item['title']) if kind in ('papers', 'blog') else item['title'])
@@ -651,8 +650,8 @@ def render_home_section(section_id, title, items, kind):
             meta = project_meta_html(item)
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
-        cards.append(content_entry_html({**item, 'summary': summary_text}, kind, meta))
-    return f"<section id='{section_id}' class='content-section'><h1>{escape(title)}</h1>{''.join(cards)}</section>"
+        cards.append(content_entry_html({**item, 'summary': summary_text, 'full_summary': False}, kind, meta))
+    return f"<section id='{section_id}' class='content-section'><h2>{escape(title)}</h2>{''.join(cards)}</section>"
 
 
 def render_grouped_list(title, grouped_html):
@@ -743,18 +742,12 @@ def render_comments(entry):
 
 def render_home(papers, projects, blogs, misc):
     homepage_papers = [item for item in papers if item.get('homepage', True)]
-    content = hero_block() + f'''
-<div class="container">
-  <div class="row">
-    <div class="col-12">
+    content = f'''
       {render_home_section('papers', 'Highlighted Work', homepage_papers, 'papers')}
       {render_home_section('projects', 'Projects', projects, 'projects')}
       {render_home_section('blog', 'Blog', blogs, 'blog')}
       {render_home_section('miscellaneous', 'Miscellaneous', misc, 'miscellaneous')}
       {render_visitor_section()}
-    </div>
-  </div>
-</div>
 '''
     return home_shell(SITE['title'], content, SITE['bio'])
 
