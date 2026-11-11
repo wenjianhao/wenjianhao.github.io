@@ -121,9 +121,10 @@ a:hover {
 .home-name { margin: 0 0 20px; }
 @media (min-width: 761px) {
   .profile {
+    --profile-top: 68px;
     position: sticky;
-    top: 44px;
-    max-height: calc(100vh - 60px);
+    top: var(--profile-top);
+    max-height: calc(100vh - var(--profile-top) - 16px);
     overflow-y: auto;
   }
 }
