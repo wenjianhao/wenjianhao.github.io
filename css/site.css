@@ -132,7 +132,7 @@ a:hover {
 .home-role { margin: 16px 0; line-height: 1.48; }
 .profile-links, .profile-nav { display: grid; justify-items: start; gap: 6px; }
 .profile-links a { display: inline-flex; align-items: center; gap: 10px; }
-.profile-nav { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.profile-divider { margin: 20px 0 16px; height: 1px; border: 0; background: var(--line); opacity: 1; }
 .profile-nav a { color: var(--text); }
 .hero-text { margin: 0; color: var(--text); }
 .home-content { min-width: 0; }
@@ -417,7 +417,7 @@ a:hover {
   #portrait { width: 108px; }
   .home-role { margin: 10px 0; }
   .profile-links, .profile-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 16px; }
-  .profile-nav { margin-top: 12px; padding-top: 0; border: 0; }
+  .profile-divider { margin: 6px 0; }
 }
 
 @media (max-width: 640px) {

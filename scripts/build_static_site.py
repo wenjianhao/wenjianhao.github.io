@@ -553,13 +553,15 @@ def home_shell(title, content, description=''):
       <h1 class="home-name">{escape(SITE['title'])}</h1>
       <img src="{escape(SITE['portrait'])}" id="portrait" alt="Wenjian Hao portrait" width="160" height="160">
       <p class="home-role">{escape(SITE['tagline'])}</p>
+      <nav class="profile-nav" aria-label="Site sections">{nav}</nav>
+      <hr class="profile-divider">
       <div class="profile-links">
         <a href="{escape(SITE['email'])}"><i class="bi bi-envelope" aria-hidden="true"></i>Email</a>
         <a href="{escape(SITE['scholar'])}"><i class="bi bi-mortarboard" aria-hidden="true"></i>Scholar</a>
         <a href="{escape(SITE['github'])}"><i class="bi bi-github" aria-hidden="true"></i>GitHub</a>
         <a href="{escape(SITE['company'])}"><i class="bi bi-building" aria-hidden="true"></i>Robot Mind</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button>
       </div>
-      <nav class="profile-nav" aria-label="Site sections">{nav}<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button></nav>
     </aside>
     <main class="home-content">
       <section aria-label="Introduction">
