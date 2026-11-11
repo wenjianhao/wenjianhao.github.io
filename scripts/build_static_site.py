@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
-ASSET_VERSION = "20261111a"
+ASSET_VERSION = "20261111b"
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -468,6 +468,10 @@ def load_entries(section):
             'pdf_url': pdf_url,
             'code_url': code_url,
             'media': front.get('media', ''),
+            'media_natural': front.get('media_natural', False),
+            'home_media': front.get('home_media', ''),
+            'home_media_alt': front.get('home_media_alt', ''),
+            'home_media_poster': front.get('home_media_poster', ''),
             'media_poster': front.get('media_poster', ''),
             'media_hlg': front.get('media_hlg', ''),
             'media_alt': front.get('media_alt', front.get('title', path.stem)),
@@ -502,6 +506,7 @@ def page_shell(title, content, description='', include_math=False):
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
+  <script defer src="/js/media-previews.js"></script>
   {math}
   {THEME_SCRIPT}
 </head>
@@ -539,6 +544,7 @@ def home_shell(title, content, description=''):
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
+  <script defer src="/js/media-previews.js"></script>
   {THEME_SCRIPT}
 </head>
 <body>
@@ -573,22 +579,24 @@ def entry_media_html(item):
         return ''
     media_path = str(item['media'])
     if media_path.partition('?')[0].lower().endswith(('.mp4', '.webm', '.mov')):
+        frame = 'entry-media-frame entry-media-frame-video' if item.get('media_natural') else 'entry-media-frame'
         poster = f" poster='{escape(item['media_poster'])}'" if item.get('media_poster') else ''
         hlg = (f"""<source src="{escape(item['media_hlg'])}" type='video/mp4; codecs="hvc1"'>"""
                if item.get('media_hlg') else '')
         return (
             "<div class='entry-media'>"
-            "<div class='entry-media-frame entry-media-frame-video'>"
-            f"<video class='entry-media-asset' autoplay loop muted playsinline preload='metadata'{poster} aria-label='{escape(item.get('media_alt', item['title']))}'>"
+            f"<div class='{frame}'>"
+            f"<video class='entry-media-asset' data-preview loop muted playsinline preload='none'{poster} aria-label='{escape(item.get('media_alt', item['title']))}'>"
             f"{hlg}<source src='{escape(media_path)}'>"
             f"</video>"
             "</div>"
             f"</div>"
         )
+    loading = " loading='lazy' decoding='async' fetchpriority='low'" if item.get('lazy_image') else ''
     return (
         "<div class='entry-media'>"
         "<div class='entry-media-frame'>"
-        f"<img class='entry-media-asset' src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}'>"
+        f"<img class='entry-media-asset'{loading} src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}'>"
         "</div>"
         f"</div>"
     )
@@ -622,6 +630,9 @@ def render_visitor_section():
 def render_home_section(section_id, title, items, kind):
     cards = []
     for item in items:
+        if item.get('home_media'):
+            item = {**item, 'media': item['home_media'], 'media_alt': item['home_media_alt'] or item['title'],
+                    'media_poster': item['home_media_poster'], 'media_hlg': '', 'media_natural': True}
         meta = ''
         if kind == 'papers':
             summary_text = item['home_summary']
@@ -650,7 +661,7 @@ def render_home_section(section_id, title, items, kind):
             meta = project_meta_html(item)
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
-        cards.append(content_entry_html({**item, 'summary': summary_text, 'full_summary': False}, kind, meta))
+        cards.append(content_entry_html({**item, 'summary': summary_text, 'full_summary': False, 'lazy_image': True}, kind, meta))
     return f"<section id='{section_id}' class='content-section'><h2>{escape(title)}</h2>{''.join(cards)}</section>"
 
 

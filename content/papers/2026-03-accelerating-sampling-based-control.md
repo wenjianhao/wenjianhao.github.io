@@ -6,7 +6,8 @@ paper_group: "Learning-Based Control for Robotics"
 paper_order: 20
 venue: "IROS 2026"
 summary: "This paper presents an efficient MPPI control framework using learned linear Koopman dynamics to reduce rollout cost while maintaining control performance."
-media: "/papers/media/accelerating-sampling-based-control-latest.gif"
+media: "/papers/media/accelerating-sampling-based-control-latest-web.mp4"
+media_poster: "/papers/media/accelerating-sampling-based-control-latest-web.jpg"
 media_alt: "Accelerating sampling-based control robot motion latest animation"
 ---
 
@@ -25,8 +26,8 @@ This paper presents an efficient model predictive path integral (MPPI) control f
 
 ##### Demo
 
-<video controls muted loop playsinline preload="metadata" style="display: block; width: 100%; max-width: 760px; height: auto; border-radius: 8px; margin: 18px auto;">
-  <source src="/papers/media/mppi-dk.mp4" type="video/mp4">
+<video controls muted loop playsinline preload="none" poster="/papers/media/mppi-dk-web.jpg" style="display: block; width: 100%; max-width: 760px; height: auto; border-radius: 8px; margin: 18px auto;">
+  <source src="/papers/media/mppi-dk-web.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

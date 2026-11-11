@@ -6,6 +6,8 @@ paper_group: "Learning-Based Control for Robotics"
 paper_order: 5
 summary_from_abstract: true
 media: "/papers/media/koopman-mbrl-outdoor-preview-sdr.mp4"
+media_natural: true
+media_poster: "/papers/media/koopman-mbrl-outdoor-sdr-first-frame.png"
 media_alt: "Front and rear views of a quadruped walking outdoors on its hind feet"
 ---
 
@@ -22,7 +24,7 @@ We propose a Koopman model-based reinforcement learning (K-MBRL) algorithm for c
 
 ##### Demo
 
-<video controls playsinline preload="metadata" width="864" height="1080" aria-label="Outdoor bipedal walking demonstration" style="display:block; width:100%; max-width:480px; height:auto; margin:18px auto;">
+<video controls playsinline preload="none" poster="/papers/media/koopman-mbrl-outdoor-sdr-first-frame.png" width="864" height="1080" aria-label="Outdoor bipedal walking demonstration" style="display:block; width:100%; max-width:480px; height:auto; margin:18px auto;">
   <source src="/papers/media/koopman-mbrl-outdoor-demo-sdr.mp4" type="video/mp4">
   <a href="/papers/media/koopman-mbrl-outdoor-demo-sdr.mp4">Watch the outdoor walking demo (MP4)</a>
 </video>

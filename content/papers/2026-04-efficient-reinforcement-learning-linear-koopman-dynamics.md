@@ -6,7 +6,8 @@ paper_group: "Learning-Based Control for Robotics"
 paper_order: 10
 homepage: false
 summary: "This paper presents an online model-based reinforcement learning framework that combines learned linear Koopman dynamics with actor-critic policy optimization for efficient control of nonlinear robotic systems."
-media: "/papers/media/efficient-reinforcement-learning-linear-koopman-dynamics.gif"
+media: "/papers/media/efficient-reinforcement-learning-linear-koopman-dynamics-web.mp4"
+media_poster: "/papers/media/efficient-reinforcement-learning-linear-koopman-dynamics-web.jpg"
 media_alt: "Efficient reinforcement learning robotic arm animation"
 media_fit: "contain"
 media_width: 220
@@ -27,8 +28,8 @@ This paper presents an online model-based reinforcement learning framework for o
 
 ##### Demo
 
-<video controls muted loop playsinline preload="metadata" style="display: block; width: 100%; max-width: 760px; height: auto; border-radius: 8px; margin: 18px auto;">
-  <source src="/papers/media/pgdk-tro.mp4" type="video/mp4">
+<video controls muted loop playsinline preload="none" poster="/papers/media/pgdk-tro-web.jpg" style="display: block; width: 100%; max-width: 760px; height: auto; border-radius: 8px; margin: 18px auto;">
+  <source src="/papers/media/pgdk-tro-web.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

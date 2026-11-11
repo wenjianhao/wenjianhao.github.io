@@ -246,7 +246,7 @@ a:hover {
 }
 
 .entry-title {
-  font-size: 11pt;
+  font-size: 1.1em;
   line-height: 1.56;
   font-weight: 700;
   color: var(--text);
