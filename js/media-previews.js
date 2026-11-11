@@ -1,4 +1,18 @@
 (() => {
+  const stills = document.querySelectorAll('picture > source[data-still]');
+  if ('IntersectionObserver' in window) {
+    const near = new IntersectionObserver(entries => {
+      for (const {target, isIntersecting} of entries) {
+        if (!isIntersecting) continue;
+        near.unobserve(target);
+        target.previousElementSibling.remove();
+      }
+    }, {rootMargin: '160px 0px'});
+    stills.forEach(still => near.observe(still.nextElementSibling));
+  } else {
+    stills.forEach(still => still.remove());
+  }
+
   const videos = document.querySelectorAll('video[data-preview]');
   if (!videos.length) return;
   if (!('IntersectionObserver' in window) ||

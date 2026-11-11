@@ -592,12 +592,24 @@ def entry_media_html(item):
             "</div>"
             f"</div>"
         )
-    loading = " loading='lazy' decoding='async' fetchpriority='low'" if item.get('lazy_image') else ''
+    is_gif = media_path.lower().endswith('.gif')
+    loading = " loading='lazy' decoding='async' fetchpriority='low'" if is_gif or item.get('lazy_image') else ''
     frame = 'entry-media-frame entry-media-frame-natural' if item.get('media_natural') else 'entry-media-frame'
+    still = ''
+    if is_gif:
+        card = Path(media_path).parent / 'cards' / Path(media_path).name
+        if (STATIC / str(card).lstrip('/')).is_file():
+            media_path = str(card)
+        poster = card.with_suffix('.webp')
+        if (STATIC / str(poster).lstrip('/')).is_file():
+            still = f"<source data-still media='(scripting: enabled)' srcset='{escape(str(poster))}'>"
+    image = f"<img class='entry-media-asset'{loading} src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}'>"
+    if still:
+        image = f"<picture>{still}{image}</picture>"
     return (
         "<div class='entry-media'>"
         f"<div class='{frame}'>"
-        f"<img class='entry-media-asset'{loading} src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}'>"
+        f"{image}"
         "</div>"
         f"</div>"
     )
