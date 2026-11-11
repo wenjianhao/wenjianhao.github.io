@@ -6,10 +6,9 @@ paper_group: "Dynamics Learning for Complex Systems"
 paper_order: 50
 summary: "This paper proposes deep Koopman learning for nonlinear time-varying systems with error analysis and computationally efficient prediction."
 venue: "Automatica 2024"
-media: "/papers/media/deep-koopman-time-varying-systems-web.mp4"
-media_poster: "/papers/media/deep-koopman-time-varying-systems-web.jpg"
+media: "/papers/media/deep-koopman-time-varying-systems.gif"
 media_alt: "Deep Koopman learning time-varying systems gamma comparison animation"
-home_media: "/papers/media/time-varying-koopman-tracking.gif"
+home_media: "/papers/media/time-varying-koopman-tracking-white.gif"
 home_media_alt: "Recorded one-step Deep Koopman predictions (circles) against the true states (line) as the fast-varying system evolves, gamma = 6."
 ---
 

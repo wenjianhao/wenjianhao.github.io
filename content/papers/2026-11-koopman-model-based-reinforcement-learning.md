@@ -5,9 +5,8 @@ author: "W Hao, PC Heredia, S Mou"
 paper_group: "Learning-Based Control for Robotics"
 paper_order: 5
 summary_from_abstract: true
-media: "/papers/media/koopman-mbrl-outdoor-preview-sdr.mp4"
+media: "/papers/media/koopman-mbrl-outdoor-preview.gif"
 media_natural: true
-media_poster: "/papers/media/koopman-mbrl-outdoor-sdr-first-frame.png"
 media_alt: "Front and rear views of a quadruped walking outdoors on its hind feet"
 ---
 

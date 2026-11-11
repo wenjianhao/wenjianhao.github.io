@@ -211,7 +211,7 @@ a:hover {
   height: 140px;
   object-fit: contain;
   border-radius: 10px;
-  background: var(--surface-alt);
+  background: transparent;
 }
 
 .entry-media .entry-media-frame-video,
@@ -221,8 +221,13 @@ a:hover {
   height: auto;
 }
 
+.entry-media img[src$="/deep-learning-koopman-representation-control-cropped.gif"] {
+  box-sizing: border-box;
+  padding: 8px;
+}
+
 @media (min-width: 641px) {
-  #papers .entry-media:is(:has(.entry-media-frame-video), :has(.entry-media-frame-natural), :has(img[src*="efficient-reinforcement-learning-linear-koopman-dynamics.gif"])) {
+  .content-entry-featured > .entry-media:has(video, img[src$=".gif" i]) {
     align-self: stretch;
     position: relative;
 

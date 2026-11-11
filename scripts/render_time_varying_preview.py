@@ -42,13 +42,17 @@ def render(ffmpeg, source, output, poster):
     ink, actual, forecast = '#172a39', '#136a78', '#ad491e'
     large, small = (ImageFont.load_default(size=n) for n in (35, 25))
     history = deque(maxlen=34)
+    gif = str(output).lower().endswith('.gif')
+    codec = (['-filter_complex', 'fps=12,scale=480:-1:flags=lanczos,split[a][b];'
+              '[a]palettegen[p];[b][p]paletteuse=dither=none', '-loop', '0']
+             if gif else ['-c:v', 'libx264', '-crf', '19', '-pix_fmt', 'yuv420p',
+                          '-movflags', '+faststart'])
     with subprocess.Popen([ffmpeg, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt',
                            'rgb24', '-s', f'{w}x{h}', '-r', '24', '-i', '-', '-an',
-                           '-c:v', 'libx264', '-crf', '19', '-pix_fmt', 'yuv420p',
-                           '-movflags', '+faststart', output], stdin=subprocess.PIPE) as enc:
+                           *codec, output], stdin=subprocess.PIPE) as enc:
         for frame, pair in enumerate(recorded_states(ffmpeg, source)):
             history.append(pair)
-            img = Image.new('RGB', (w, h), '#fbfaf6')
+            img = Image.new('RGB', (w, h), '#ffffff' if gif else '#fbfaf6')
             draw = ImageDraw.Draw(img)
             draw.text((22, 15), 'Fast time-varying system', fill=ink, font=large)
             draw.line((26, 79, 69, 79), fill=actual, width=7)

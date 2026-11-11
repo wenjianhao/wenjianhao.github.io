@@ -6,8 +6,7 @@ paper_group: "Learning-Based Control for Robotics"
 paper_order: 40
 homepage: false
 summary: "This paper presents a data-driven actor-critic Koopman framework for closed-loop optimal control of systems with unknown dynamics."
-media: "/papers/media/optimal-control-unknown-dynamics-quadruped-web.mp4"
-media_poster: "/papers/media/optimal-control-unknown-dynamics-quadruped-web.jpg"
+media: "/papers/media/optimal-control-unknown-dynamics-quadruped.gif"
 media_alt: "Optimal control of nonlinear systems quadruped animation"
 media_fit: "fill"
 media_box_width: 220
