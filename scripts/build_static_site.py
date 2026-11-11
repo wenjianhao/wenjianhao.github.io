@@ -562,8 +562,7 @@ def home_shell(title, content, description=''):
       <nav class="profile-nav" aria-label="Site sections">{nav}<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"></button></nav>
     </aside>
     <main class="home-content">
-      <section aria-labelledby="bio-heading">
-        <h2 class="hero-heading" id="bio-heading">Short Biography</h2>
+      <section aria-label="Introduction">
         <p class="hero-text">{escape(SITE['intro_text'])}</p>
       </section>
       {content}
