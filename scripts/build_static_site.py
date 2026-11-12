@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import hashlib
 import os
 import re
 import shutil
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
 ASSET_VERSION = "20261111b"
+SITE_CSS_VERSION = hashlib.sha256((ROOT / 'css/site.css').read_bytes()).hexdigest()[:12]
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -505,7 +507,7 @@ def page_shell(title, content, description='', include_math=False):
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
-  <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
+  <link href="/css/site.css?v={SITE_CSS_VERSION}" rel="stylesheet">
   <script defer src="/js/media-previews.js"></script>
   {math}
   {THEME_SCRIPT}
@@ -543,7 +545,7 @@ def home_shell(title, content, description=''):
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
-  <link href="/css/site.css?v={ASSET_VERSION}" rel="stylesheet">
+  <link href="/css/site.css?v={SITE_CSS_VERSION}" rel="stylesheet">
   <script defer src="/js/media-previews.js"></script>
   {THEME_SCRIPT}
 </head>

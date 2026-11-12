@@ -114,7 +114,7 @@ a:hover {
   margin: 44px auto;
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr);
-  gap: 48px;
+  gap: 58px;
   align-items: start;
 }
 
@@ -135,6 +135,12 @@ a:hover {
 .profile-divider { margin: 20px 0 16px; height: 1px; border: 0; background: var(--line); opacity: 1; }
 .profile-nav a { color: var(--text); }
 .hero-text { margin: 0; color: var(--text); }
+.hero-text,
+.entry-summary,
+.article-content p {
+  text-align: justify;
+  hyphens: auto;
+}
 .home-content { min-width: 0; }
 .home-content .entry-media { flex-basis: 168px; width: 168px; }
 .home-content .entry-media-frame { width: 100%; }
