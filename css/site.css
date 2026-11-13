@@ -235,7 +235,7 @@ a:hover {
 }
 
 @media (min-width: 641px) {
-  .content-entry-featured > .entry-media:has(video, img[src$=".gif" i]) {
+  .content-entry-featured > .entry-media {
     align-self: stretch;
     position: relative;
 

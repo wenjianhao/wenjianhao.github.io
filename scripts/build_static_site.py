@@ -15,7 +15,7 @@ SITE_CSS_VERSION = hashlib.sha256((ROOT / 'css/site.css').read_bytes()).hexdiges
 
 SITE = {
     'title': 'Wenjian Hao',
-    'tagline': 'Ph.D. candidate, Purdue University AAE',
+    'tagline': ('Ph.D. candidate', 'Purdue, AAE'),
     'intro_text': (
         'I am a Ph.D. candidate in the School of Aeronautics and Astronautics at Purdue University, advised by Dr. '
         'Shaoshuai Mou. My research focuses on learning-based control for autonomous robots; data-driven modeling '
@@ -554,7 +554,7 @@ def home_shell(title, content, description=''):
     <aside class="profile" aria-label="Profile">
       <h1 class="home-name">{escape(SITE['title'])}</h1>
       <img src="{escape(SITE['portrait'])}" id="portrait" alt="Wenjian Hao portrait" width="160" height="160">
-      <p class="home-role">{escape(SITE['tagline'])}</p>
+      <p class="home-role">{'<br>'.join(escape(line) for line in SITE['tagline'])}</p>
       <nav class="profile-nav" aria-label="Site sections">{nav}</nav>
       <hr class="profile-divider">
       <div class="profile-links">
