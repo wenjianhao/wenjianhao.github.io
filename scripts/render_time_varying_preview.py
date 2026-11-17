@@ -39,7 +39,7 @@ def recorded_states(ffmpeg, source):
 
 def render(ffmpeg, source, output, poster):
     w, h = 720, 520
-    ink, actual, forecast = '#172a39', '#136a78', '#ad491e'
+    ink, actual, forecast = '#172a39', '#000000', '#ad491e'
     large, small = (ImageFont.load_default(size=n) for n in (35, 25))
     history = deque(maxlen=34)
     gif = str(output).lower().endswith('.gif')
