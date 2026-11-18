@@ -4,6 +4,7 @@ date: 2026-11-10
 author: "W Hao, PC Heredia, S Mou"
 paper_group: "Learning-Based Control for Robotics"
 paper_order: 5
+additional_demo_url: "https://robot-mind.com/"
 summary_from_abstract: true
 media: "/papers/media/koopman-mbrl-outdoor-preview.gif"
 media_natural: true

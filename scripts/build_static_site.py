@@ -468,6 +468,7 @@ def load_entries(section):
             'venue': front.get('venue', ''),
             'math': bool(front.get('math')),
             'pdf_url': pdf_url,
+            'additional_demo_url': front.get('additional_demo_url', ''),
             'code_url': code_url,
             'media': front.get('media', ''),
             'media_natural': front.get('media_natural', False),
@@ -668,7 +669,9 @@ def render_home_section(section_id, title, items, kind):
             resources = []
             if item.get('pdf_url'):
                 resources.append(f"<a href='{escape(item['pdf_url'])}'>[PDF]</a>")
-            if item.get('code_url'):
+            if item.get('additional_demo_url'):
+                resources.append(f"<a href='{escape(item['additional_demo_url'])}'>[Additional Demos]</a>")
+            if item.get('code_url') and item['slug'] == '2024-01-deep-koopman-time-varying-systems':
                 resources.append(f"<a href='{escape(item['code_url'])}'>[Code]</a>")
             venue_line = ' · '.join(venue_parts)
             if resources:
@@ -696,7 +699,9 @@ def paper_list_entry(item):
     resources = []
     if item.get('pdf_url'):
         resources.append(f"<a href='{escape(item['pdf_url'])}'>[PDF]</a>")
-    if item.get('code_url'):
+    if item.get('additional_demo_url'):
+        resources.append(f"<a href='{escape(item['additional_demo_url'])}'>[Additional Demos]</a>")
+    if item.get('code_url') and item['slug'] == '2024-01-deep-koopman-time-varying-systems':
         resources.append(f"<a href='{escape(item['code_url'])}'>[Code]</a>")
     venue_line = ' · '.join(venue_parts)
     if resources:

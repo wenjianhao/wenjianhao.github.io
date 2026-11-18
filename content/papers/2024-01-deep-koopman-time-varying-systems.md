@@ -15,7 +15,7 @@ home_media_alt: "Recorded one-step Deep Koopman predictions (circles) against th
 ---
 
 - [Paper](https://www.sciencedirect.com/science/article/pii/S0005109823005381)
-- [Code and data](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SQ2BSVsAAAAJ&citation_for_view=SQ2BSVsAAAAJ:2osOgNQ5qMEC)
+- [Code and data](https://github.com/wenjianhao/Deep-Koopman-learning-of-nonlinear-time-varying-systems)
 
 ---
 
