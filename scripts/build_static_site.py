@@ -626,11 +626,13 @@ def content_entry_html(item, kind, meta='', title=None):
     entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
     main_style = " style='min-width:0;flex:1 1 auto;'" if media else ""
     entry_title = title if title is not None else (display_title(item['title']) if kind in ('papers', 'blog') else item['title'])
+    # Keep the title styling and line clamp, but temporarily disable paper links.
+    title_href = '' if kind == 'papers' else f" href='/{kind}/{item['slug']}/'"
     return (
         f"<div class='{entry_class}'{entry_style}>"
         f"{media}"
         f"<div class='content-entry-main'{main_style}>"
-        f"<div class='entry-title'><a href='/{kind}/{item['slug']}/'>{escape(entry_title)}</a></div>"
+        f"<div class='entry-title'><a{title_href}>{escape(entry_title)}</a></div>"
         f"<div class='entry-summary'>{escape(item['summary'])}</div>{meta}</div></div>"
     )
 

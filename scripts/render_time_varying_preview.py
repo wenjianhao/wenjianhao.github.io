@@ -38,10 +38,21 @@ def recorded_states(ffmpeg, source):
 
 
 def render(ffmpeg, source, output, poster):
-    w, h = 720, 520
+    w, h = 720, 620
     ink, actual, forecast = '#172a39', '#000000', '#ad491e'
     large, small = (ImageFont.load_default(size=n) for n in (35, 25))
+    try:
+        title_font, title_stroke = ImageFont.truetype('Arial Bold.ttf', 25), 0
+    except OSError:
+        title_font, title_stroke = small, 1
     history = deque(maxlen=34)
+    states = list(recorded_states(ffmpeg, source))
+    # L2 error from video-extracted markers, not the original numerical dataset.
+    errors = [float(np.linalg.norm(np.subtract(pair[0], pair[1]))) for pair in states]
+    if not errors or not np.isfinite(errors).all():
+        raise ValueError('Missing or invalid recorded state errors')
+    error_limit = max(0.1, float(np.ceil(max(errors) * 10) / 10))
+    error_history = deque(maxlen=34)
     gif = str(output).lower().endswith('.gif')
     codec = (['-filter_complex', 'fps=12,scale=480:-1:flags=lanczos,split[a][b];'
               '[a]palettegen[p];[b][p]paletteuse=dither=none', '-loop', '0']
@@ -50,33 +61,63 @@ def render(ffmpeg, source, output, poster):
     with subprocess.Popen([ffmpeg, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt',
                            'rgb24', '-s', f'{w}x{h}', '-r', '24', '-i', '-', '-an',
                            *codec, output], stdin=subprocess.PIPE) as enc:
-        for frame, pair in enumerate(recorded_states(ffmpeg, source)):
+        for frame, pair in enumerate(states):
             history.append(pair)
+            error_history.append(errors[frame])
             img = Image.new('RGB', (w, h), '#ffffff' if gif else '#fbfaf6')
             draw = ImageDraw.Draw(img)
-            draw.text((22, 15), 'Fast time-varying system', fill=ink, font=large)
-            draw.line((26, 79, 69, 79), fill=actual, width=7)
-            draw.text((82, 62), 'True state', fill=ink, font=small)
-            draw.ellipse((228, 72, 242, 86), outline=forecast, width=3)
-            draw.text((255, 62), 'Predicted state', fill=ink, font=small)
-            for dim, top in enumerate((112, 286)):
-                bottom = top + 147
-                draw.text((19, top+51), ('x1', 'x2')[dim], fill=ink, font=large)
-                for value in (0, 1, 2, 3):
-                    y = bottom - (value+0.75)*33
-                    draw.line((82,y,695,y), fill='#d7dfde', width=1)
-                def coords(i, v):
-                    return (82 + i*18.3, bottom - (v+0.75)*33)
-                pts = [coords(i, p[0][dim]) for i,p in enumerate(history)]
+            # Two state panels together occupy twice the error panel's height.
+            # All panels use the same rolling simulation-step window.
+            def time_x(i):
+                return 82 + i * 613 / 33
+            draw.text((82, 10), 'Fast time-varying system', fill=ink, font=title_font,
+                      stroke_width=title_stroke, stroke_fill=ink)
+            draw.text((681, 54), f'Step: {101+frame}', anchor='ra', fill=ink, font=small)
+            draw.line((98, 69, 131, 69), fill=actual, width=5)
+            draw.text((142, 54), 'True state', fill=ink, font=small)
+            draw.ellipse((315, 63, 327, 75), outline=forecast, width=3)
+            draw.text((340, 54), 'Predicted state', fill=ink, font=small)
+            for dim, top in enumerate((100, 262)):
+                bottom = top + 132
+                def state_y(value):
+                    return bottom - (value + 1) / 6.5 * 132
+                for value in (0, 2, 4):
+                    y = state_y(value)
+                    draw.line((82, y, 695, y), fill='#d7dfde', width=1)
+                    draw.text((72, y), str(value), anchor='rm', fill=ink, font=small)
+                for i in (0, 11, 22, 33):
+                    x = time_x(i)
+                    draw.line((x, top, x, bottom), fill='#edf0f0', width=1)
+                draw.rectangle((82, top, 695, bottom), outline='#7c908e', width=1)
+                draw.text((25, top + 54), ('x1', 'x2')[dim], fill=ink, font=small)
+                pts = [(time_x(i), state_y(p[0][dim])) for i, p in enumerate(history)]
                 if len(pts) > 1:
                     draw.line(pts, fill=actual, width=5)
                 for i, p in enumerate(history):
-                    x, y = coords(i, p[1][dim])
-                    draw.ellipse((x-5,y-5,x+5,y+5), outline=forecast, width=3)
-            draw.line((82,449,695,449), fill='#7c908e', width=2)
-            draw.text((82,464), 'Simulation step', fill=ink, font=small)
-            # First source frame is labeled step 101 (frame 72 is step 173).
-            draw.text((690,464), str(101+frame), anchor='rt', fill=ink, font=small)
+                    x, y = time_x(i), state_y(p[1][dim])
+                    draw.ellipse((x-5, y-5, x+5, y+5), outline=forecast, width=3)
+            error_top, error_bottom = 424, 556
+            # Leave headroom for the in-panel label without covering the error curve.
+            error_scale = error_limit * 1.35
+            for value in (0, error_limit / 2, error_limit):
+                y = error_bottom - value / error_scale * (error_bottom - error_top)
+                draw.line((82, y, 695, y), fill='#d7dfde', width=1)
+                draw.text((72, y), f'{value:g}', anchor='rm', fill=ink, font=small)
+            start_step = 101 + frame - len(history) + 1
+            for i in (0, 11, 22, 33):
+                x = time_x(i)
+                draw.line((x, error_top, x, error_bottom), fill='#edf0f0', width=1)
+                draw.text((x, 562), str(start_step + i), anchor='lt' if i == 0 else 'mt',
+                          fill=ink, font=small)
+            draw.rectangle((82, error_top, 695, error_bottom), outline='#7c908e', width=1)
+            error_pts = [(time_x(i), error_bottom - value / error_scale *
+                          (error_bottom - error_top)) for i, value in enumerate(error_history)]
+            if len(error_pts) > 1:
+                draw.line(error_pts, fill=actual, width=3)
+            x, y = error_pts[-1]
+            draw.ellipse((x-3, y-3, x+3, y+3), fill=actual)
+            draw.text((96, error_top + 8), 'Prediction error', fill='#000000', font=small)
+            draw.text((388, 590), 'Time step', anchor='mt', fill=ink, font=small)
             if frame == 72:
                 img.save(poster, quality=90)
             enc.stdin.write(img.tobytes())
