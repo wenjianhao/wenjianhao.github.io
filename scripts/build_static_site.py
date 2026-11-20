@@ -670,7 +670,7 @@ def render_home_section(section_id, title, items, kind):
             if item.get('pdf_url'):
                 resources.append(f"<a href='{escape(item['pdf_url'])}'>[PDF]</a>")
             if item.get('additional_demo_url'):
-                resources.append(f"<a href='{escape(item['additional_demo_url'])}'>[Additional Demos]</a>")
+                resources.append(f"<a href='{escape(item['additional_demo_url'])}'>[Robotic arm and humanoid demos]</a>")
             if item.get('code_url') and item['slug'] == '2024-01-deep-koopman-time-varying-systems':
                 resources.append(f"<a href='{escape(item['code_url'])}'>[Code]</a>")
             venue_line = ' · '.join(venue_parts)
@@ -700,7 +700,7 @@ def paper_list_entry(item):
     if item.get('pdf_url'):
         resources.append(f"<a href='{escape(item['pdf_url'])}'>[PDF]</a>")
     if item.get('additional_demo_url'):
-        resources.append(f"<a href='{escape(item['additional_demo_url'])}'>[Additional Demos]</a>")
+        resources.append(f"<a href='{escape(item['additional_demo_url'])}'>[Robotic arm and humanoid demos]</a>")
     if item.get('code_url') and item['slug'] == '2024-01-deep-koopman-time-varying-systems':
         resources.append(f"<a href='{escape(item['code_url'])}'>[Code]</a>")
     venue_line = ' · '.join(venue_parts)
