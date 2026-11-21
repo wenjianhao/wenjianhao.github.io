@@ -12,6 +12,7 @@ CONTENT = ROOT / 'content'
 STATIC = ROOT / 'static'
 ASSET_VERSION = "20261111b"
 SITE_CSS_VERSION = hashlib.sha256((ROOT / 'css/site.css').read_bytes()).hexdigest()[:12]
+MEDIA_PREVIEWS_VERSION = hashlib.sha256((ROOT / 'js/media-previews.js').read_bytes()).hexdigest()[:12]
 
 SITE = {
     'title': 'Wenjian Hao',
@@ -547,7 +548,7 @@ def home_shell(title, content, description=''):
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={SITE_CSS_VERSION}" rel="stylesheet">
-  <script defer src="/js/media-previews.js"></script>
+  <script defer src="/js/media-previews.js?v={MEDIA_PREVIEWS_VERSION}"></script>
   {THEME_SCRIPT}
 </head>
 <body>
@@ -598,6 +599,9 @@ def entry_media_html(item):
         )
     is_gif = media_path.lower().endswith('.gif')
     loading = " loading='lazy' decoding='async' fetchpriority='low'" if is_gif or item.get('lazy_image') else ''
+    eager = is_gif and item.get('eager_media', False)
+    if eager:
+        loading = " loading='eager' decoding='async' fetchpriority='high'"
     frame = 'entry-media-frame entry-media-frame-natural' if item.get('media_natural') else 'entry-media-frame'
     still = ''
     if is_gif:
@@ -605,7 +609,7 @@ def entry_media_html(item):
         if (STATIC / str(card).lstrip('/')).is_file():
             media_path = str(card)
         poster = card.with_suffix('.webp')
-        if (STATIC / str(poster).lstrip('/')).is_file():
+        if not eager and (STATIC / str(poster).lstrip('/')).is_file():
             still = f"<source data-still media='(scripting: enabled)' srcset='{escape(str(poster))}'>"
     image = f"<img class='entry-media-asset'{loading} src='{escape(media_path)}' alt='{escape(item.get('media_alt', item['title']))}'>"
     if still:
@@ -652,6 +656,8 @@ def render_home_section(section_id, title, items, kind):
         if item.get('home_media'):
             item = {**item, 'media': item['home_media'], 'media_alt': item['home_media_alt'] or item['title'],
                     'media_poster': item['home_media_poster'], 'media_hlg': '', 'media_natural': True}
+        if kind == 'papers' and not cards:
+            item = {**item, 'eager_media': True}
         meta = ''
         if kind == 'papers':
             summary_text = item['home_summary']
