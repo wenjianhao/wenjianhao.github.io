@@ -222,6 +222,11 @@ a:hover {
   background: transparent;
 }
 
+.robot-mind-highlight .entry-media-frame,
+.robot-mind-highlight .entry-media-asset {
+  border-radius: 0;
+}
+
 .entry-media .entry-media-frame-video,
 .entry-media-frame-video video.entry-media-asset,
 .entry-media .entry-media-frame-natural,
