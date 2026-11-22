@@ -626,6 +626,8 @@ def entry_media_html(item):
 def content_entry_html(item, kind, meta='', title=None):
     media = entry_media_html(item)
     entry_class = "content-entry content-entry-featured" if media else "content-entry"
+    if item.get('entry_class'):
+        entry_class += ' ' + item['entry_class']
     if item.get('full_summary'):
         entry_class += " full-summary"
     entry_style = " style='display:flex;align-items:flex-start;gap:18px;'" if media else ""
@@ -649,6 +651,18 @@ def render_visitor_section():
     if not src:
         return ''
     return f"""<section id='visitors' class='content-section visitor-section'><div id='clustrmaps-widget' class='clustrmaps-widget'><script type='text/javascript' id='clustrmaps' src='{escape(src)}'></script></div></section>"""
+
+def robot_mind_highlight_html():
+    return content_entry_html({
+        'title': 'Robot Mind 1',
+        'summary': 'An wheeled humanoid robot for improving everyday life',
+        'media': '/papers/media/robot-mind-1-cropped.mp4',
+        'media_poster': '/papers/media/robot-mind-1-cropped-poster.jpg',
+        'media_alt': 'Robot Mind 1 wheeled humanoid robot demo',
+        'media_natural': True,
+        'entry_class': 'robot-mind-highlight',
+    }, 'papers', meta="<div class='entry-year'>For more details, visit <a href='https://robot-mind.com/'>robot-mind.com</a>.</div>", title='Robot Mind 1')
+
 
 def render_home_section(section_id, title, items, kind):
     cards = []
@@ -689,6 +703,8 @@ def render_home_section(section_id, title, items, kind):
         else:
             meta = f"<div class='entry-year'>{item['date_label']}</div>"
         cards.append(content_entry_html({**item, 'summary': summary_text, 'full_summary': False, 'lazy_image': True}, kind, meta))
+    if section_id == 'papers' and kind == 'papers':
+        cards.insert(0, robot_mind_highlight_html())
     return f"<section id='{section_id}' class='content-section'><h2>{escape(title)}</h2>{''.join(cards)}</section>"
 
 

@@ -235,6 +235,11 @@ a:hover {
 }
 
 @media (min-width: 641px) {
+  /* Match a paper card's five text lines and three metadata gaps. */
+  .robot-mind-highlight .content-entry-main {
+    min-height: calc(7.8em + 24px);
+  }
+
   .content-entry-featured > .entry-media {
     align-self: stretch;
     position: relative;
