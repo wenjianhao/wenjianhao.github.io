@@ -656,8 +656,8 @@ def robot_mind_highlight_html():
     return content_entry_html({
         'title': 'Robot Mind 1',
         'summary': 'An wheeled humanoid robot for improving everyday life',
-        'media': '/papers/media/robot-mind-1-cropped.mp4',
-        'media_poster': '/papers/media/robot-mind-1-cropped-poster.jpg',
+        'media': '/papers/media/robot-mind-1-cropped.gif',
+        'eager_media': True,
         'media_alt': 'Robot Mind 1 wheeled humanoid robot demo',
         'media_natural': True,
         'entry_class': 'robot-mind-highlight',
