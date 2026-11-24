@@ -35,7 +35,7 @@ SITE = {
     'github': 'https://github.com/wenjianhao',
     'company': 'https://robot-mind.com/',
     'nav': [
-        ('Papers', '/#papers'),
+        ('Research', '/#papers'),
         ('Projects', '/#projects'),
         ('Blog', '/#blog'),
         ('Miscellaneous', '/#miscellaneous'),
