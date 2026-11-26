@@ -493,6 +493,10 @@ def load_entries(section):
 def page_shell(title, content, description='', include_math=False, blog_post=False):
     nav = ''.join(f'<a href="{href}">{label}</a>' for label, href in SITE['nav'])
     math = MATHJAX if include_math else ''
+    if include_math and blog_post:
+        # Preserve TeX delimiters through JavaScript string parsing in blog posts.
+        for delimiter in ('(', ')', '[', ']'):
+            math = math.replace("'\\" + delimiter + "'", "'\\\\" + delimiter + "'")
     blog_style = ''
     if blog_post:
         version = hashlib.sha256((ROOT / 'css/blog.css').read_bytes()).hexdigest()[:12]

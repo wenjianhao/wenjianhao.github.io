@@ -20,8 +20,8 @@
   <script>
 window.MathJax = {
   tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']],
-    displayMath: [['$$', '$$'], ['\[', '\]']],
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
     tags: 'all'
   },
   svg: { fontCache: 'global' }
@@ -103,83 +103,153 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="article-meta"><a href="/">Home</a> / <a href="/blog/">Blog</a></div>
       <h1 class="section-page-title">Learning nonlinear systems using linear operators and machine learning</h1>
       <div class="article-submeta">March 2026 · Wenjian Hao</div>
-      <div class="article-content"><p>This post introduces a practical view of learning nonlinear dynamics using Koopman-inspired deep linear operators, with a focus on prediction and control.</p>
-<h2 id="why-care-about-learning-nonlinear-systems">Why care about learning nonlinear systems?</h2>
+      <div class="article-content"><p>Learning a dynamical model from data can support prediction, planning, and feedback control when first-principles models are unavailable or difficult to use. This post explains two approaches: learning the nonlinear state-transition map directly and learning observables whose evolution is approximately linear. The central distinction is that the Koopman operator is linear on a space of functions, but a practical finite-dimensional model is generally only an approximation.</p>
+<h2 id="learning-a-dynamical-system-from-data">Learning a dynamical system from data</h2>
 <h3 id="problem-setup">Problem setup</h3>
-<p>Consider the discrete-time dynamical system</p>
+<p>Consider a deterministic, discrete-time, time-invariant controlled system:</p>
 $$
-\boldsymbol{x}(t+1) = \boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))
+\boldsymbol{x}_{t+1}=\boldsymbol{f}(\boldsymbol{x}_t,\boldsymbol{u}_t).
 \label{eq:dynamics}
 $$
-<p>where $t=0,1,2,\cdots$ denotes the discrete-time index, $\boldsymbol{x}(t) \in \mathbb{R}^n$ is the system state, $\boldsymbol{u}(t) \in \mathbb{R}^m$ is the control input, and $\boldsymbol{f}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$ is the system dynamics mapping funciton.</p>
-<p>Suppose we are given a dataset</p>
+<p>Here $t=0,1,2,\ldots$ indexes time, $\boldsymbol{x}_t\in\mathbb{R}^n$ is the state, and $\boldsymbol{u}_t\in\mathbb{R}^m$ is the input. The unknown transition map is $\boldsymbol{f}:\mathbb{R}^n\times\mathbb{R}^m\to\mathbb{R}^n$. For this initial setup, assume the full state and applied inputs are measured without noise.</p>
+<p>Suppose we collect transition samples:</p>
 $$
-\mathcal{D} = \{(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{x}_i^+)\}_{i=1}^{N}
+\mathcal{D}=\{(\boldsymbol{x}_i,\boldsymbol{u}_i,\boldsymbol{x}_i^+)\}_{i=1}^{N},
+\qquad \boldsymbol{x}_i^+=\boldsymbol{f}(\boldsymbol{x}_i,\boldsymbol{u}_i).
 \label{eq:dataset}
 $$
-<p>where $\boldsymbol{x}_i^+$ denotes the successor state obtained by applying the input $\boldsymbol{u}_i$ to $\boldsymbol{f}$ at $\boldsymbol{x}_i$. Here, the subscript is used to index data samples in the dataset, rather than the time-varying system variables. The problem of interest is to learn an approximation of $\boldsymbol{f}$ from the dataset $\mathcal{D}$.</p>
-<h2 id="what-is-linear-operator-and-state-of-the-art-methods">What is linear operator and state-of-the-art methods</h2>
-<h3 id="state-of-the-art-methods">State-of-the-art methods</h3>
-<p>Popular baseline methods:</p>
-<ul>
-<li>Linear regression works well when $\boldsymbol{f}$ is linear. Common variants include Ordinary Least Squares (OLS) for basic modeling and regularized least squares such as Ridge regression.</li>
-</ul>
-<ul>
-<li>Multilayer Perceptron (MLP) in machine learning: MLP assumes that the unknown dynamics $\boldsymbol{f}$ in $\eqref{eq:dynamics}$ can be represented by a parameterized function class, denoted as $\boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t))=\boldsymbol{\phi}(\boldsymbol{x}(t), \boldsymbol{u}(t), \boldsymbol{w}^*)$, where $\boldsymbol{\phi}:\mathbb{R}^n\times\mathbb{R}^m\rightarrow\mathbb{R}^n$. The dynamics learning problem is then formulated as estimating the optimal parameters $\boldsymbol{w}^*$ that best fit the dataset $\mathcal{D}$ in $\eqref{eq:dataset}$ by minimizing the prediction error:</li>
-</ul>
+<p>The index $i$ identifies a data sample, not necessarily its time index; samples may come from multiple trajectories. The learning goal is to predict successor states accurately over the operating region and input range relevant to deployment. Good training fit alone does not establish accuracy outside that region.</p>
+<p>With disturbances or measurement noise, observed transitions need not satisfy the deterministic relation exactly. At the population level, the optimal unrestricted squared-error predictor is the conditional mean when the relevant second moments exist, not every random realization. A restricted model class may only approximate that mean. Measurement noise in the regressors can also bias identification. Partial observations may require an observer, a history of measurements, or a recurrent model instead of a memoryless state-transition model.</p>
+<h3 id="direct-prediction-models">Direct prediction models</h3>
+<p>A linear baseline predicts the next state using $A\boldsymbol{x}+B\boldsymbol{u}$; an affine baseline also includes an offset. Ordinary least squares fits these coefficients, while ridge regression adds a quadratic penalty. These are useful baselines, but generally cannot represent nonlinear dynamics exactly over a large operating region.</p>
+<p>A multilayer perceptron (MLP) instead uses a nonlinear predictor $\boldsymbol{f}_{\boldsymbol{w}}:\mathbb{R}^n\times\mathbb{R}^m\to\mathbb{R}^n$, parameterized by $\boldsymbol{w}\in\mathbb{R}^p$. Define its empirical prediction loss separately from its minimizers:</p>
 $$
-\boldsymbol{\hat w}^* = \arg\min_{\boldsymbol{w}\in\mathbb{R}^p} \mathbf{L}(\boldsymbol{w}) = \frac{1}{N}\sum_{i=1}^{N}\parallel \boldsymbol{x}_i^+ - \boldsymbol{\phi}(\boldsymbol{x}_i, \boldsymbol{u}_i, \boldsymbol{w})\parallel^2
+\mathcal{L}_N(\boldsymbol{w})=
+\frac{1}{N}\sum_{i=1}^{N}
+\left\|\boldsymbol{x}_i^+-\boldsymbol{f}_{\boldsymbol{w}}(\boldsymbol{x}_i,\boldsymbol{u}_i)\right\|_2^2.
 \label{eq:mlp-loss}
 $$
-<p>One can typically use gradient descent to solve $\eqref{eq:mlp-loss}$</p>
 $$
-\boldsymbol{w}(k+1) = \boldsymbol{w}(k) - \alpha_w(k) \nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}(k))
+\widehat{\boldsymbol{w}}\in
+\operatorname*{arg\,min}_{\boldsymbol{w}\in\mathbb{R}^p}
+\mathcal{L}_N(\boldsymbol{w}).
+\label{eq:empirical-minimizer}
+$$
+<p>The latter notation assumes a minimizer exists and allows it to be nonunique. An optimizer used in practice may return only an approximate or local solution. No assumption that some network parameters reproduce the true dynamics exactly is needed to define this learning problem.</p>
+<p>Generalization concerns prediction error on unseen data, not simply the distance between two parameter vectors. Different network parameters can represent the same function. To define a population objective, one must specify a distribution $\rho$ over state-input pairs; for example:</p>
+$$
+\mathcal{R}(\boldsymbol{w})=
+\mathbb{E}_{(\boldsymbol{x},\boldsymbol{u})\sim\rho}
+\left\|\boldsymbol{f}(\boldsymbol{x},\boldsymbol{u})-\boldsymbol{f}_{\boldsymbol{w}}(\boldsymbol{x},\boldsymbol{u})\right\|_2^2.
+\label{eq:population-risk}
+$$
+<p>A shift in this distribution can change deployment performance even when training error is small.</p>
+<h3 id="what-gradient-descent-does-and-does-not-guarantee">What gradient descent does and does not guarantee</h3>
+<p>For a differentiable loss, full-batch gradient descent uses</p>
+$$
+\boldsymbol{w}_{k+1}=\boldsymbol{w}_k-\alpha_k\nabla\mathcal{L}_N(\boldsymbol{w}_k),
 \label{eq:gd-update}
 $$
-<p>where $k=0,1,2,\cdots$ denotes the iteration index, $\alpha_w(k)$ is the learning rate, and $\nabla_{\boldsymbol{w}}\mathbf{L}(\boldsymbol{w}_k)$ denotes the gradient of $\mathbf{L}$ with respect to $\boldsymbol{w}$ evaluated at $\boldsymbol{w}(k)$.</p>
-<p>Some notes:</p>
+<p>where $k$ indexes optimization iterations and $\alpha_k>0$ is the step size. This is distinct from the physical time index $t$.</p>
+<p>A diminishing step size is <strong>not universally necessary</strong> for convergence. For a differentiable, strongly convex objective with an $L$-Lipschitz gradient, full-batch gradient descent with a constant step size $0<\alpha\leq 1/L$ converges to the unique minimizer. Neural-network objectives are generally nonconvex, so this guarantee does not automatically apply.</p>
+<p>Stochastic gradient descent uses noisy gradient estimates. Under suitable smoothness, strong-convexity, unbiasedness, and bounded-variance assumptions, a sufficiently small fixed step size gives an expected-error bound with a noise-dependent floor. Suitable diminishing step sizes can remove that floor; classical conditions include $\sum_k\alpha_k=\infty$ and $\sum_k\alpha_k^2<\infty$. Neither statement is a universal guarantee for neural networks. See <a href="https://arxiv.org/abs/1606.04838">Bottou, Curtis, and Nocedal (2018)</a> for precise assumptions and results.</p>
+<h2 id="the-koopman-operator-viewpoint">The Koopman operator viewpoint</h2>
+<h3 id="linear-evolution-of-observables">Linear evolution of observables</h3>
+<p>First consider an autonomous system $\boldsymbol{x}_{t+1}=\boldsymbol{F}(\boldsymbol{x}_t)$, without an independently chosen input. An observable is a scalar function $g$ of the state. On a linear function space closed under composition with $\boldsymbol{F}$, the Koopman operator is defined by</p>
+$$
+(\mathcal{K}g)(\boldsymbol{x})=g(\boldsymbol{F}(\boldsymbol{x})).
+\label{eq:koopman}
+$$
+<p>It advances observables by one time step. For observables $g,h$ and scalars $a,b$,</p>
+$$
+\mathcal{K}(ag+bh)=a\mathcal{K}g+b\mathcal{K}h.
+\label{eq:linearity}
+$$
+<p>This linearity follows from composition and does not require $\boldsymbol{F}$ to be linear. The trade-off is that the observable space is usually infinite-dimensional.</p>
+<p>For a finite vector of observables $\boldsymbol{\psi}(\boldsymbol{x})\in\mathbb{R}^{d}$, an exact matrix representation requires its components to span a Koopman-invariant subspace:</p>
+$$
+\boldsymbol{\psi}(\boldsymbol{F}(\boldsymbol{x}))=K\boldsymbol{\psi}(\boldsymbol{x}).
+\label{eq:closure}
+$$
+<p>Otherwise, a fitted matrix only approximates this relation. Recovering the original state also requires that the observables retain sufficient information. An exact finite-dimensional invariant representation with state recovery is a restrictive property, not a generic consequence of lifting into more dimensions. <a href="https://doi.org/10.1371/journal.pone.0150171">Brunton et al. (2016)</a> discuss these limitations.</p>
+<h3 id="dmd-edmd-and-learned-observables">DMD, EDMD, and learned observables</h3>
 <ul>
-<li>The assumption that $\boldsymbol{f}$ can be represented by $\boldsymbol{\phi}$ (i.e., the existence of $\boldsymbol{w}^*$) is generally unclear in practice and depends on the expressive power of the chosen function class.</li>
-<li>$\boldsymbol{\hat w}^*$ denotes the optimal parameters with respect to the training dataset, while $\boldsymbol{w}^*$ denotes the optimal parameters defined over the entire state–input space of the dynamical system. In general, $\boldsymbol{\hat w}^*$ and $\boldsymbol{w}^*$ are not equal. The gap between $\boldsymbol{w}^*$ and $\boldsymbol{\hat w}^*$ may lead to poor deployment performance of $\boldsymbol{\hat w}^*$ for state–input pairs that are not contained in the training dataset.</li>
-<li>One useful existing result for $\eqref{eq:gd-update}$ is that, to achieve $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2 = 0$, the learning rate $\alpha_w(k)$ should be diminishing. Furthermore, for a constant $\alpha_w$, $\lim_{k\rightarrow\infty} \parallel \boldsymbol{w}(k) - \boldsymbol{\hat w}^*\parallel^2$ typically converges to a small constant.</li>
+<li><strong>Dynamic mode decomposition (DMD)</strong> fits a linear map between successive measured snapshots, possibly in reduced coordinates. Its connection to Koopman spectral quantities depends on the observables, data, and approximation assumptions.</li>
+<li><strong>Extended DMD (EDMD)</strong> fits evolution in a prescribed dictionary of observables, such as polynomials or radial basis functions. Dictionary choice and data coverage affect the approximation. See <a href="https://arxiv.org/abs/1408.4408">Williams, Kevrekidis, and Rowley (2015)</a>.</li>
+<li><strong>Deep Koopman models</strong> learn observables using neural networks rather than prescribing the entire dictionary. Encoder-decoder models are one approach; learning features does not by itself guarantee exact invariant coordinates. <a href="https://arxiv.org/abs/1712.09707">Lusch, Kutz, and Brunton (2018)</a> provide an example of learning representations from trajectory data.</li>
 </ul>
-<h3 id="linear-operator-viewpoint">Linear operator viewpoint</h3>
-<p>The Koopman operator provides a way to study nonlinear dynamics through a linear evolution of observables. Instead of evolving the state directly, it evolves carefully chosen functions of the state, which can make prediction and control design more structured.</p>
-<p>The Koopman-operator-based methods include:</p>
-<ul>
-<li>Dynamic Mode Decomposition (DMD)</li>
-<li>Extended Dynamic Mode Decomposition (EDMD)</li>
-<li>Deep Koopman Operator</li>
-</ul>
-<h2 id="the-proposed-method">The Proposed Method</h2>
-<h3 id="main-ideas">Main ideas</h3>
-<p>A typical training objective combines one-step prediction, multi-step rollout, reconstruction, and regularization losses.</p>
-<h3 id="algorithm">Algorithm</h3>
+<h3 id="including-control-inputs">Including control inputs</h3>
+<p>An independently selected input changes the state transition, so the autonomous definition alone is not a complete controlled-system model. One can define a family of operators indexed by a fixed input, or augment the state with an input sequence and its shift. A common practical predictor instead takes the form</p>
+$$
+\begin{aligned}
+\boldsymbol{z}_t&=\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_t),\\
+\widehat{\boldsymbol{z}}_{t+1}&=A\boldsymbol{z}_t+B\boldsymbol{u}_t,\\
+\widehat{\boldsymbol{x}}_{t+1}&=C\widehat{\boldsymbol{z}}_{t+1}.
+\end{aligned}
+\label{eq:controlled-predictor}
+$$
+<p>Here $A\in\mathbb{R}^{d\times d}$, $B\in\mathbb{R}^{d\times m}$, and $C\in\mathbb{R}^{n\times d}$. This model is linear in the lifted state and input but generally approximates the nonlinear controlled dynamics. Some systems need input-dependent, bilinear, or richer lifted models. A nonlinear decoder is another option, but its use can make state constraints and costs nonlinear in the lifted variables. <a href="https://arxiv.org/abs/1611.03537">Korda and Mezic (2018)</a> develop lifted linear predictors for model predictive control.</p>
+<h2 id="a-practical-learning-workflow">A practical learning workflow</h2>
+<p>The following is an illustrative workflow, not a claim of a new algorithm or a guarantee that every nonlinear system admits this model.</p>
+<h3 id="preserve-the-state-and-fit-lifted-dynamics">Preserve the state and fit lifted dynamics</h3>
+<p>One useful architecture includes the state explicitly:</p>
+$$
+\boldsymbol{\psi}_{\theta}(\boldsymbol{x})=
+\begin{bmatrix}\boldsymbol{x}\\\boldsymbol{h}_{\theta}(\boldsymbol{x})\end{bmatrix},
+\qquad C=\begin{bmatrix}I_n&0\end{bmatrix}.
+\label{eq:state-inclusive-lift}
+$$
+<p>The learned features $\boldsymbol{h}_{\theta}$ augment the state, so $d\geq n$ and $C\boldsymbol{\psi}_{\theta}(\boldsymbol{x})=\boldsymbol{x}$ by construction. A separate decoder and reconstruction loss are unnecessary for this architecture. Including a constant feature allows an affine offset in the lifted predictor.</p>
+<p>For a fixed encoder, form matrices with samples as columns:</p>
+$$
+\begin{aligned}
+Z&=[\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_1),\ldots,\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_N)],\\
+Z^+&=[\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_1^+),\ldots,\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_N^+)],\\
+U&=[\boldsymbol{u}_1,\ldots,\boldsymbol{u}_N].
+\end{aligned}
+\label{eq:lifted-data}
+$$
+<p>Set $V=[Z^\top\;U^\top]^\top$ and $M=[A\;B]$. A regularized least-squares fit is</p>
+$$
+\min_M\ \|Z^+-MV\|_F^2+\lambda\|M\|_F^2,
+\label{eq:ridge-objective}
+$$
+$$
+M=Z^+V^\top(VV^\top+\lambda I)^{-1},\qquad\lambda>0.
+\label{eq:ridge-fit}
+$$
+<p>The norm is the Frobenius norm. With no regularization, a minimum-norm solution is $M=Z^+V^\dagger$, where the dagger denotes the Moore-Penrose pseudoinverse; the superscript $+$ on $Z^+$ denotes successor data, not a pseudoinverse. Numerically, solve the regularized linear system rather than forming an explicit inverse. Jointly optimizing the encoder and matrices is generally nonconvex even though fitting the matrices for a fixed encoder is a convex problem.</p>
+<h3 id="train-and-validate-for-the-intended-use">Train and validate for the intended use</h3>
 <ol>
-<li>Learn an encoder $\phi_\theta$ that maps original states to latent observables.</li>
-<li>Fit linear operators $(A, B)$ in latent space from data.</li>
-<li>Learn a decoder $\psi_\eta$ to reconstruct physical states from latent variables.</li>
-<li>Train end-to-end with losses on one-step prediction, multi-step rollout, and reconstruction.</li>
+<li><strong>Split data by trajectory or experiment.</strong> Keep training, validation, and test trajectories separate; randomly splitting highly correlated neighboring transitions can give an overly optimistic estimate of generalization. Fit normalization statistics on training data only.</li>
+<li><strong>Fit the lifting map and dynamics.</strong> A latent consistency loss compares $\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_i^+)$ with $A\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_i)+B\boldsymbol{u}_i$. State-prediction losses measure errors after applying $C$. Feature scaling and regularization matter because latent loss depends on the chosen coordinates.</li>
+<li><strong>Use multi-step losses when trajectories are available.</strong> Initialize $\widehat{\boldsymbol{z}}_0=\boldsymbol{\psi}_{\theta}(\boldsymbol{x}_0)$, roll out $\widehat{\boldsymbol{z}}_{j+1}=A\widehat{\boldsymbol{z}}_j+B\boldsymbol{u}_j$, and compare $C\widehat{\boldsymbol{z}}_j$ with measured states. Arbitrary unconnected transition samples do not provide multi-step targets.</li>
+<li><strong>Evaluate beyond training loss.</strong> Compare held-out one-step and multi-step errors against linear and nonlinear baselines, and measure computation time. For control, also evaluate tracking, constraint violations, and sensitivity to disturbances and model mismatch.</li>
 </ol>
-<h3 id="applications">Applications</h3>
-<p>Deep linear-operator models support multiple downstream tasks:</p>
+<p>Reconstruction losses are useful when a learned encoder-decoder does not include an exact state readout. They should not be treated as mandatory for every Koopman model. Similarly, a learned feature vector can collapse to an uninformative representation unless the architecture or losses preserve the information needed for the task.</p>
+<h2 id="prediction-and-control-benefits-and-limitations">Prediction and control: benefits and limitations</h2>
+<p>Small one-step error does not guarantee small long-horizon error. To see why, suppose the true lifted evolution satisfies $\boldsymbol{z}_{t+1}=A\boldsymbol{z}_t+B\boldsymbol{u}_t+\boldsymbol{r}_t$, while the predictor omits the residual $\boldsymbol{r}_t$. With the same initial lifted state and the same input sequence, define $\boldsymbol{e}_t=\boldsymbol{z}_t-\widehat{\boldsymbol{z}}_t$. Direct substitution gives</p>
+$$
+\begin{aligned}
+\boldsymbol{e}_H&=\sum_{j=0}^{H-1}A^{H-1-j}\boldsymbol{r}_j,\\
+\|\boldsymbol{e}_H\|_2&\leq\sum_{j=0}^{H-1}\|A^{H-1-j}\|_2\|\boldsymbol{r}_j\|_2.
+\end{aligned}
+\label{eq:error-propagation}
+$$
+<p>Thus, both approximation residuals and the growth of matrix powers influence rollout accuracy. With the exact linear readout above, state error is bounded by $\|C\|_2\|\boldsymbol{e}_H\|_2$. This calculation compares predictions under an identical input sequence; closed-loop stability requires a separate analysis.</p>
+<p>A lifted linear predictor can simplify model predictive control when the costs are convex quadratic and the constraints are linear in the decision variables. Nonlinear decoding or nonconvex constraints can remove that advantage. Good empirical prediction alone does not establish stability, recursive feasibility, or safety of the physical system. Those claims require additional assumptions, analysis, and an appropriate treatment of model error.</p>
+<p>Likewise, using a learned model in reinforcement learning may reduce planning cost or improve data efficiency on a particular task, but neither improvement follows automatically from a linear latent representation. The appropriate model depends on data quality, coverage, prediction horizon, and the control objective.</p>
+<h2 id="extensions">Extensions</h2>
+<p>Time-varying systems require models that account for time or changing parameters; a single fixed operator is not generally sufficient. Stochastic systems can be described using conditional-expectation operators on observables, but predicting expectations is different from predicting individual sample paths. Partial-observation and multi-agent problems introduce additional questions about state estimation, available information, and communication.</p>
+<p><strong>Takeaway:</strong> Koopman-based learning provides a useful structure for approximating nonlinear dynamics, not a universal exact finite-dimensional linearization. Its value should be established through clearly stated assumptions, held-out prediction tests, and task-specific control evaluation.</p>
+<h2 id="references">References</h2>
 <ul>
-<li>Long-horizon forecasting in nonlinear physical systems.</li>
-<li>System identification when first-principles models are unavailable or expensive.</li>
-<li>Controller synthesis in latent space using linear optimal control methods.</li>
-<li>Safety filtering and constrained control by combining latent predictions with CBF/MPC layers.</li>
-<li>Model-based reinforcement learning with improved planning and sample efficiency.</li>
-</ul>
-<h3 id="extensions">Extensions</h3>
-<p>Current research directions include:</p>
-<ul>
-<li>Time-varying and input-dependent operators $(A_t, B_t)$.</li>
-<li>Stochastic and uncertainty-aware Koopman models for noisy environments.</li>
-<li>Physics-informed lifting functions that embed invariants or conservation structure.</li>
-<li>Distributed and partial-observation formulations for multi-agent systems.</li>
-<li>Online adaptation for nonstationary dynamics and domain shifts.</li>
-</ul>
-<p>These extensions aim to close the gap between elegant operator theory and robust real-world deployment.</p></div>
+<li>Bottou, L., Curtis, F. E., and Nocedal, J. (2018). <a href="https://arxiv.org/abs/1606.04838">Optimization Methods for Large-Scale Machine Learning</a>.</li>
+<li>Williams, M. O., Kevrekidis, I. G., and Rowley, C. W. (2015). <a href="https://arxiv.org/abs/1408.4408">A Data-Driven Approximation of the Koopman Operator: Extending Dynamic Mode Decomposition</a>.</li>
+<li>Brunton, S. L., Brunton, B. W., Proctor, J. L., and Kutz, J. N. (2016). <a href="https://doi.org/10.1371/journal.pone.0150171">Koopman Invariant Subspaces and Finite Linear Representations of Nonlinear Dynamical Systems for Control</a>.</li>
+<li>Korda, M., and Mezic, I. (2018). <a href="https://arxiv.org/abs/1611.03537">Linear Predictors for Nonlinear Dynamical Systems: Koopman Operator Meets Model Predictive Control</a>.</li>
+<li>Lusch, B., Kutz, J. N., and Brunton, S. L. (2018). <a href="https://arxiv.org/abs/1712.09707">Deep Learning for Universal Linear Embeddings of Nonlinear Dynamics</a>.</li>
+</ul></div>
       
       <section class="article-comments">
         <h2>Comments</h2>
