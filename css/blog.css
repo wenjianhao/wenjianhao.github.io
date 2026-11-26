@@ -1,0 +1,145 @@
+/* Blog-only reading typography, based on Lil'Log's article styling. */
+body.blog-post {
+  --text: #1e1e1e;
+  --muted: #6c6c6c;
+  --blog-content: #1f1f1f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--blog-content);
+  overflow-wrap: break-word;
+}
+
+[data-theme='dark'] body.blog-post {
+  --text: #dadadb;
+  --muted: #9b9c9d;
+  --blog-content: #c4c4c5;
+}
+
+.blog-post .article-page.container {
+  width: 768px !important;
+  max-width: 100% !important;
+  margin: 24px auto 48px;
+  padding: 24px;
+}
+
+.blog-post .article-page > .row {
+  margin: 0;
+}
+
+.blog-post .article-page > .row > .col-12 {
+  padding: 0;
+  min-width: 0;
+}
+
+.blog-post .article-page .section-page-title {
+  display: block;
+  margin: 0 0 2px;
+  padding: 0;
+  border: 0;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+}
+
+.blog-post .article-meta,
+.blog-post .article-submeta {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.blog-post .article-submeta {
+  margin: 0 0 20px;
+}
+
+.blog-post .article-content {
+  color: var(--blog-content);
+}
+
+.blog-post .article-content p {
+  text-align: left;
+  hyphens: manual;
+}
+
+.blog-post .article-content p,
+.blog-post .article-content ul,
+.blog-post .article-content ol,
+.blog-post .article-content figure {
+  margin: 0 0 20px;
+}
+
+.blog-post .article-content li {
+  margin-top: 5px;
+}
+
+.blog-post .article-content li p {
+  margin-bottom: 0;
+}
+
+.blog-post .article-content :is(h1, h2, h3, h4, h5, h6),
+.blog-post .article-comments h2 {
+  margin: 24px 0 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: var(--text);
+}
+
+.blog-post .article-content h1 { font-size: 28px; margin: 28px 0 20px; }
+.blog-post .article-content h2,
+.blog-post .article-comments h2 { font-size: 24px; }
+.blog-post .article-content h3 { font-size: 18px; }
+.blog-post .article-content h4 { font-size: 16px; }
+.blog-post .article-content h5 { font-size: 14px; }
+.blog-post .article-content h6 { font-size: 12px; }
+
+.blog-post .article-content a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-post .article-content :is(img, iframe) {
+  max-width: 100%;
+}
+
+.blog-post .article-content img {
+  height: auto;
+}
+
+.blog-post .article-content mjx-container {
+  max-width: 100%;
+  min-width: 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 4px;
+}
+
+.blog-post .article-content mjx-container:not([display='true']) {
+  display: inline-block;
+  vertical-align: middle;
+  padding-block: 0;
+}
+
+.blog-post .article-content mjx-container[display='true'] {
+  display: block;
+  width: 100%;
+}
+
+.blog-post .article-content code {
+  font-size: 0.85em;
+}
+
+.blog-post .article-content blockquote {
+  margin: 20px 0;
+  padding: 0 14px;
+  border-left: 3px solid var(--text);
+}
+
+@media (max-width: 768px) {
+  .blog-post .article-page.container {
+    padding: 14px;
+  }
+
+}

@@ -490,9 +490,13 @@ def load_entries(section):
     return entries
 
 
-def page_shell(title, content, description='', include_math=False):
+def page_shell(title, content, description='', include_math=False, blog_post=False):
     nav = ''.join(f'<a href="{href}">{label}</a>' for label, href in SITE['nav'])
     math = MATHJAX if include_math else ''
+    blog_style = ''
+    if blog_post:
+        version = hashlib.sha256((ROOT / 'css/blog.css').read_bytes()).hexdigest()[:12]
+        blog_style = f'<link href="/css/blog.css?v={version}" rel="stylesheet">'
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -510,11 +514,12 @@ def page_shell(title, content, description='', include_math=False):
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/bootstrap.min.css?v={ASSET_VERSION}" rel="stylesheet">
   <link href="/css/site.css?v={SITE_CSS_VERSION}" rel="stylesheet">
+  {blog_style}
   <script defer src="/js/media-previews.js"></script>
   {math}
   {THEME_SCRIPT}
 </head>
-<body>
+<body{' class="blog-post"' if blog_post else ''}>
   <div class="site-nav-wrap">
     <div class="container">
       <div class="site-nav">
@@ -762,7 +767,7 @@ def render_detail(entry):
   </div>
 </div>
 '''
-    return page_shell(title, body, entry['summary'], include_math=entry['math'])
+    return page_shell(title, body, entry['summary'], include_math=entry['math'], blog_post=entry['section'] == 'blog')
 
 
 def render_comments(entry):
