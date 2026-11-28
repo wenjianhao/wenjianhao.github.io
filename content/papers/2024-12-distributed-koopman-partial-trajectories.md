@@ -1,5 +1,6 @@
 ---
 title: "Distributed Koopman Learning using Partial Trajectories for Control"
+home_summary: "Learns shared Koopman dynamics from partial trajectories by exchanging models, not data."
 date: 2024-12-20
 author: "W Hao, Z Lu, D Upadhyay, S Mou"
 paper_group: "Distributed Learning and Multi-Agent Systems"

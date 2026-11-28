@@ -459,7 +459,7 @@ def load_entries(section):
             'year': format_year(dt),
             'author': front.get('author', ''),
             'summary': summary,
-            'home_summary': summary if use_abstract else tighten_summary(summary),
+            'home_summary': front.get('home_summary') or (summary if use_abstract else tighten_summary(summary)),
             'full_summary': use_abstract,
             'home_project_summary': tighten_summary(summary, 96),
             'body_html': rendered,
@@ -664,7 +664,7 @@ def render_visitor_section():
 def robot_mind_highlight_html():
     return content_entry_html({
         'title': 'Robot Mind 1',
-        'summary': 'An wheeled humanoid robot for improving everyday life',
+        'summary': 'A wheeled humanoid robot designed to help with everyday tasks.',
         'media': '/papers/media/robot-mind-1-cropped.gif',
         'eager_media': True,
         'media_alt': 'Robot Mind 1 wheeled humanoid robot demo',

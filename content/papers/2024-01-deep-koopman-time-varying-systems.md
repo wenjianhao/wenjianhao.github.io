@@ -4,6 +4,7 @@ date: 2024-01-01
 author: "W Hao, B Huang, W Pan, D Wu, S Mou"
 paper_group: "Dynamics Learning for Complex Systems"
 paper_order: 50
+home_summary: "Approximates rapidly changing dynamics with deep Koopman models and low test errors."
 summary: "This paper proposes deep Koopman learning for nonlinear time-varying systems with error analysis and computationally efficient prediction."
 venue: "Automatica 2024"
 media: "/papers/media/deep-koopman-time-varying-systems.gif"

@@ -1,5 +1,6 @@
 ---
 title: "Deep Koopman Learning using Noisy Data"
+home_summary: "Learns dynamics under bounded noise by tuning Koopman observables to reduce its effects."
 date: 2025-01-01
 author: "W Hao, D Upadhyay, S Mou"
 paper_group: "Dynamics Learning for Complex Systems"

@@ -5,6 +5,7 @@ author: "W Hao, PC Heredia, S Mou"
 paper_group: "Learning-Based Control for Robotics"
 paper_order: 5
 summary_from_abstract: true
+home_summary: "Uses one-step Koopman predictions to learn robot control with less rollout error."
 media: "/papers/media/koopman-mbrl-outdoor-preview.gif"
 media_natural: true
 media_alt: "Front and rear views of a quadruped walking outdoors on its hind feet"
